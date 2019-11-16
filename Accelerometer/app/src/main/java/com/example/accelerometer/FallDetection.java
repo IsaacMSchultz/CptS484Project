@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class FallDetection implements SensorEventListener {
@@ -52,22 +53,33 @@ public class FallDetection implements SensorEventListener {
 
     private void sendAlert(){
         // develop text system for alerting message
+
+//        if (!checkPermission(Manifest.permission.SEND_SMS)){
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+//        }
+
         String phoneNumber = "4256266630";
         String smsMessage = "Fall Detected! Kenzo Bannang fell and is in need of emergency assistance!";
-        SmsManager sms = null;
-        try {
-            sms = SmsManager.getDefault();
-        } catch(Exception e) {
-            Toast.makeText(testContext, "Error SmsManager.getDefault()", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        try {
-            sms.sendTextMessage("4256266630", null, smsMessage, null, null);
-            Toast.makeText(testContext, "Message Sent!", Toast.LENGTH_SHORT).show();
-        } catch(Exception e) {
-            Toast.makeText(testContext, "Error with sendTextMessage", Toast.LENGTH_SHORT).show();
+        //if (checkPermission(Manifest.permission.SEND_SMS))
+        {
+            SmsManager sms = SmsManager.getDefault();
+            try {
+                sms.sendTextMessage("4256266630", null, smsMessage, null, null);
+                Toast.makeText(testContext, "Message Sent!", Toast.LENGTH_SHORT).show();
+                return;
+            } catch(Exception e) {
+                Toast.makeText(testContext, "Error with sendTextMessage", Toast.LENGTH_SHORT).show();
+            }
         }
+        // else{
+        //    Toast.makeText(testContext, "Error permission is null", Toast.LENGTH_SHORT).show();
+        //  }
     }
+
+//    public boolean checkPermission(String permission){
+//        int check = ContextCompat.checkSelfPermission(this, permission);
+//        return (check == PackageManager.PERMISSION_GRANTED);
+//    }
 
 }
