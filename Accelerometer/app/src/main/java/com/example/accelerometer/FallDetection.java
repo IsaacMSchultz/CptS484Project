@@ -7,34 +7,33 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
 public class FallDetection implements SensorEventListener {
 
     SensorManager snsmgr;
     Sensor sns;
-    TextView txt;
     Context testContext;
 
-    int interval;
-    Timer timer;
+    long interval;
     boolean notified = false;
-
+    boolean sendText = true;
     String FALLMSG = "Fall Detected, Contacting Emergency Contact in ";
+
+    public Button stopButton;
+    public TextView timerCountDown;
+    public TextView fallMessage;
+    private CountDownTimer countTimer;
 
     public FallDetection(Context mainClass) {
         testContext = mainClass;
@@ -54,31 +53,52 @@ public class FallDetection implements SensorEventListener {
         float zSquared = sensorEvent.values[2] * sensorEvent.values[2];
         double xyzSRoot = Math.sqrt(xSquared + ySquared + zSquared);
 
-        int delay = 1000;
-        int period = 1000;
-        timer = new Timer();
-        interval = 3;
+        interval = 11000;
 
+        stopButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                stopText();
+            }
+        });
 
         if(xyzSRoot > 10 && !notified) {
 
-            Toast.makeText(testContext, FALLMSG, Toast.LENGTH_SHORT).show();
+            countTimer = new CountDownTimer(interval, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    interval = millisUntilFinished;
+                    if (sendText)updateCountDownText();
+                }
 
-            while (interval > 0){
-                Toast.makeText(testContext, String.valueOf(interval), Toast.LENGTH_SHORT).show();
-               for (double i = 0; i < 1000000*1000000; i++){ }
-//                try {
-//                    TimeUnit.SECONDS.sleep(1);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-                interval = interval - 1;
-            }
+                @Override
+                public void onFinish() {
+                    if (sendText) sendAlert();
+                }
+            }.start();
 
-            this.sendAlert();
+            stopButton.setText("Cancel");
+            stopButton.setVisibility(View.VISIBLE);
+            timerCountDown.setVisibility(View.VISIBLE);
+            fallMessage.setText(FALLMSG);
+            fallMessage.setVisibility(View.VISIBLE);
             notified = true;
-            return;
+
         }
+    }
+
+    private void updateCountDownText(){
+        int seconds = (int) (interval /1000);
+        String timeLeft = String.valueOf(seconds);
+        timerCountDown.setText(timeLeft);
+    }
+
+    public void stopText(){
+        sendText = !sendText;
+        countTimer.cancel();
+        stopButton.setVisibility(View.INVISIBLE);
+        timerCountDown.setVisibility(View.INVISIBLE);
+        fallMessage.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -94,23 +114,12 @@ public class FallDetection implements SensorEventListener {
         SmsManager sms = SmsManager.getDefault();
         try {
             sms.sendTextMessage("4256266630", null, smsMessage, null, null);
-            Toast.makeText(testContext, "Message Sent!", Toast.LENGTH_SHORT).show();
+            stopButton.setVisibility(View.INVISIBLE);
+            timerCountDown.setVisibility(View.INVISIBLE);
+            fallMessage.setVisibility(View.INVISIBLE);
             return;
         } catch(Exception e) {
             Toast.makeText(testContext, "Error with sendTextMessage", Toast.LENGTH_SHORT).show();
         }
     }
 }
-
-
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                public void run() {
-//                    Looper.prepare();
-//                    Handler mHandler = new Handler() {
-//                        public void handleMessage(Message msg) {
-//                            Toast.makeText(testContext, Integer.toString(setInterval()), Toast.LENGTH_SHORT).show();
-//                        }
-//                    };
-//                    Looper.loop();
-//                }
-//            }, delay, period);

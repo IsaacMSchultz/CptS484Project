@@ -7,14 +7,42 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/fall_message"
+        android:layout_width="240dp"
+        android:layout_height="82dp"
+        android:text="msg"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="220dp"
+        tools:visibility="visible" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textV"
-        android:textSize="20dp"
+        android:text="00"
+        android:id="@+id/text_view_countdown"
+        android:textSize="60sp"
+        android:visibility="invisible"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_stop"
+        android:layout_width="249dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="160dp"
+        android:text="Cancel"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
