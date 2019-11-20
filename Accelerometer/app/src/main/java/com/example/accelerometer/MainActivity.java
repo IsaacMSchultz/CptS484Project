@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(xyzSRoot > 15) {
             //Toast.makeText(MainActivity.this, "Detected graph spike", Toast.LENGTH_SHORT).show();
             this.sendSMS();
+            
+            txt.setText(String.valueOf(sensorEvent.values[0]) + '\n' + String.valueOf(sensorEvent.values[1]) + '\n' + String.valueOf(sensorEvent.values[2]) + '\n');
+            if(sensorEvent.values[0] > 10) {
+                Toast.makeText(MainActivity.this, "Detected graph spike", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
