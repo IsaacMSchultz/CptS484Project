@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EyeBallinPrototype</string>
+    <string name="opening_message">Hello! please state your destination</string>
+</resources>
