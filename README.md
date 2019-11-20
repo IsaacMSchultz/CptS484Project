@@ -2,7 +2,7 @@
 Add TextToSpeechClass.java to your project <br/>
 Add the class to manifest 
 
-import statement <br/>
+instantiate class <br/>
 `object = new TextToSpeechClass(getApplicationContext(), "Opening message");`
 
 Speak function <br/>
