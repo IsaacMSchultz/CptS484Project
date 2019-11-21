@@ -19,6 +19,46 @@
         android:layout_marginTop="220dp"
         tools:visibility="visible" />
 
+    <EditText
+        android:id="@+id/inputNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:visibility="invisible"
+        android:imeOptions="actionDone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="90dp"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/input_contact_message"
+        android:layout_width="340dp"
+        android:layout_height="80dp"
+        android:text="Please Input an emergency contact Phone Number: "
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/phone_enter"
+        android:layout_width="200dp"
+        android:layout_height="66dp"
+        android:text="Enter"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="130dp"
+        tools:visibility="visible" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

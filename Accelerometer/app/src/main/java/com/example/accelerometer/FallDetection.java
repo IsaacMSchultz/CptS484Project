@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +15,7 @@ import android.os.Message;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +33,14 @@ public class FallDetection implements SensorEventListener {
     String FALLMSG = "Fall Detected, Contacting Emergency Contact in ";
 
     public Button stopButton;
+    public Button enterButton;
     public TextView timerCountDown;
     public TextView fallMessage;
+    public TextView contactMessage;
+    public EditText phoneNumber;
+
+    public String phoneNumberText = "";
+
     private CountDownTimer countTimer;
 
     public FallDetection(Context mainClass) {
@@ -108,12 +116,12 @@ public class FallDetection implements SensorEventListener {
 
     private void sendAlert(){
 
-        String phoneNumber = "4256266630";
+        //String phoneNumber = "4256266630";
         String smsMessage = "Fall Detected!";
 
         SmsManager sms = SmsManager.getDefault();
         try {
-            sms.sendTextMessage("4256266630", null, smsMessage, null, null);
+            sms.sendTextMessage(phoneNumberText, null, smsMessage, null, null);
             stopButton.setVisibility(View.INVISIBLE);
             timerCountDown.setVisibility(View.INVISIBLE);
             fallMessage.setVisibility(View.INVISIBLE);
