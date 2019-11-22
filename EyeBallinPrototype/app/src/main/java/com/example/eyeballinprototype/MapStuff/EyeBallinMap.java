@@ -14,7 +14,7 @@ public class EyeBallinMap {
      * Might want to come up with a better way to do this with another class. This will get n^2 large with the number of vertices we will have */
     int[][][] floorAdjacency = new int[][][] {
             {{}},
-            {{}}, 
+            {{}},
             { //Adjacency matrix of floor 3
             {0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //elevator
             {9, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // outside the elevator
@@ -43,10 +43,18 @@ public class EyeBallinMap {
         "bathroom", "outside 351", "351", "outside 354", "354",  "355", "Outside 356 & 357",
         "356", "357", "outside 358", "358", "Outside vending machine", "361", "363"}, {}};
 
+    double[][] nodeLocations = new double[][] {
+            {}, //floor 1
+            {}, //floor 2
+            {}, //floor 3
+            {}  //floor 4
+    };
+
     public EyeBallinMap() {
         // Do nothing in the constructor
     }
 
+    // factory function that takes all the adjacency matrices, nodeLocations, and floor names, and adds them all to the mapGraph.
     private MapGraph nodeFactory(int[][][] adjacencyMatrix) { //translates adjacency matrix
         MapGraph mapGraph = new MapGraph(); //graph that we will add to
         HashMap<String, Integer> nodeAdjacency; //
@@ -60,7 +68,7 @@ public class EyeBallinMap {
                     if (adjacencyMatrix[i][j][k] != 0) //only add the nodes that it is actually connected to
                         nodeAdjacency.put(floorNames[i][k], adjacencyMatrix[i][j][k]); // add the node adjacency tuple to the hashmap
 
-                newNode = new MapNode(floorNames[i][j], nodeAdjacency, new Location("test"), 3); //Create a new node with the adjacency from the matrix
+                newNode = new MapNode(floorNames[i][j], nodeAdjacency, new Location("test"), i); //Create a new node with the adjacency from the matrix
                 map.addNode(newNode); // add the node to the graph
             }
         }
