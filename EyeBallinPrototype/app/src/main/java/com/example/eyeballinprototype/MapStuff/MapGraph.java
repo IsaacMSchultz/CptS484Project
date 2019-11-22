@@ -3,15 +3,25 @@ package com.example.eyeballinprototype.MapStuff;
 // The program is for adjacency matrix representation of the graph
 import java.util.*;
 import java.lang.*;
+import java.util.HashMap;
 import java.io.*;
 
 public class MapGraph {
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
-    int V; // The number of vertices in the graph
+    HashMap<String, MapNode> nodes; //HashMap where the name of the node is the key
 
-    public MapGraph(int vertices) {
-        V = vertices;
+    public MapGraph() {
+        this.nodes = new HashMap<String, MapNode>();
+    }
+
+    public MapGraph(HashMap<String, MapNode> nodes) {
+        this.nodes = nodes; // put the nodes in the graph
+    }
+
+    // Add a node into the graph.
+    public void addNode(MapNode node) {
+        nodes.put(node.getName(), node);
     }
 
     int minDistance(int dist[], Boolean sptSet[]) {
