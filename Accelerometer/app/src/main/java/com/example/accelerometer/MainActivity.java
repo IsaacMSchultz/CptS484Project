@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 newTest.phoneNumber.setEnabled(false);
             }
         });
+
+        setContentView(R.layout.walk_path_layout);
     }
 
     public boolean checkPermission(String permission){
