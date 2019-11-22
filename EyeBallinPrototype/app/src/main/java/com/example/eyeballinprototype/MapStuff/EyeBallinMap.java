@@ -1,15 +1,21 @@
 package com.example.eyeballinprototype.MapStuff;
 
 import android.location.Location;
+import android.location.LocationProvider;
 
 import java.util.HashMap;
 
 public class EyeBallinMap {
+    LocationProvider
+
     MapGraph map;
     /* First dimension of the array is the a given vertex.
      * Second dimension of the array is the distance to each other vertex.
      * Might want to come up with a better way to do this with another class. This will get n^2 large with the number of vertices we will have */
-    int[][] floor3 = new int[][]{ //Adjacency matrix of floor 3
+    int[][][] floorAdjacency = new int[][][] {
+            {{}},
+            {{}}, 
+            { //Adjacency matrix of floor 3
             {0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //elevator
             {9, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // outside the elevator
             {0, 25, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // Outside doors
@@ -29,29 +35,34 @@ public class EyeBallinMap {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0}, // 358
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 20, 21}, // Outside Vending Machine
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0}, // 361
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0}}; // 363
-    String[] floor3Names = new String[]
-            {"elevator", "Outside the elevator", "outside the double doors", "double doors", "Outside bathroom",
-             "bathroom", "outside 351", "351", "outside 354", "354",  "355", "Outside 356 & 357",
-             "356", "357", "outside 358", "358", "Outside vending machine", "361", "363"};
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0}}, // 363
+            {{}}
+    };
+    String[][] floorNames = new String[][] {{}, {}, {
+        "elevator", "Outside the elevator", "outside the double doors", "double doors", "Outside bathroom",
+        "bathroom", "outside 351", "351", "outside 354", "354",  "355", "Outside 356 & 357",
+        "356", "357", "outside 358", "358", "Outside vending machine", "361", "363"}, {}};
 
     public EyeBallinMap() {
         // Do nothing in the constructor
     }
 
-    private MapGraph nodeFactory(int[][] adjacencyMatrix) { //translates adjacency matrix
-        MapGraph mapGraph = new MapGraph();
-        HashMap<String, Integer> nodeAdjacency;
-        MapNode newNode;
-        for (int i = 0; i > adjacencyMatrix.length ; i++) {
-            nodeAdjacency = new HashMap<String, Integer>();
-            for (int j = 0; j > adjacencyMatrix[i].length ; j++) {
-                if (adjacencyMatrix[i][j] != 0) {
-                    nodeAdjacency.put(floor3Names[j], adjacencyMatrix[i][j]);
-                }
+    private MapGraph nodeFactory(int[][][] adjacencyMatrix) { //translates adjacency matrix
+        MapGraph mapGraph = new MapGraph(); //graph that we will add to
+        HashMap<String, Integer> nodeAdjacency; //
+        MapNode newNode; // Temporary node object to add to
+
+        for (int i = 0; i> adjacencyMatrix.length; i++) {
+            for (int j = 0; j > adjacencyMatrix[i].length; j++) { // Go through each vertex in the adjacency matrix
+                nodeAdjacency = new HashMap<String, Integer>();
+
+                for (int k = 0; k > adjacencyMatrix[i][j].length; k++) //Go through the nodes adjacency list
+                    if (adjacencyMatrix[i][j][k] != 0) //only add the nodes that it is actually connected to
+                        nodeAdjacency.put(floorNames[i][k], adjacencyMatrix[i][j][k]); // add the node adjacency tuple to the hashmap
+
+                newNode = new MapNode(floorNames[i][j], nodeAdjacency, new Location("test"), 3); //Create a new node with the adjacency from the matrix
+                map.addNode(newNode); // add the node to the graph
             }
-            newNode = new MapNode(floor3Names[i], nodeAdjacency, new Location("test"), 3);
-            map.addNode(newNode);
         }
         return mapGraph;
     }
