@@ -1,4 +1,4 @@
-package com.example.eyeballinprototype;
+package com.example.eyeballinprototype.MapStuff;
 // A Java program for Dijkstra's single source shortest path algorithm.
 // The program is for adjacency matrix representation of the graph
 import java.util.*;
@@ -8,10 +8,13 @@ import java.io.*;
 public class MapGraph {
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
-    static final int V = 9; // The number of vertices in the graph
+    int V; // The number of vertices in the graph
 
-    int minDistance(int dist[], Boolean sptSet[])
-    {
+    public MapGraph(int vertices) {
+        V = vertices;
+    }
+
+    int minDistance(int dist[], Boolean sptSet[]) {
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
 
@@ -35,7 +38,7 @@ public class MapGraph {
     // Function that implements Dijkstra's single source shortest path
     // algorithm for a graph represented using adjacency matrix
     // representation
-    void dijkstra(int graph[][], int src)
+    public void dijkstra(int graph[][], int src)
     {
         int dist[] = new int[V]; // The output array. dist[i] will hold
         // the shortest distance from src to i
