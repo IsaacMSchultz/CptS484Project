@@ -50,7 +50,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     }
 
     private void navigate() {
-        setContentView(R.layout.alert_layout);
+        //setContentView(R.layout.alert_layout);
     }
 
     public void fallDetected() {
@@ -70,7 +70,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             }
         }.start();
 
-        startListener("Fall detected, say cancel to cancel");
+        startListener(getString(R.string.notify_fall));
     }
 
     @Override
@@ -114,7 +114,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         //probably parse message
         if(message.equals("cancel")) {
             stopText();
-            SpeakActivity say = new SpeakActivity(getApplicationContext(), "Cancelled");
+            SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.notify_cancel));
         }
         else {
             sendAlert();
@@ -127,6 +127,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
         SmsManager sms = SmsManager.getDefault();
         try {
+            SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.notify_contacts));
             sms.sendTextMessage(phoneNumber, null, smsMessage, null, null);
             Toast.makeText(getApplicationContext(), "Text sent", Toast.LENGTH_SHORT).show();
             //say someone has been notified.

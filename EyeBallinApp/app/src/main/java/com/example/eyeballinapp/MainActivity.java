@@ -9,12 +9,14 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_LISTENER = 0;
+    private SpeechParser parser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         startListener(getString(R.string.init_greeting));
+        parser = new SpeechParser();
     }
 
     public void startListener(String message) {
@@ -36,13 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void startProgramLoop(String message) {
         //parse the message
-        switch(message) {
-            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), "Starting navigation...");
+        switch(parser.getSpeechCommand(message)) {
+            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+                parser.clear();
                 Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
                 startActivity(myIntent);
                 break;
-            default: Toast.makeText(this ,"Dont say navigate or this will be an infinite loop", Toast.LENGTH_SHORT).show();
-                startListener(message);
+            case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
+                break;
+            case "no": startListener(getString(R.string.init_greeting));
+                break;
+            case "room number": startListener(getString(R.string.room_number));
+                //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
+                break;
+            default: startListener(getString(R.string.please_repeat));
         }
     }
 
