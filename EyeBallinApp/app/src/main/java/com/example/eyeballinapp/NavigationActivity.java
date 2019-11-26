@@ -50,7 +50,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     }
 
     private void navigate() {
-        setContentView(R.layout.alert_layout);
+        //setContentView(R.layout.alert_layout);
     }
 
     public void fallDetected() {
