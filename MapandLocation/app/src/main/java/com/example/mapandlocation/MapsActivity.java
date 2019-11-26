@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LocationManager locationManager;
     LocationListener locationListener;
+    TextView coordinateValues;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -50,6 +52,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        // hide the map fragment
+        // get the correct coordinates from the default output
+        coordinateValues = findViewById(R.id.CoordTextView);
     }
 
 
@@ -71,7 +76,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
 
-                Toast.makeText(MapsActivity.this, location.toString(), Toast.LENGTH_SHORT).show();
+                // This is the menu that appears with the metadata including coordinates
+                //Toast.makeText(MapsActivity.this, location.toString(), Toast.LENGTH_SHORT).show();
+
+                // extract only the latitude and longitude
+
+                String[] coordArray = location.toString().split(" ", 3);
+                String[] latLong = coordArray[1].split(",", 2);
+
+                Double lat = new Double(latLong[0]);
+                Double lon = new Double(latLong[1]);
+                coordinateValues.setText("Latitude: " + lat + " Longitude: " + lon);
+
             }
 
             @Override
