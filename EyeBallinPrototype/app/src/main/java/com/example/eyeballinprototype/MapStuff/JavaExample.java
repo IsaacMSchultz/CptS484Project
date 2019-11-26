@@ -58,7 +58,7 @@ public class JavaExample {
                     @Override
                     public int compare(Pair<Integer, Integer> p1, Pair<Integer, Integer> p2) {
                         //sort using distance values
-                        int key1 = p1.getKey();
+                        int key1 = p1.  getKey();
                         int key2 = p2.getKey();
                         return key1-key2;
                     }

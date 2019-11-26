@@ -5,8 +5,9 @@ import android.location.LocationProvider;
 
 import java.util.HashMap;
 
+// EyeBallinMap is a map that makes use of the MapGraph class to navigate the user to a given location
 public class EyeBallinMap {
-    LocationProvider
+//    LocationProvider //LocationProvider to determine
 
     MapGraph map;
     /* First dimension of the array is the a given vertex.
@@ -51,7 +52,7 @@ public class EyeBallinMap {
     };
 
     public EyeBallinMap() {
-        // Do nothing in the constructor
+        // build the map using the constructor in here
     }
 
     // factory function that takes all the adjacency matrices, nodeLocations, and floor names, and adds them all to the mapGraph.
