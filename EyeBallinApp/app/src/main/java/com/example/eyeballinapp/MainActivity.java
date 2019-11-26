@@ -1,7 +1,12 @@
 package com.example.eyeballinapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -17,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
         startListener(getString(R.string.init_greeting));
         parser = new SpeechParser();
+
+        if (!checkPermission(Manifest.permission.SEND_SMS)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+        }
+
     }
 
     public void startListener(String message) {
@@ -54,5 +64,11 @@ public class MainActivity extends AppCompatActivity {
             default: startListener(getString(R.string.please_repeat));
         }
     }
+
+    public boolean checkPermission(String permission){
+        int check = ContextCompat.checkSelfPermission(this, permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
+    }
+
 
 }

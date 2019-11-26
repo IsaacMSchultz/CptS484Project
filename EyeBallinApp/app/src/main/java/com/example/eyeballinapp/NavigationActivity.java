@@ -123,7 +123,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
     private void sendAlert() {
         String phoneNumber = "4256266630";
-        String smsMessage = "Fall Detected!";
+        String smsMessage = getString(R.string.notify_text);
 
         SmsManager sms = SmsManager.getDefault();
         try {
