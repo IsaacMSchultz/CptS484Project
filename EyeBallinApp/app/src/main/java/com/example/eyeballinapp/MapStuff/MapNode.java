@@ -1,4 +1,4 @@
-package com.example.eyeballinprototype.MapStuff;
+package com.example.eyeballinapp.MapStuff;
 
 import android.location.Location;
 import java.util.HashMap;
