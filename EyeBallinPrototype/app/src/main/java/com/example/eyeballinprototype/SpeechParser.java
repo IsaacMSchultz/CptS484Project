@@ -21,8 +21,10 @@ public class SpeechParser {
         Pattern p = Pattern.compile("^.*(\\btake me\\b|\\broom\\b|\\bgo to\\b).*$");
         Matcher m = p.matcher(sentence);
         if(m.matches()) {
-            Pattern p2 = getPattern("room");
-            mDestination = "451";
+            Pattern p2 = Pattern.compile("(\\d+)");
+            Matcher m2 = p2.matcher(sentence);
+            if(m2.matches())
+                mDestination = m2.group(m2.groupCount());
             return "repeat";
         }
         else {
@@ -45,4 +47,6 @@ public class SpeechParser {
     private Pattern getPattern(String word) {
         return Pattern.compile("^.*(\\b" + word + "\\b).*$");
     }
+
+
 }
