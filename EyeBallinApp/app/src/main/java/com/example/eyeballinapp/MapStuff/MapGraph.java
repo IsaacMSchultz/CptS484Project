@@ -77,19 +77,19 @@ public class MapGraph {
         return nodes.size();
     }
 
-    public void dijkstra_GetMinDistances(String sourceVertex) {
+    public void dijkstra_GetMinDistances(String sourceVertex) { // I need to completely re-do this part. I don't think I did any of this right.
 
-        if (!nodes.containsKey(sourceVertex))
+        if (!nodes.containsKey(sourceVertex)) //Cannot find the distances if the source doesn't exist.
             return;
 
-        boolean[] SPT = new boolean[getSize()];
+        HashMap<String, Boolean> SPT = new HashMap<String, Boolean>;
 
         //distance used to store the distance of vertex from a source
-        int[] distance = new int[getSize()];
+        HashMap<String, Integer> distance = new HashMap<String, Integer>;
 
         //Initialize all the distance to infinity
-        for (int i = 0; i < getSize(); i++) {
-            distance[i] = Integer.MAX_VALUE;
+        for (String nodeName : nodes.keySet()) {
+            distance.put(nodeName, Integer.MAX_VALUE);
         }
 
         //Initialize priority queue
@@ -105,8 +105,8 @@ public class MapGraph {
         });
 
         //create the pair for for the first index, 0 distance, (source vertex) index
-        distance[0] = 0; //set starting distance to 0
-        AdjacencyPair p0 = new AdjacencyPair( sourceVertex, distance[0]); // Assuming that all graphs are connected. This will pick a random starting point.
+        distance.put(sourceVertex, 0); //set starting distance to 0
+        AdjacencyPair p0 = new AdjacencyPair( sourceVertex, 0); // Assuming that all graphs are connected.
 
         pq.offer(p0); //add starting point to the priority queue
 
@@ -116,23 +116,25 @@ public class MapGraph {
             AdjacencyPair extractedPair = pq.poll();
 
             //extracted vertex
-            int extractedVertex = extractedPair.getDistance();
-            if (SPT[extractedVertex] == false) {
-                SPT[extractedVertex] = true;
+            String extractedVertex = extractedPair.getDestination();
+            if (SPT.get(extractedVertex) == false) { // If the vertex that we pulled out is false
+                SPT.put(extractedVertex, true); // set it to true.
+
+                // Get the node's adjacency list from the adjacencyPair at the top of the queue
+                HashMap<String, Integer> adjacencyList = nodes.get(extractedPair.getDestination()).getAdjacency();
 
                 //iterate through all the adjacent vertices and update the keys
-                HashMap<String, Integer> adjacencyList = nodes.get();
                 for (String destString : adjacencyList.keySet()) {
                     int destination = adjacencyList.get(destString);
                     //only if edge destination is not present in mst
-                    if (SPT[destination] == false) {
+                    if (SPT.get(destination) == false) {
                         ///check if distance needs an update or not
                         //means check total weight from source to vertex_V is less than
                         //the current distance value, if yes then update the distance
-                        int newKey = distance[extractedVertex] + edge.weight;
-                        int currentKey = distance[destination];
+                        int newKey = distance.get(extractedVertex) + adjacencyList.get(destString);
+                        int currentKey = distance.get(destString);
                         if (currentKey > newKey) {
-                            Pair<Integer, Integer> p = new Pair<>(newKey, destination);
+                            AdjacencyPair p = new AdjacencyPair(newKey, newKey);
                             pq.offer(p);
                             distance[destination] = newKey;
                         }
