@@ -93,6 +93,7 @@ public class MapGraph {
         }
 
         // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
+        // We only care about the path between the source and the destination nodes, so we should use the second version of dijkstras that does that
     }
 
     public void printDijkstra(int[] distance, int sourceVertex) {
