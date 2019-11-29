@@ -92,58 +92,7 @@ public class MapGraph {
             distance.put(nodeName, Integer.MAX_VALUE);
         }
 
-        //Initialize priority queue
-        //override the comparator to do the sorting based keys
-        PriorityQueue<AdjacencyPair> pq = new PriorityQueue<>(getSize(), new Comparator<AdjacencyPair>() {
-            @Override
-            public int compare(AdjacencyPair p1, AdjacencyPair p2) {
-                //sort using distance values
-                int key1 = p1.getDistance();
-                int key2 = p2.getDistance();
-                return key1 - key2;
-            }
-        });
-
-        //create the pair for for the first index, 0 distance, (source vertex) index
-        distance.put(sourceVertex, 0); //set starting distance to 0
-        AdjacencyPair p0 = new AdjacencyPair( sourceVertex, 0); // Assuming that all graphs are connected.
-
-        pq.offer(p0); //add starting point to the priority queue
-
-        //while priority queue is not empty
-        while (!pq.isEmpty()) {
-            //extract the min
-            AdjacencyPair extractedPair = pq.poll();
-
-            //extracted vertex
-            String extractedVertex = extractedPair.getDestination();
-            if (SPT.get(extractedVertex) == false) { // If the vertex that we pulled out is false
-                SPT.put(extractedVertex, true); // set it to true.
-
-                // Get the node's adjacency list from the adjacencyPair at the top of the queue
-                HashMap<String, Integer> adjacencyList = nodes.get(extractedPair.getDestination()).getAdjacency();
-
-                //iterate through all the adjacent vertices and update the keys
-                for (String destString : adjacencyList.keySet()) {
-                    int destination = adjacencyList.get(destString);
-                    //only if edge destination is not present in mst
-                    if (SPT.get(destination) == false) {
-                        ///check if distance needs an update or not
-                        //means check total weight from source to vertex_V is less than
-                        //the current distance value, if yes then update the distance
-                        int newKey = distance.get(extractedVertex) + adjacencyList.get(destString);
-                        int currentKey = distance.get(destString);
-                        if (currentKey > newKey) {
-                            AdjacencyPair p = new AdjacencyPair(newKey, newKey);
-                            pq.offer(p);
-                            distance[destination] = newKey;
-                        }
-                    }
-                }
-            }
-        }
-        //print Shortest Path Tree
-        printDijkstra(distance, sourceVertex);
+        // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
     }
 
     public void printDijkstra(int[] distance, int sourceVertex) {
