@@ -44,10 +44,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="95" column="148" selection-start-line="95" selection-start-column="148" selection-end-line="95" selection-end-column="148" />
+            <state relative-caret-position="436">
+              <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
               <folding>
-                <element signature="e#3194#3211#0" expanded="true" />
+                <element signature="e#3194#3210#0" expanded="true" />
                 <element signature="e#3339#3356#0" expanded="true" />
               </folding>
             </state>
@@ -122,9 +122,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="871" />
+    <option name="width" value="1056" />
     <option name="height" value="1087" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -491,7 +491,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1087" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
@@ -508,7 +508,7 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.3322851" />
+      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="right" id="Assistant" order="0" weight="0.32995737" />
       <window_info anchor="right" id="Device File Explorer" order="1" side_tool="true" />
@@ -605,10 +605,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="95" column="148" selection-start-line="95" selection-start-column="148" selection-end-line="95" selection-end-column="148" />
+        <state relative-caret-position="436">
+          <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
           <folding>
-            <element signature="e#3194#3211#0" expanded="true" />
+            <element signature="e#3194#3210#0" expanded="true" />
             <element signature="e#3339#3356#0" expanded="true" />
           </folding>
         </state>

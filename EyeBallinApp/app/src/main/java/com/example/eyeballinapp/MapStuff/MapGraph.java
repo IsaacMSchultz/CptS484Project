@@ -77,19 +77,26 @@ public class MapGraph {
         return nodes.size();
     }
 
-    public void dijkstra_GetMinDistances(String sourceVertex) { // I need to completely re-do this part. I don't think I did any of this right.
+    public void dijkstra(String sourceVertex, String destinationVertex) {
 
-        if (!nodes.containsKey(sourceVertex)) //Cannot find the distances if the source doesn't exist.
+        if (!nodes.containsKey(sourceVertex) || !nodes.containsKey(destinationVertex)) //Cannot find the distances if the source or destination is not in the graph.
             return;
 
-        HashMap<String, Boolean> SPT = new HashMap<String, Boolean>;
-
-        //distance used to store the distance of vertex from a source
-        HashMap<String, Integer> distance = new HashMap<String, Integer>;
+        HashMap<String, String> prev = new HashMap<String, String>(); // keeps track of the previous node for each node
+        HashMap<String, Integer> distance = new HashMap<String, Integer>(); //distance used to store the distance of vertex from a source
+        HashSet<String> nodeNames = new HashSet<>(); //HashSet to store the list of all the nodes we are still considering
 
         //Initialize all the distance to infinity
         for (String nodeName : nodes.keySet()) {
-            distance.put(nodeName, Integer.MAX_VALUE);
+            distance.put(nodeName, Integer.MAX_VALUE); // Set the distance to be infinity for every node
+            prev.put(nodeName, "N/A"); // Set the previous value to be N/A for every node
+            nodeNames.add(nodeName); //Store all nodeNames in the set we will be working on.
+        }
+
+        distance.put(sourceVertex, 0); // Set starting vertex to have a distance of 0.
+
+        while (nodeNames.isEmpty() == false) {
+            
         }
 
         // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
