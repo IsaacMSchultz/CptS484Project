@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.example.eyeballinapp.MapStuff.MapGraph;
 import com.example.eyeballinapp.MapStuff.XmlParser;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
@@ -37,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Testing parsing
         XmlParser test = new XmlParser(this);
+        MapGraph graph = new MapGraph();
         try {
-            test.tempParse();
+            graph = test.tempParse();
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        System.out.print("idk");
 
     }
 

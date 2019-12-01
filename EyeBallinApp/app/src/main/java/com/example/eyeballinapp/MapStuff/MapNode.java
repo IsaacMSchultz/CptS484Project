@@ -7,13 +7,14 @@ import java.util.HashMap;
 public class MapNode {
     private String name;
     private Location location; // GPS location of the node
-    private int floor;
+    private int id;
     private HashMap<String, Integer> adjacency; //one slice of the adjacency matrix.
 
-    public MapNode(String nodeName, HashMap<String, Integer> adjacentNodes, Location loc, int floor) {
-        name = nodeName;
-        adjacency = adjacentNodes;
-        location = loc;
+    public MapNode(String nodeName, HashMap<String, Integer> adjacentNodes, Location loc, int id) {
+        this.name = nodeName;
+        this.adjacency = adjacentNodes;
+        this.location = loc;
+        this.id = id;
     }
 
     public MapNode(String nodeName, int floor) {
