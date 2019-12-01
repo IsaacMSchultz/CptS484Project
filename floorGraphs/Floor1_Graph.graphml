@@ -2,26 +2,26 @@
 <graphml>
     <graph id="Graph" uidGraph="23" uidEdge="10021">
         <nodes>
-            <node positionX="191" positionY="50.30000305175781" id="0" mainText="North Doors" upText=""></node>
-            <node positionX="193" positionY="164.3000030517578" id="1" mainText="Outside Elevator" upText=""></node>
-            <node positionX="192" positionY="281.3000030517578" id="2" mainText="Outside Hallway" upText=""></node>
-            <node positionX="194" positionY="494.3000030517578" id="3" mainText="South Doors" upText=""></node>
-            <node positionX="286" positionY="344.3000030517578" id="4" mainText="Water Fountain" upText=""></node>
-            <node positionX="340.2499999999998" positionY="285.39546639578685" id="5" mainText="Floor 1 Hallway" upText=""></node>
-            <node positionX="509.5833333333331" positionY="285.39546639578685" id="6" mainText="Outside Bathroom" upText=""></node>
-            <node positionX="517" positionY="344.3000030517578" id="7" mainText="Bathroom" upText=""></node>
-            <node positionX="678.2499999999998" positionY="286.72879972912017" id="8" mainText="Outside 151, 152" upText=""></node>
-            <node positionX="684.2499999999999" positionY="367.3954663957868" id="9" mainText="152" upText=""></node>
-            <node positionX="673.5833333333331" positionY="216.72879972912014" id="10" mainText="151" upText=""></node>
-            <node positionX="831.5833333333333" positionY="286.72879972912017" id="11" mainText="Outside 155, 156" upText=""></node>
-            <node positionX="812" positionY="347.3000030517578" id="12" mainText="156" upText=""></node>
-            <node positionX="805" positionY="223.3000030517578" id="13" mainText="155" upText=""></node>
-            <node positionX="949.5833333333331" positionY="286.72879972912017" id="14" mainText="Outside 157, 158" upText=""></node>
-            <node positionX="938.2499999999998" positionY="355.3954663957868" id="15" mainText="158" upText=""></node>
-            <node positionX="930.9166666666665" positionY="212.06213306245348" id="16" mainText="157" upText=""></node>
-            <node positionX="1087.583333333333" positionY="282.72879972912017" id="17" mainText="Outside 159" upText=""></node>
-            <node positionX="1057" positionY="202.3000030517578" id="18" mainText="159" upText=""></node>
-            <node positionX="1158" positionY="287.3000030517578" id="19" mainText="East Doors" upText=""></node>
+            <node positionX="190" positionY="50" id="0" mainText="North Doors" upText=""></node>
+            <node positionX="190" positionY="160" id="1" mainText="Outside Elevator 1" upText=""></node>
+            <node positionX="190" positionY="280" id="2" mainText="Outside Hallway 1" upText=""></node>
+            <node positionX="190" positionY="500" id="3" mainText="South Doors" upText=""></node>
+            <node positionX="290" positionY="345" id="4" mainText="Water Fountain 1" upText=""></node>
+            <node positionX="340.2499999999998" positionY="280" id="5" mainText="Floor 1 hallway" upText=""></node>
+            <node positionX="509.5833333333331" positionY="280" id="6" mainText="Outside Bathroom 1" upText=""></node>
+            <node positionX="517" positionY="380" id="7" mainText="Bathroom 1" upText=""></node>
+            <node positionX="678.2499999999998" positionY="280" id="8" mainText="Outside 151, 152" upText=""></node>
+            <node positionX="684.2499999999999" positionY="380" id="9" mainText="152" upText=""></node>
+            <node positionX="673.5833333333331" positionY="180" id="10" mainText="151" upText=""></node>
+            <node positionX="831.5833333333333" positionY="280" id="11" mainText="Outside 155, 156" upText=""></node>
+            <node positionX="812" positionY="380" id="12" mainText="156" upText=""></node>
+            <node positionX="805" positionY="180" id="13" mainText="155" upText=""></node>
+            <node positionX="949.5833333333331" positionY="280" id="14" mainText="Outside 157, 158" upText=""></node>
+            <node positionX="938.2499999999998" positionY="380" id="15" mainText="158" upText=""></node>
+            <node positionX="930.9166666666665" positionY="180" id="16" mainText="157" upText=""></node>
+            <node positionX="1087.583333333333" positionY="280" id="17" mainText="Outside 159" upText=""></node>
+            <node positionX="1057" positionY="180" id="18" mainText="159" upText=""></node>
+            <node positionX="1158" positionY="280" id="19" mainText="East Doors" upText=""></node>
         </nodes>
         <edges>
             <edge vertex1="0" vertex2="1" isDirect="false" weight="72" useWeight="true" id="10000" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
