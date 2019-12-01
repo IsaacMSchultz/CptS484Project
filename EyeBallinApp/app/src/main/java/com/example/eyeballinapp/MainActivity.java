@@ -1,74 +1,108 @@
 package com.example.eyeballinapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int REQUEST_LISTENER = 0;
-    private SpeechParser parser;
+    Button mSpeakBtn;
+    TextToSpeechClass mTts;
+    TextView mStatusText;
+    private static final int REQ_CODE_SPEECH_INPUT = 100;
+    SpeechParser parser = new SpeechParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
-        startListener(getString(R.string.init_greeting));
-        parser = new SpeechParser();
+        setContentView(R.layout.activity_main);
 
-        if (!checkPermission(Manifest.permission.SEND_SMS)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
-        }
+        //mTts = new TextToSpeechClass(getApplicationContext(), getString(R.string.opening_message));
 
-    }
+//        mSpeakBtn = findViewById(R.id.speak_button);
+//        mStatusText = findViewById(R.id.status_text);
+//
+//        mSpeakBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
-    public void startListener(String message) {
-        Intent myIntent = new Intent(MainActivity.this, ListenActivity.class);
-        SpeechResult.get(getApplicationContext()).setSpeechText(message);
-        startActivityForResult(myIntent, REQUEST_LISTENER);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_LISTENER: {
-                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
-                startProgramLoop(testMessage);
-                break;
-            }
-        }
-    }
-
-    private void startProgramLoop(String message) {
-        //parse the message
-        switch(parser.getSpeechCommand(message)) {
-            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
-                parser.clear();
-                Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
-                startActivity(myIntent);
-                break;
-            case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
-                break;
-            case "no": startListener(getString(R.string.init_greeting));
-                break;
-            case "room number": startListener(getString(R.string.room_number));
-                //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
-                break;
-            default: startListener(getString(R.string.please_repeat));
-        }
-    }
-
-    public boolean checkPermission(String permission){
-        int check = ContextCompat.checkSelfPermission(this, permission);
-        return (check == PackageManager.PERMISSION_GRANTED);
+        Intent myIntent = new Intent(MainActivity.this, TextToSpeechClass.class);
+        startActivity (myIntent);
     }
 
 
+//    private void SpeechToText() {
+//        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+//        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hello, How can I help you?");
+//        try {
+//            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+//        } catch (ActivityNotFoundException a) {
+//        }
+//
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        switch (requestCode) {
+//            case REQ_CODE_SPEECH_INPUT: {
+//                if (resultCode == RESULT_OK && null != data) {
+//                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//                    mStatusText.setText(result.get(0));
+//                    startApplication(result.get(0));
+//                    //Toast.makeText(MainActivity.this, "activity result ran", Toast.LENGTH_SHORT).show();
+//                }
+//                break;
+//            }
+//        }
+//    }
+//
+//    private void startApplication(String command) {
+//        //parse command while it isnt the command were looking for keep on asking
+//        switch(parser.getSpeechCommand(command)) {
+//            case "yes": navigate(parser.getDestination());
+//                break;
+//            case "no": speak("You said no");
+//                break;
+//            case "repeat": repeat(command);
+//                SpeechToText();
+//                break;
+//            case "stop": speak("Stop requested, goodbye");
+//                break;
+//            case "setup": speak("Going to setup");
+//                break;
+//            case "commands": speak("Commands are: Go to, setup, or stop");
+//                SpeechToText();
+//                break;
+//            default: speak("Sorry I did not hear that, please repeat");
+//                SpeechToText();
+//                break;
+//        }
+//
+//    }
+//
+//    private void navigate(String roomNumber) {
+//        mTts.speak("Going to room " + roomNumber);
+//        while(mTts.isSpeaking()) {}
+//    }
+//
+//    private void repeat(String command) {
+//        mTts.speak(command + "...is that correct?");
+//        while(mTts.isSpeaking()) {}
+//    }
+//
+//    private void speak(String sentence) {
+//        mTts.speak(sentence);
+//        while(mTts.isSpeaking()) {}
+//    }
 }
