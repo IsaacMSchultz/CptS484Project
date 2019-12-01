@@ -1,42 +1,18 @@
 package com.example.eyeballinapp.MapStuff;
 
-import java.io.IOException;
+import android.content.Context;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlPullParserException;
-import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
-import android.app.Activity;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.ContextWrapper;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import android.content.res.Resources;
-
-import android.content.Intent;
-import android.location.Location;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.*;
-import java.util.ArrayList;
-import org.w3c.dom.Element;
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 //import android.content.res.Resources;
 

@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.example.eyeballinapp.R;
 
 import static com.example.eyeballinapp.MainActivity.REQUEST_LISTENER;
