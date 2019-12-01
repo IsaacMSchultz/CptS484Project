@@ -60,10 +60,10 @@ public class MapGraph implements Graph {
         double lowest = Double.MAX_VALUE;
         MapNode lowestNode = new MapNode("N/A", 0);
 
-        for (String nodeName : nodes.keySet()) {
-            double distance = nodes.get(nodeName).getLocation().distanceTo(loc);
-            if (distance < lowest) {
-                lowest = distance;
+        for (String nodeName : nodes.keySet()) { //go through all the nodes in the graph
+            double distance = nodes.get(nodeName).getLocation().distanceTo(loc); // get the distance from where we are to that node
+            if (distance < lowest) { // if its lower than the current lowest distance,
+                lowest = distance; //save that distance
                 lowestNode = nodes.get(nodeName); //set the lowest node to the actual lowest node
             }
         }
@@ -73,13 +73,13 @@ public class MapGraph implements Graph {
     // Navigate from a source node, to a destination node. This will not be called
     public List<MapNode> navigateFrom(String source, String destination) {
         // This function should run Dijkstra's on the map to get an ordered list of nodes that the user should follow to get to their location.
-        return new ArrayList<MapNode>();
+        return dijkstra(source, destination);
     }
 
     // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
     // This function actually traverses the tree to find the shortest path between the source, and destination vertices.
     // Assumes that the graph is connected!!!
-    public List<MapNode> dijkstra(String sourceVertex, String destinationVertex) {
+    private List<MapNode> dijkstra(String sourceVertex, String destinationVertex) {
         if (!nodes.containsKey(sourceVertex) || !nodes.containsKey(destinationVertex)) //Cannot find the distances if the source or destination is not in the graph.
             return new ArrayList<MapNode>();
 

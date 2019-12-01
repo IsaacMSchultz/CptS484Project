@@ -13,7 +13,7 @@ public class EyeBallinMap {
     /* First dimension of the array is the a given vertex.
      * Second dimension of the array is the distance to each other vertex.
      * Might want to come up with a better way to do this with another class. This will get n^2 large with the number of vertices we will have */
-    int[][][] floorAdjacency = new int[][][]{
+    int[][][] floorAdjacency = new int[][][]{ //REPLACE ALL OF THIS WITH XML PARSING. This is ghetto AF
             { //Floor 1
                 {0, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {72, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
