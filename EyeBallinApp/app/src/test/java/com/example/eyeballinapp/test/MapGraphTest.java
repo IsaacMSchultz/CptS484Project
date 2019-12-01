@@ -19,9 +19,18 @@ public class MapGraphTest {
         MapGraph map = new MapGraph();
 
         assertEquals(0, map.getSize());
+
         MapNode testNode = new MapNode("test1", 1);
         map.addNode(testNode);
         assertEquals(1, map.getSize());
+
+        testNode = new MapNode("test2", 1);
+        map.addNode(testNode);
+        testNode = new MapNode("test3", 1);
+        map.addNode(testNode);
+        testNode = new MapNode("test3", 1);
+        map.addNode(testNode);
+        assertEquals(3, map.getSize());
     }
 
     @Test
@@ -30,6 +39,15 @@ public class MapGraphTest {
 
     @Test
     public void addEdge() {
+        MapGraph map = new MapGraph();
+        MapNode testNode = new MapNode("test1", 1);
+        map.addNode(testNode);
+        testNode = new MapNode("test2", 1);
+        map.addNode(testNode);
+        map.addEdge("test1", "test2", 9);
+
+        assertTrue(map.getNode("test1").getAdjacency().containsKey("test2"));
+        assertTrue(map.getNode("test2").getAdjacency().containsKey("test1"));
     }
 
     @Test

@@ -16,6 +16,9 @@ public class MapGraph implements Graph {
     public int getSize() {
         return nodes.size();
     }
+    public MapNode getNode(String nodeName) {
+        return nodes.get(nodeName);
+    }
 
     // Default constructor
     public MapGraph() {
@@ -43,15 +46,15 @@ public class MapGraph implements Graph {
     }
 
     // Add a single edge to the graph.
-    public void addEdge(String source, String destination, int weight, int floor) {
-        if (!nodes.containsKey(source)) { // If this is a node that has not been added yet, add it
-            nodes.put(source, new MapNode(source, floor));
+    public boolean addEdge(String source, String destination, int weight) {
+        if (!nodes.containsKey(source) || !nodes.containsKey(destination)) { // If this is a node that has not been added yet
+            return false;
         }
-        if (!nodes.containsKey(destination)) {
-            nodes.put(destination, new MapNode(destination, floor));
-        }
-        nodes.get(source).addEdge(destination, weight); 
+
+        nodes.get(source).addEdge(destination, weight);
         nodes.get(destination).addEdge(source, weight);
+
+        return true;
     }
 
     // Find the closes node given a location.
