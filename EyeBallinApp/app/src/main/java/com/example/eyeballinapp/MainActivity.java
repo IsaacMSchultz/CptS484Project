@@ -9,11 +9,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.example.eyeballinapp.MapStuff.XmlParser;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
 import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
 import com.example.eyeballinapp.SpeechStuff.SpeechParser;
 import com.example.eyeballinapp.SpeechStuff.SpeechResult;
+
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (!checkPermission(Manifest.permission.SEND_SMS)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+        }
+
+        // Testing parsing
+        XmlParser test = new XmlParser(this);
+        try {
+            test.tempParse();
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
     }
