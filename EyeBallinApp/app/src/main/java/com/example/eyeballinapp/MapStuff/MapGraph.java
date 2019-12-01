@@ -16,6 +16,9 @@ public class MapGraph implements Graph {
     public int getSize() {
         return nodes.size();
     }
+    public MapNode getNode(String nodeName) {
+        return nodes.get(nodeName);
+    }
 
     // Default constructor
     public MapGraph() {
@@ -43,11 +46,15 @@ public class MapGraph implements Graph {
     }
 
     // Add a single edge to the graph.
-    public void addEdge(String source, String destination, int weight, int floor) {
-        if (!nodes.containsKey(source)) { // If this is a node that has not been added yet, add it
-            nodes.put(source, new MapNode(source, floor));
+    public boolean addEdge(String source, String destination, int weight) {
+        if (!nodes.containsKey(source) || !nodes.containsKey(destination)) { // If this is a node that has not been added yet
+            return false;
         }
+
         nodes.get(source).addEdge(destination, weight);
+        nodes.get(destination).addEdge(source, weight);
+
+        return true;
     }
 
     // Find the closes node given a location.
@@ -126,7 +133,7 @@ public class MapGraph implements Graph {
 
                 // walk backwards from the destination to the source, and add each node along the way.
                 if (prev.get(currentNode).equals("N/A") || currentNode == sourceVertex) { // Can only run this if prev is defined, or this is the source (I think thats the case if the destination was not found)
-                    while (prev.get(currentNode).equals("N/A")){ // While there is a node behind the currentNode
+                    while (prev.get(currentNode).equals("N/A")) { // While there is a node behind the currentNode
                         shortestPath.add(0, nodes.get(currentNode)); // Add that node to the top of the list
                         currentNode = prev.get(currentNode); // set the currentNode to the one previous to it along the path.
                     }

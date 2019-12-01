@@ -1,6 +1,7 @@
 package com.example.eyeballinapp.MapStuff;
 
 import android.location.Location;
+import android.location.LocationManager;
 
 import java.util.HashMap;
 
@@ -20,7 +21,10 @@ public class MapNode {
     public MapNode(String nodeName, int floor) {
         name = nodeName;
         adjacency = new HashMap<String, Integer>();
-        location = new Location("nothing");
+
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
+//        location = new CustomLocation(0, 0, floor); //Cannot run android specific things in tests on laptop!!!
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
     }
 
     public String getName() {

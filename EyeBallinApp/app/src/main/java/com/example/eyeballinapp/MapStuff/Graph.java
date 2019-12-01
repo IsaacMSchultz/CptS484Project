@@ -14,7 +14,7 @@ public interface Graph {
     public void addNode(String source, String[] destination, int[] weight, int floor);
 
     // Add a single edge to the graph.
-    public void addEdge(String source, String destination, int weight, int floor); // makes a node if it doesnt exist
+    public boolean addEdge(String source, String destination, int weight); // return false if source or destination dont exist
 
     // Find the closes node given a location.
     public String nearestNodeName(Location loc);
