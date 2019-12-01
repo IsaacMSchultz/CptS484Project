@@ -22,6 +22,7 @@
             <node positionX="1087.583333333333" positionY="280" id="1017" mainText="Outside 159" upText=""></node>
             <node positionX="1057" positionY="180" id="1018" mainText="159" upText=""></node>
             <node positionX="1158" positionY="280" id="1019" mainText="East Doors" upText=""></node>
+            <node positionX="190" positionY="280" id="1020" mainText="Elevator 1" upText=""></node>
 
             <node positionX="163" positionY="16.800003051757812" id="200" mainText="Elevator 2" upText=""></node>
             <node positionX="16" positionY="14.800003051757812" id="201" mainText="Outside Elevator 2" upText=""></node>
@@ -41,7 +42,6 @@
             <node positionX="1357" positionY="173.8000030517578" id="2015" mainText="Outside 261, 263" upText=""></node>
             <node positionX="1366" positionY="22.800003051757812" id="2016" mainText="261" upText=""></node>
             <node positionX="1420" positionY="24.800003051757812" id="2017" mainText="263" upText=""></node>
-        
 
             <node positionX="222" positionY="56.19999694824219" id="308" mainText="Elevator 3" upText=""></node>
             <node positionX="90" positionY="56.19999694824219" id="309" mainText="Outside Elevator 3" upText=""></node>
@@ -103,6 +103,7 @@
             <edge vertex1="1017" vertex2="1014" isDirect="false" weight="38" useWeight="true" id="1010018" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="1019" vertex2="1017" isDirect="false" weight="8" useWeight="true" id="1010019" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="1014" vertex2="1011" isDirect="false" weight="35" useWeight="true" id="1010020" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="101" vertex2="1020" isDirect="false" weight="35" useWeight="true" id="1010021" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
 
             <edge vertex1="200" vertex2="201" isDirect="false" weight="9" useWeight="true" id="2010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="201" vertex2="202" isDirect="false" weight="25" useWeight="true" id="2010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
@@ -158,6 +159,10 @@
             <edge vertex1="4018" vertex2="4021" isDirect="false" weight="39" useWeight="true" id="4010015" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="4021" vertex2="4022" isDirect="false" weight="16" useWeight="true" id="4010016" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="4022" vertex2="4023" isDirect="false" weight="37" useWeight="true" id="4010017" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+
+            <edge vertex1="1020" vertex2="200" isDirect="false" weight="999" useWeight="true" id="5010000" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="200" vertex2="308" isDirect="false" weight="999" useWeight="true" id="5010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="308" vertex2="408" isDirect="false" weight="999" useWeight="true" id="5010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
         </edges>
     </graph>
 </graphml>
