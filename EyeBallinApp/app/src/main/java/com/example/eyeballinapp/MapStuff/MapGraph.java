@@ -10,7 +10,7 @@ import java.lang.*;
 import java.util.HashMap;
 import java.io.*;
 
-public class MapGraph {
+public class MapGraph implements Graph {
     HashMap<String, MapNode> nodes; //HashMap where the name of the node is the key
 
     public int getSize() {
