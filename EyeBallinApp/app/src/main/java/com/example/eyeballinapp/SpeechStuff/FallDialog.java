@@ -1,6 +1,5 @@
-package com.example.eyeballinapp;
+package com.example.eyeballinapp.SpeechStuff;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.example.eyeballinapp.R;
 
 // FIXME: 11/25/2019 A possible problem would be that if a fall is detected, all the other navigation
 // activities will be stopped. Not sure if this will happen yet since were manipulating different

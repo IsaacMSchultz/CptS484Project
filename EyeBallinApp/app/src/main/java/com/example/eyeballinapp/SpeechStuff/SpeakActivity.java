@@ -1,4 +1,4 @@
-package com.example.eyeballinapp;
+package com.example.eyeballinapp.SpeechStuff;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;

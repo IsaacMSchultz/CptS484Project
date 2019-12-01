@@ -2,7 +2,7 @@
 * Description: The navigation will start here, basically all the map stuff and graph nodes whatever
 *              will happen here.
 * */
-package com.example.eyeballinapp;
+package com.example.eyeballinapp.SpeechStuff;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,12 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import com.example.eyeballinapp.R;
 
 import static com.example.eyeballinapp.MainActivity.REQUEST_LISTENER;
 

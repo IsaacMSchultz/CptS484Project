@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListenActivity"></activity>
-        <activity android:name=".NavigationActivity"></activity>
+        <activity android:name=".SpeechStuff.ListenActivity"></activity>
+        <activity android:name=".SpeechStuff.NavigationActivity"></activity>
 
     </application>
 

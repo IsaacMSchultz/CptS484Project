@@ -1,4 +1,4 @@
-package com.example.eyeballinapp;
+package com.example.eyeballinapp.SpeechStuff;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

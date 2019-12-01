@@ -8,7 +8,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import com.example.eyeballinapp.SpeechStuff.ListenActivity;
+import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
+import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
+import com.example.eyeballinapp.SpeechStuff.SpeechParser;
+import com.example.eyeballinapp.SpeechStuff.SpeechResult;
 
 
 public class MainActivity extends AppCompatActivity {
