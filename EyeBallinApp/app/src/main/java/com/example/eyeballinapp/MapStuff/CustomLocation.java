@@ -17,5 +17,5 @@ public class CustomLocation extends Location {
         this.floorNum = floor;
     }
 
-    // Override the DistanceTo function
+    // TODO: Override the DistanceTo function
 }

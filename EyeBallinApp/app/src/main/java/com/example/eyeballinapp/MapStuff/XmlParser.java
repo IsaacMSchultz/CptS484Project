@@ -1,20 +1,23 @@
 package com.example.eyeballinapp.MapStuff;
 
-import android.content.Context;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-//import android.content.res.Resources;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+
+import android.content.Context;
+import java.util.HashMap;
+import android.content.res.Resources;
+
 
 public class XmlParser {
 
@@ -31,15 +34,14 @@ public class XmlParser {
         this.graph = existingGraph;
     }
 
-    public MapGraph tempParse() throws  IOException{
-        File fXmlFile;
+    public MapGraph tempParse() throws Resources.NotFoundException{
+        
+        // When I parse the nodes I also add their id/ name to this hashmap for
+        // easier access to add edges.
+        HashMap<Integer, String> idToName = new HashMap<>();
         InputStream ins;
-        try{
-            // not working at the moment
-            //fXmlFile = new File("/app/src/main/assets/halfschool.xml");
-            //boolean test = fXmlFile.canRead();
-            //System.out.print(test);
 
+        try{
             ins = context.getResources().openRawResource(
                     context.getResources().getIdentifier("halfschool","raw", context.getPackageName()));
 
@@ -54,44 +56,69 @@ public class XmlParser {
             Element node = (Element) nodes.item(1);
             NodeList graphs = node.getChildNodes();
 
-            Node nodevals = graphs.item(1);
-            Node edgevals = graphs.item(3);
+            Node nodeVals = graphs.item(1);
+            Node edgeVals = graphs.item(3);
 
             // only the odd children have value because they're wrapped in
             // openening and closing newline characters probably because of the
             // formatting/ built in parse function
-            for (int i = 1; i < nodevals.getChildNodes().getLength(); i+= 2){
+            for (int i = 1; i < nodeVals.getChildNodes().getLength(); i+= 2){
+
+                int id = Integer.parseInt(nodeVals.getChildNodes().item(i).getAttributes().item(2).getNodeValue());
+                String name = nodeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue();
+
+                // Insert into map
+                idToName.put(id, name);
 
                 // Create a new CustomLocation object to be inserted into graph
                 CustomLocation newLocation = new CustomLocation(
-                        Double.valueOf(nodevals.getChildNodes().item(i).getAttributes().item(0).getNodeValue()),
-                        Double.valueOf(nodevals.getChildNodes().item(i).getAttributes().item(1).getNodeValue()),
-                        getFloorNum(Integer.parseInt(nodevals.getChildNodes().item(i).getAttributes().item(2).getNodeValue()))
+                        Double.valueOf(nodeVals.getChildNodes().item(i).getAttributes().item(0).getNodeValue()),
+                        Double.valueOf(nodeVals.getChildNodes().item(i).getAttributes().item(1).getNodeValue()),
+                        getFloorNum(id)
                 );
 
                 // Create a new MapNode with the values
-                // Create a function to parse id's to get floor numbers
-
-
-                MapNode newNode = new MapNode(nodevals.getChildNodes().item(i).getAttributes().item(3).getNodeValue(),
-                        null,
+                MapNode newNode = new MapNode(name,
+                        new HashMap<String, Integer>(),
                         newLocation,
-                        Integer.parseInt(nodevals.getChildNodes().item(i).getAttributes().item(2).getNodeValue())
+                        id
                         );
 
                 // Insert into the graph to be returned
                 this.graph.addNode(newNode);
             }
 
-            ins.read();
+            // Adding edges to the graph
+            for (int i = 1; i < edgeVals.getChildNodes().getLength(); i+= 2){
 
-        } catch (Exception e){
+                // use the hashmap to get the node names
+                String source = idToName.get(Integer.parseInt(
+                        edgeVals.getChildNodes().item(i).getAttributes().item(0).getNodeValue()));
+                String dest = idToName.get(Integer.parseInt(
+                        edgeVals.getChildNodes().item(i).getAttributes().item(1).getNodeValue()));
+
+                graph.addEdge(source, dest,
+                        Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue())/*,
+                        getFloorNum(Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(5).getNodeValue()))*/); // I removed the floor from the criteria to add an edge. Assuming that you must add all nodes involved before you can add an edge.
+            }
+
+            //ins.read();
+
+        // Don't think any of used methods can throw exceptions
+        } catch (Resources.NotFoundException e){
+            e.printStackTrace();
+        } catch (ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (SAXException e){
             e.printStackTrace();
         }
 
-          return graph;
+        return graph;
     }
 
+    // Method to get the proper floor number from the item's id
     int getFloorNum (int nodeId){
 
         while (nodeId >= 10){
