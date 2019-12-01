@@ -23,7 +23,7 @@ public class MapNode {
         adjacency = new HashMap<String, Integer>();
 
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
-//        location = new CustomLocation(0, 0, floor); //Cannot run android specific things in tests on laptop!!!
+        location = new CustomLocation(0, 0, floor); //Cannot run android specific things in tests on laptop!!!
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
     }
 

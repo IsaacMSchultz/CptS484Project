@@ -3,12 +3,11 @@ package com.example.eyeballinapp.MapStuff;
 // The program is for adjacency matrix representation of the graph
 
 import android.location.Location;
-import android.util.Pair;
 
-import java.util.*;
-import java.lang.*;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.*;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class MapGraph implements Graph {
     HashMap<String, MapNode> nodes; //HashMap where the name of the node is the key

@@ -1,7 +1,6 @@
 package com.example.eyeballinapp.MapStuff;
 
 import android.location.Location;
-import android.location.LocationProvider;
 
 import java.util.HashMap;
 
