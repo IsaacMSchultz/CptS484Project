@@ -36,17 +36,18 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
 
-        // Testing parsing
+        // Populate matrix from XML data
         XmlParser test = new XmlParser(this);
         MapGraph graph = new MapGraph();
-        try {
-            graph = test.tempParse();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+//        try {
+//            graph = test.tempParse();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+        graph = test.tempParse();
 
-        System.out.print("idk");
-
+        // Just used for debugging
+        System.out.print("stopping point");
     }
 
     public void startListener(String message) {
