@@ -1,16 +1,16 @@
 package com.example.eyeballinapp.MapStuff;
 
 public class AdjacencyPair {
-    String destination;
-    int distance;
+    private String vertex;
+    private int distance;
 
-    public AdjacencyPair(String destination, int distance) {
-        this.destination = destination;
+    public AdjacencyPair(String vertex, int distance) {
+        this.vertex = vertex;
         this.distance = distance;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getVertex() {
+        return vertex;
     }
 
     public int getDistance() {
