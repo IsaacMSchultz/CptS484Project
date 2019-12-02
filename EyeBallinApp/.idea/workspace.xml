@@ -10,15 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409500ae-4187-4d78-8715-c769dd02dfd0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/GraphPriorityQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/eyeballinapp/test/MapGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/example/eyeballinapp/test/MapGraphTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="409500ae-4187-4d78-8715-c769dd02dfd0" name="Default Changelist" comment="" />
     <list id="bc45dc5a-d621-40e8-8a36-a048604a1577" name="Revert: removing test folder" comment="" />
     <list id="4aecdbdd-2c2f-4f44-9e0f-abe4892cbccc" name="Revert: updating workspace" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,7 +22,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="26c40eda" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_28_x86" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -67,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="22" column="51" lean-forward="true" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+            <state relative-caret-position="493">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
@@ -164,7 +156,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -243,22 +235,13 @@
               <item name="EyeBallinApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="EyeBallinApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EyeBallinApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="EyeBallinApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EyeBallinApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EyeBallinApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1127,8 +1110,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/MapNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="51" lean-forward="true" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+        <state relative-caret-position="493">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
         </state>
       </provider>
     </entry>
