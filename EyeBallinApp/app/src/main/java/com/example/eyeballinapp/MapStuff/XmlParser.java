@@ -5,6 +5,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -97,8 +98,8 @@ public class XmlParser {
                         edgeVals.getChildNodes().item(i).getAttributes().item(1).getNodeValue()));
 
                 graph.addEdge(source, dest,
-                        Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue()),
-                        getFloorNum(Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(5).getNodeValue())));
+                        Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue())/*,
+                        getFloorNum(Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(5).getNodeValue()))*/); // I removed the floor from the criteria to add an edge. Assuming that you must add all nodes involved before you can add an edge.
             }
 
             //ins.read();
