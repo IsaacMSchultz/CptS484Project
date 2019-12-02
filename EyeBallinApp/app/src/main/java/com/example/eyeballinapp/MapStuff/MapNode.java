@@ -22,9 +22,9 @@ public class MapNode {
         name = nodeName;
         adjacency = new HashMap<String, Integer>();
 
-        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
         location = new CustomLocation(0, 0, floor); //Cannot run android specific things in tests on laptop!!!
-        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
     }
 
     public String getName() {
