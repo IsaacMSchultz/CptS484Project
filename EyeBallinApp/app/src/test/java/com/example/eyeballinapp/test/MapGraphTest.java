@@ -119,18 +119,4 @@ public class MapGraphTest {
             assertEquals(expected[j], steps.get(j).getName());
         }
     }
-
-    @Test
-    public void navigateFrom1() {
-        MapGraph map = new MapGraph();
-        // build the map using the constructor in here
-        XmlParser parser = new XmlParser(map);
-        map = parser.tempParse();
-
-        List<MapNode> steps = map.navigateFrom("North Doors", "East Doors");
-
-//        assertEquals(expected.length, steps.size());
-
-        assertTrue(true);
-    }
 }

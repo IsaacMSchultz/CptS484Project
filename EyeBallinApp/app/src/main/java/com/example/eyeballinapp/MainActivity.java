@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
+import com.example.eyeballinapp.MapStuff.Route;
 import com.example.eyeballinapp.MapStuff.XmlParser;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
         graph = test.tempParse();
 
-        List<MapNode> steps = graph.navigateFrom("East Doors", "458");
+        Route steps = graph.navigateFrom("East Doors", "458");
 
         // Just used for debugging
         System.out.print("stopping point");

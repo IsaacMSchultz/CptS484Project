@@ -2,7 +2,7 @@ package com.example.eyeballinapp.MapStuff;
 
 import java.util.ArrayList;
 
-class Route {
+public class Route {
     private ArrayList<Step> steps;
     private int currentStep;
 

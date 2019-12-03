@@ -7,6 +7,14 @@ import java.util.HashMap;
 
 public class CustomLocation extends Location {
 
+    // The way we have things set up:
+    /*
+        north is positive y
+        south is negative y
+        east is positive x
+        west is negative x
+     */
+
     private double positionX;
     private double positionY;
     private int floorNum;

@@ -5,6 +5,7 @@ package com.example.eyeballinapp.MapStuff.Graph;
 import android.location.Location;
 
 import com.example.eyeballinapp.MapStuff.CustomLocation;
+import com.example.eyeballinapp.MapStuff.Route;
 import com.example.eyeballinapp.MapStuff.Step;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class MapGraph implements Graph {
+public class MapGraph {
     HashMap<String, MapNode> nodes; //HashMap where the name of the node is the key
 
     public int getSize() {
@@ -68,6 +69,11 @@ public class MapGraph implements Graph {
         return true;
     }
 
+    // determines if a node is in the graph.
+    public boolean containsNode(String name) {
+        return nodes.containsKey(name);
+    }
+
     // Find the closes node given a location.
     public String nearestNodeName(Location loc) {
         return nearestNode(loc).getNode().getName();
@@ -88,10 +94,73 @@ public class MapGraph implements Graph {
         return new Step(lowestNode, loc);
     }
 
-    // Navigate from a source node, to a destination node. This will not be called
-    public List<MapNode> navigateFrom(String source, String destination) {
-        // This function should run Dijkstra's on the map to get an ordered list of nodes that the user should follow to get to their location.
-        return dijkstra(source, destination);
+    // Navigate from a source node, to a destination node, and return the route between them.
+    public Route navigateFrom(String source, String destination) {
+        return new Route(route(source, destination));
+    }
+
+    private ArrayList<Step> route(String sourceVertex, String destinationVertex) {
+        if (!nodes.containsKey(sourceVertex) || !nodes.containsKey(destinationVertex)) //Cannot find the distances if the source or destination is not in the graph.
+            return new ArrayList<Step>();
+
+        HashMap<String, String> prev = new HashMap<String, String>(); // keeps track of the previous node for each node
+        HashMap<String, Double> distance = new HashMap<String, Double>(); //distance used to store the distance of vertex from a source
+        ArrayList<Step> shortestPath = new ArrayList<>(); // Create the arrayList that we will use to store the shortest path.
+
+        // Creating a priority queue for ordering which node to select next.
+        // Size of the number of nodes, compares based on distance
+        // AdjacencyPair contains a String for the destination, and an double for the distance to it.
+        PriorityQueue<AdjacencyPair> priorityQueue = new PriorityQueue<AdjacencyPair>(nodes.size(), new AdjacencyPairComparator());
+//        TreeSet<AdjacencyPair> priorityQueue = new TreeSet<AdjacencyPair>(new AdjacencyPairComparator()); // Using this instead of a priorityQueue because it does not allow duplicates.
+
+        distance.put(sourceVertex, 0.0); // Set starting vertex to have a distance of 0.
+        priorityQueue.offer(new AdjacencyPair(sourceVertex, 0.0));
+
+        //Initialize the distance of all other nodes to infinity
+        for (String nodeName : nodes.keySet()) {
+            if (!nodeName.equals(sourceVertex))
+                distance.put(nodeName, Double.MAX_VALUE); // Set the distance to be infinity for every node
+            prev.put(nodeName, "N/A"); // Set the previous value to be N/A for every node
+
+            //priorityQueue.offer(new AdjacencyPair(nodeName, distance.get(nodeName))); // Add the node to the priority queue. SourceVertex will be at the top since it has the smallest.
+        }
+
+        // While there are nodes that are still reachable.
+        while (priorityQueue.isEmpty() == false) {
+
+            // Find the node with the shortest distance
+            String closest = priorityQueue.poll().getVertex(); // Take the top node off the queue.
+
+            if (!closest.equals(destinationVertex)) { // If we have not reached the destination vertex, continue traversing neighbors of this node to find the shortest path.
+                HashMap<String, Double> neighbors = nodes.get(closest).getAdjacency(); // Get the neighbors of the closest node.
+
+                for (String neighbor : neighbors.keySet()) {
+                    Double pathLength;
+                    pathLength = distance.get(closest) + neighbors.get(neighbor); // Store the path length, which is the current distance, plus the distance of to the neighbor.
+
+                    if (pathLength < distance.get(neighbor)) {// If the pathLength we just found is shorter than the one we already have stored in the distance HashMap
+                        distance.put(neighbor, pathLength); // Update the length of the new shortest path to that node.
+                        prev.put(neighbor, closest); // Set the node previous to the neighbor for the shortest distance path, to the closest node.
+
+                        priorityQueue.offer(new AdjacencyPair(neighbor, pathLength));
+                    }
+                }
+            } else { // We have found the shortest path from the source to the destination!
+                // Now we need to build the steps that need to be taken to navigate from the source to the destination.
+                String currentNode = closest; //renaming the variable to make this section more clear
+
+                // walk backwards from the destination to the source, and add each node along the way.
+                if (!prev.get(currentNode).equals("N/A") || currentNode.equals(sourceVertex)) { // Can only run this if prev is defined, or this is the source (I think thats the case if the destination was not found)
+                    while (!prev.get(currentNode).equals("N/A")) { // While there is a node behind the currentNode (excludes the last node).
+                        Step nextStep = new Step(nodes.get(currentNode), nodes.get(prev.get(currentNode)).getLocation()); // add the previous node and the distance between them to the step.
+
+                        shortestPath.add(0, nextStep); // Add that node to the top of the list
+                        currentNode = prev.get(currentNode); // set the currentNode to the one previous to it along the path.
+                    }
+                }
+            }
+        }
+        return shortestPath;
     }
 
     // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
