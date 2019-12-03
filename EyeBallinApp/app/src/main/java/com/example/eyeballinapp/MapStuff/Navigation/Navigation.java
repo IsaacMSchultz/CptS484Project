@@ -3,7 +3,7 @@
 // This class will also create a location listener that will be used to navigate the user
 // For testing
 
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Navigation;
 
 public class Navigation {
     EyeBallinMap map;

@@ -1,9 +1,8 @@
 package com.example.eyeballinapp.MapStuff.Graph;
 
 import android.location.Location;
-import android.location.LocationManager;
 
-import com.example.eyeballinapp.MapStuff.CustomLocation;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 
 import java.util.HashMap;
 

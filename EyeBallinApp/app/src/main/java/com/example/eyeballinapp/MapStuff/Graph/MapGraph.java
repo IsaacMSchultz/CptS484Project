@@ -4,9 +4,7 @@ package com.example.eyeballinapp.MapStuff.Graph;
 
 import android.location.Location;
 
-import com.example.eyeballinapp.MapStuff.CustomLocation;
-import com.example.eyeballinapp.MapStuff.Route;
-import com.example.eyeballinapp.MapStuff.Step;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

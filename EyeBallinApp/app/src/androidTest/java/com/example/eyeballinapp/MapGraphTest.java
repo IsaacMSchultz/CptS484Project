@@ -2,16 +2,13 @@ package com.example.eyeballinapp;
 
 import androidx.test.runner.AndroidJUnit4;
 
-import com.example.eyeballinapp.MapStuff.CustomLocation;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
-import com.example.eyeballinapp.MapStuff.Route;
-import com.example.eyeballinapp.MapStuff.XmlParser;
+import com.example.eyeballinapp.MapStuff.Graph.Route;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

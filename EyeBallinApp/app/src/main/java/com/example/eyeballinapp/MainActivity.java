@@ -9,17 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
-import com.example.eyeballinapp.MapStuff.Graph.MapNode;
-import com.example.eyeballinapp.MapStuff.Route;
-import com.example.eyeballinapp.MapStuff.XmlParser;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
+import EyeBallinMap;
+import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
 import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
 import com.example.eyeballinapp.SpeechStuff.SpeechParser;
 import com.example.eyeballinapp.SpeechStuff.SpeechResult;
-
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,17 +35,11 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
 
-        // Populate matrix from XML data
-        XmlParser test = new XmlParser(this);
-        MapGraph graph = new MapGraph();
-//        try {
-//            graph = test.tempParse();
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-        graph = test.tempParse();
+        EyeBallinMap map = new EyeBallinMap();
+        map.setDestination("458");
+        map.updateUser(new CustomLocation(0,0,1));
 
-        Route steps = graph.navigateFrom("East Doors", "458");
+        Route steps = map.calculateRoute();
 
         // Just used for debugging
         System.out.print("stopping point");

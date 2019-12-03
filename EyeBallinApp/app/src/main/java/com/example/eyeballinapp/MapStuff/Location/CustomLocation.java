@@ -1,8 +1,6 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Location;
 
 import android.location.Location;
-
-import java.util.HashMap;
 
 
 public class CustomLocation extends Location {

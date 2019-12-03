@@ -1,4 +1,4 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.parsing;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import android.content.res.Resources;
 
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 

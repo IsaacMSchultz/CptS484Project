@@ -1,8 +1,10 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Graph;
 
 import android.location.Location;
 
+import com.example.eyeballinapp.MapStuff.Graph.EBVector;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 
 public class Step {
     private MapNode node;

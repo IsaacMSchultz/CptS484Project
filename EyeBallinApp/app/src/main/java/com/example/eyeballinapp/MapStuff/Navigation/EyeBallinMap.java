@@ -1,7 +1,11 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Navigation;
 
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
+import com.example.eyeballinapp.MapStuff.Graph.EBVector;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
-import com.example.eyeballinapp.MapStuff.Graph.MapNode;
+import com.example.eyeballinapp.MapStuff.Graph.Route;
+import com.example.eyeballinapp.MapStuff.Graph.Step;
+import com.example.eyeballinapp.MapStuff.parsing.XmlParser;
 
 // EyeBallinMap is a map that makes use of the MapGraph class to navigate the user to a given location
 public class EyeBallinMap {

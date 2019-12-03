@@ -11,10 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409500ae-4187-4d78-8715-c769dd02dfd0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Route.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Step.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Step.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+            <state relative-caret-position="832">
+              <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2967#2968#0" expanded="true" />
@@ -83,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+            <state relative-caret-position="265">
+              <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -220,13 +217,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapNode.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/example/eyeballinapp/test/MapGraphTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapGraph.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/CustomLocation.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EBVector.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Step.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Route.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -671,7 +668,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23667377" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23667377" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -688,7 +685,7 @@
       <window_info anchor="bottom" id="Build" order="6" weight="0.3271028" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.32917964" />
-      <window_info anchor="bottom" id="Debug" order="9" visible="true" weight="0.3509865" />
+      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.3509865" />
       <window_info anchor="right" id="Preview" order="0" />
       <window_info anchor="right" id="Assistant" order="1" weight="0.32995737" />
       <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
@@ -719,7 +716,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java</url>
-          <line>53</line>
+          <line>49</line>
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
@@ -986,16 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EBVector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -1070,12 +1057,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+        <state relative-caret-position="832">
+          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2967#2968#0" expanded="true" />
             <element signature="e#3006#3007#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
