@@ -1,16 +1,15 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Graph;
 // A Java program for Dijkstra's single source shortest path algorithm.
 // The program is for adjacency matrix representation of the graph
 
 import android.location.Location;
 
+import com.example.eyeballinapp.MapStuff.CustomLocation;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.TreeSet;
 
 public class MapGraph implements Graph {
     HashMap<String, MapNode> nodes; //HashMap where the name of the node is the key
@@ -38,14 +37,18 @@ public class MapGraph implements Graph {
         nodes.put(node.getName(), node); // Add a node to the graph.
     }
 
-    // Adding a new node to a graph with an entire adjacency list
-    public void addNode(String source, String[] destination, int[] weight, int floor) {
-        if (!nodes.containsKey(source)) {
-            nodes.put(source, new MapNode(source, floor));
+    // Add a node into the graph that has already been built
+    public void addNode(String name, CustomLocation loc) {
+        nodes.put(name, new MapNode(name, loc)); // Add a node to the graph.
+    }
+
+    // remove a node and all its edges.
+    public void addNode(String name) {
+        if (!nodes.containsKey(name)) {
+            return;
         }
-        for (int i = 0; i < destination.length; i++) {
-            nodes.get(source).addEdge(destination[i], weight[i]); // Add the edges one by one
-        }
+        //TODO: remove a node an dall its edges!!!!
+//        nodes.put(name, new MapNode(name, loc)); // Add a node to the graph.
     }
 
     // Add a single edge to the graph.
@@ -68,7 +71,7 @@ public class MapGraph implements Graph {
     // Find the node that is closest to the location passed.
     public MapNode nearestNode(Location loc) {
         double lowest = Double.MAX_VALUE;
-        MapNode lowestNode = new MapNode("N/A", 0);
+        MapNode lowestNode = new MapNode("N/A", new CustomLocation(0,0,0));
 
         for (String nodeName : nodes.keySet()) { //go through all the nodes in the graph
             double distance = nodes.get(nodeName).getLocation().distanceTo(loc); // get the distance from where we are to that node

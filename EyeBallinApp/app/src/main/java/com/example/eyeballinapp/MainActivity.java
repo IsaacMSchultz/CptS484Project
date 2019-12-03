@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.eyeballinapp.MapStuff.MapGraph;
-import com.example.eyeballinapp.MapStuff.MapNode;
+import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
+import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 import com.example.eyeballinapp.MapStuff.XmlParser;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
@@ -18,7 +18,6 @@ import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
 import com.example.eyeballinapp.SpeechStuff.SpeechParser;
 import com.example.eyeballinapp.SpeechStuff.SpeechResult;
 
-import java.io.IOException;
 import java.util.List;
 
 

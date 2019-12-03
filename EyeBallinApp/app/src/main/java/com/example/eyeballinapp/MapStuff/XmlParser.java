@@ -15,8 +15,13 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+
 import java.util.HashMap;
+
 import android.content.res.Resources;
+
+import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
+import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 
 
 public class XmlParser {
@@ -24,26 +29,26 @@ public class XmlParser {
     public MapGraph graph;
     private Context context;
 
-    public XmlParser(Context current){
+    public XmlParser(Context current) {
         this.graph = new MapGraph();
         this.context = current;
 
     }
 
-    public XmlParser(MapGraph existingGraph){
+    public XmlParser(MapGraph existingGraph) {
         this.graph = existingGraph;
     }
 
-    public MapGraph tempParse() throws Resources.NotFoundException{
-        
+    public MapGraph tempParse() throws Resources.NotFoundException {
+
         // When I parse the nodes I also add their id/ name to this hashmap for
         // easier access to add edges.
         HashMap<Integer, String> idToName = new HashMap<>();
         InputStream ins;
 
-        try{
+        try {
             ins = context.getResources().openRawResource(
-                    context.getResources().getIdentifier("halfschool","raw", context.getPackageName()));
+                    context.getResources().getIdentifier("halfschool", "raw", context.getPackageName()));
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -62,7 +67,7 @@ public class XmlParser {
             // only the odd children have value because they're wrapped in
             // openening and closing newline characters probably because of the
             // formatting/ built in parse function
-            for (int i = 1; i < nodeVals.getChildNodes().getLength(); i+= 2){
+            for (int i = 1; i < nodeVals.getChildNodes().getLength(); i += 2) {
 
                 int id = Integer.parseInt(nodeVals.getChildNodes().item(i).getAttributes().item(2).getNodeValue());
                 String name = nodeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue();
@@ -82,14 +87,14 @@ public class XmlParser {
                         new HashMap<String, Integer>(),
                         newLocation,
                         id
-                        );
+                );
 
                 // Insert into the graph to be returned
                 this.graph.addNode(newNode);
             }
 
             // Adding edges to the graph
-            for (int i = 1; i < edgeVals.getChildNodes().getLength(); i+= 2){
+            for (int i = 1; i < edgeVals.getChildNodes().getLength(); i += 2) {
 
                 // use the hashmap to get the node names
                 String source = idToName.get(Integer.parseInt(
@@ -104,14 +109,14 @@ public class XmlParser {
 
             //ins.read();
 
-        // Don't think any of used methods can throw exceptions
-        } catch (Resources.NotFoundException e){
+            // Don't think any of used methods can throw exceptions
+        } catch (Resources.NotFoundException e) {
             e.printStackTrace();
-        } catch (ParserConfigurationException e){
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (SAXException e){
+        } catch (SAXException e) {
             e.printStackTrace();
         }
 
@@ -119,9 +124,9 @@ public class XmlParser {
     }
 
     // Method to get the proper floor number from the item's id
-    int getFloorNum (int nodeId){
+    int getFloorNum(int nodeId) {
 
-        while (nodeId >= 10){
+        while (nodeId >= 10) {
             nodeId /= 10;
         }
         return nodeId;

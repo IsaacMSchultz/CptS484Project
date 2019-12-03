@@ -1,7 +1,9 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Graph;
 
 import android.location.Location;
 import android.location.LocationManager;
+
+import com.example.eyeballinapp.MapStuff.CustomLocation;
 
 import java.util.HashMap;
 
@@ -11,19 +13,19 @@ public class MapNode {
     private int id;
     private HashMap<String, Integer> adjacency; //one slice of the adjacency matrix.
 
-    public MapNode(String nodeName, HashMap<String, Integer> adjacentNodes, Location loc, int id) {
+    public MapNode(String nodeName, HashMap<String, Integer> adjacentNodes, CustomLocation loc, int id) {
         this.name = nodeName;
         this.adjacency = adjacentNodes;
         this.location = loc;
         this.id = id;
     }
 
-    public MapNode(String nodeName, int floor) {
+    public MapNode(String nodeName, CustomLocation loc) {
         name = nodeName;
         adjacency = new HashMap<String, Integer>();
 
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
-//        location = new CustomLocation(0, 0, floor); //Cannot run android specific things in tests on laptop!!!
+        location = loc; //Cannot run android specific things in tests on laptop!!!
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
     }
 

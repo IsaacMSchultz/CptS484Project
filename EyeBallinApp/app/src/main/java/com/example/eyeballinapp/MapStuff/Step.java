@@ -1,8 +1,10 @@
 package com.example.eyeballinapp.MapStuff;
 
+import com.example.eyeballinapp.MapStuff.Graph.MapNode;
+
 public class Step {
     private MapNode source;
-    private NodeVector vector;
+    private EBVector vector;
 
     public Step(MapNode node, double distanceX, double distanceY) {
 
@@ -14,7 +16,7 @@ public class Step {
         //return the magnitude of the vector
     }
 
-    public NodeVector getDirection() {
+    public EBVector getDirection() {
         return vector;
     }
 

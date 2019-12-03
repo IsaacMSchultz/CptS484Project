@@ -1,8 +1,6 @@
 package com.example.eyeballinapp.MapStuff;
 
-import android.location.Location;
-
-import java.util.HashMap;
+import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 
 // EyeBallinMap is a map that makes use of the MapGraph class to navigate the user to a given location
 public class EyeBallinMap {

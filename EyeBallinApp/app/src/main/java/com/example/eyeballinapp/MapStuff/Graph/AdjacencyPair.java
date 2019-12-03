@@ -1,4 +1,4 @@
-package com.example.eyeballinapp.MapStuff;
+package com.example.eyeballinapp.MapStuff.Graph;
 
 public class AdjacencyPair {
     private String vertex;

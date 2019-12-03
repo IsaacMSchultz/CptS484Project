@@ -1,7 +1,7 @@
 package com.example.eyeballinapp.test;
 
-import com.example.eyeballinapp.MapStuff.MapGraph;
-import com.example.eyeballinapp.MapStuff.MapNode;
+import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
+import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 import com.example.eyeballinapp.MapStuff.XmlParser;
 
 import org.junit.Test;
