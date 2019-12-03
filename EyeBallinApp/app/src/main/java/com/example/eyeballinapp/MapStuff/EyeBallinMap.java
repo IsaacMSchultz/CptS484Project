@@ -1,6 +1,7 @@
 package com.example.eyeballinapp.MapStuff;
 
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
+import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 
 // EyeBallinMap is a map that makes use of the MapGraph class to navigate the user to a given location
 public class EyeBallinMap {
@@ -16,6 +17,11 @@ public class EyeBallinMap {
 
     // add / remove the user node in the graph, connect to the closest node.
     public void updateUser(CustomLocation loc) {
+        map.removeNode("USER"); //remove the old node
+        Step closestNode = map.nearestNode(loc); // get the closest node before adding the new one.
+        map.addNode("USER", loc); // add the new node
+
+        map.addEdge("USER", closestNode.getNode().getName(), closestNode.getDistance());
 
     }
 

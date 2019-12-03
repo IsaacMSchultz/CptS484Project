@@ -5,6 +5,7 @@ package com.example.eyeballinapp.MapStuff.Graph;
 import android.location.Location;
 
 import com.example.eyeballinapp.MapStuff.CustomLocation;
+import com.example.eyeballinapp.MapStuff.Step;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,16 +44,20 @@ public class MapGraph implements Graph {
     }
 
     // remove a node and all its edges.
-    public void addNode(String name) {
-        if (!nodes.containsKey(name)) {
+    public void removeNode(String name) {
+        if (!nodes.containsKey(name))  // if the node isnt in the graph we cannot remove it.
             return;
+
+        MapNode node = nodes.get(name);
+
+        // remove the edges that the node has.
+        for (String adjacentNode : node.getAdjacency().keySet()) {
+            nodes.get(adjacentNode).removeEdge(name);
         }
-        //TODO: remove a node an dall its edges!!!!
-//        nodes.put(name, new MapNode(name, loc)); // Add a node to the graph.
     }
 
     // Add a single edge to the graph.
-    public boolean addEdge(String source, String destination, int weight) {
+    public boolean addEdge(String source, String destination, double weight) {
         if (!nodes.containsKey(source) || !nodes.containsKey(destination)) { // If this is a node that has not been added yet
             return false;
         }
@@ -65,13 +70,13 @@ public class MapGraph implements Graph {
 
     // Find the closes node given a location.
     public String nearestNodeName(Location loc) {
-        return nearestNode(loc).getName();
+        return nearestNode(loc).getNode().getName();
     }
 
     // Find the node that is closest to the location passed.
-    public MapNode nearestNode(Location loc) {
+    public Step nearestNode(Location loc) {
         double lowest = Double.MAX_VALUE;
-        MapNode lowestNode = new MapNode("N/A", new CustomLocation(0,0,0));
+        MapNode lowestNode = new MapNode("N/A", new CustomLocation(0, 0, 0));
 
         for (String nodeName : nodes.keySet()) { //go through all the nodes in the graph
             double distance = nodes.get(nodeName).getLocation().distanceTo(loc); // get the distance from where we are to that node
@@ -80,7 +85,7 @@ public class MapGraph implements Graph {
                 lowestNode = nodes.get(nodeName); //set the lowest node to the actual lowest node
             }
         }
-        return lowestNode;
+        return new Step(lowestNode, loc);
     }
 
     // Navigate from a source node, to a destination node. This will not be called
@@ -97,22 +102,22 @@ public class MapGraph implements Graph {
             return new ArrayList<MapNode>();
 
         HashMap<String, String> prev = new HashMap<String, String>(); // keeps track of the previous node for each node
-        HashMap<String, Integer> distance = new HashMap<String, Integer>(); //distance used to store the distance of vertex from a source
+        HashMap<String, Double> distance = new HashMap<String, Double>(); //distance used to store the distance of vertex from a source
         ArrayList<MapNode> shortestPath = new ArrayList<>(); // Create the arrayList that we will use to store the shortest path.
 
         // Creating a priority queue for ordering which node to select next.
         // Size of the number of nodes, compares based on distance
-        // AdjacencyPair contains a String for the destination, and an integer for the distance to it.
+        // AdjacencyPair contains a String for the destination, and an double for the distance to it.
         PriorityQueue<AdjacencyPair> priorityQueue = new PriorityQueue<AdjacencyPair>(nodes.size(), new AdjacencyPairComparator());
 //        TreeSet<AdjacencyPair> priorityQueue = new TreeSet<AdjacencyPair>(new AdjacencyPairComparator()); // Using this instead of a priorityQueue because it does not allow duplicates.
 
-        distance.put(sourceVertex, 0); // Set starting vertex to have a distance of 0.
-        priorityQueue.offer(new AdjacencyPair(sourceVertex, 0));
+        distance.put(sourceVertex, 0.0); // Set starting vertex to have a distance of 0.
+        priorityQueue.offer(new AdjacencyPair(sourceVertex, 0.0));
 
         //Initialize the distance of all other nodes to infinity
         for (String nodeName : nodes.keySet()) {
             if (!nodeName.equals(sourceVertex))
-                distance.put(nodeName, Integer.MAX_VALUE); // Set the distance to be infinity for every node
+                distance.put(nodeName, Double.MAX_VALUE); // Set the distance to be infinity for every node
             prev.put(nodeName, "N/A"); // Set the previous value to be N/A for every node
 
             //priorityQueue.offer(new AdjacencyPair(nodeName, distance.get(nodeName))); // Add the node to the priority queue. SourceVertex will be at the top since it has the smallest.
@@ -125,15 +130,11 @@ public class MapGraph implements Graph {
             String closest = priorityQueue.poll().getVertex(); // Take the top node off the queue.
 
             if (!closest.equals(destinationVertex)) { // If we have not reached the destination vertex, continue traversing neighbors of this node to find the shortest path.
-                HashMap<String, Integer> neighbors = nodes.get(closest).getAdjacency(); // Get the neighbors of the closest node.
+                HashMap<String, Double> neighbors = nodes.get(closest).getAdjacency(); // Get the neighbors of the closest node.
 
                 for (String neighbor : neighbors.keySet()) {
-                    int pathLength;
-//                    if (distance.get(closest) == Integer.MAX_VALUE) { // if the distance is infinity, then we have not visited the node yet. and should treat it as 0.
-//                        pathLength = neighbors.get(neighbor);
-//                    } else {
-                        pathLength = distance.get(closest) + neighbors.get(neighbor); // Store the path length, which is the current distance, plus the distance of to the neighbor.
-//                    }
+                    Double pathLength;
+                    pathLength = distance.get(closest) + neighbors.get(neighbor); // Store the path length, which is the current distance, plus the distance of to the neighbor.
 
                     if (pathLength < distance.get(neighbor)) {// If the pathLength we just found is shorter than the one we already have stored in the distance HashMap
                         distance.put(neighbor, pathLength); // Update the length of the new shortest path to that node.

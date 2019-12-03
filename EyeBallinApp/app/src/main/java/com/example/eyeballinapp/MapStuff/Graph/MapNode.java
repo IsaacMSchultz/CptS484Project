@@ -11,9 +11,9 @@ public class MapNode {
     private String name;
     private Location location; // GPS location of the node
     private int id;
-    private HashMap<String, Integer> adjacency; //one slice of the adjacency matrix.
+    private HashMap<String, Double> adjacency; //one slice of the adjacency matrix.
 
-    public MapNode(String nodeName, HashMap<String, Integer> adjacentNodes, CustomLocation loc, int id) {
+    public MapNode(String nodeName, HashMap<String, Double> adjacentNodes, CustomLocation loc, int id) {
         this.name = nodeName;
         this.adjacency = adjacentNodes;
         this.location = loc;
@@ -22,7 +22,7 @@ public class MapNode {
 
     public MapNode(String nodeName, CustomLocation loc) {
         name = nodeName;
-        adjacency = new HashMap<String, Integer>();
+        adjacency = new HashMap<String, Double>();
 
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
         location = loc; //Cannot run android specific things in tests on laptop!!!
@@ -37,11 +37,11 @@ public class MapNode {
         return location;
     }
 
-    public HashMap<String, Integer> getAdjacency() {
+    public HashMap<String, Double> getAdjacency() {
         return adjacency;
     }
 
-    public int isAdjacent(String nodeName) {
+    public double isAdjacent(String nodeName) {
         if (adjacency.containsKey(nodeName)) {
             return adjacency.get(nodeName); //return the distance if the node is adjacent to this one.
         }
@@ -49,7 +49,7 @@ public class MapNode {
     }
 
     //add an edge to this node. boolean return informs if the operation was successful
-    public boolean addEdge(String destination, int distance) {
+    public boolean addEdge(String destination, double distance) {
         if (!adjacency.containsKey(destination)) {
             adjacency.put(destination, distance);
             return true;

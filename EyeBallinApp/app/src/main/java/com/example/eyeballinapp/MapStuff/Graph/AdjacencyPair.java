@@ -2,9 +2,9 @@ package com.example.eyeballinapp.MapStuff.Graph;
 
 public class AdjacencyPair {
     private String vertex;
-    private int distance;
+    private double distance;
 
-    public AdjacencyPair(String vertex, int distance) {
+    public AdjacencyPair(String vertex, double distance) {
         this.vertex = vertex;
         this.distance = distance;
     }
@@ -13,7 +13,7 @@ public class AdjacencyPair {
         return vertex;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 }

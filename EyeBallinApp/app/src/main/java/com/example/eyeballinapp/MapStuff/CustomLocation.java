@@ -58,9 +58,9 @@ public class CustomLocation extends Location {
     public float distanceTo(Location loc) {
         CustomLocation l = (CustomLocation) loc; //cast location to customLocation
 
-        double dX = l.getPositionX() + positionX;
-        double dY = l.getPositionY() + positionY;
-        double dZ = l.getFloorHeight() + floorHeight;
+        double dX = l.getPositionX() - positionX;
+        double dY = l.getPositionY() - positionY;
+        double dZ = l.getFloorHeight() - floorHeight;
 
         double magnitude = Math.sqrt(dX*dX + dY*dY + dZ*dZ);
 
