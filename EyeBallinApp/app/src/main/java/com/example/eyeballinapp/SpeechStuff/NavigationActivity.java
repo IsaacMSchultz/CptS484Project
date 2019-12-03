@@ -13,10 +13,13 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eyeballinapp.MapStuff.Navigation.Navigation;
 import com.example.eyeballinapp.R;
 
 import static com.example.eyeballinapp.MainActivity.REQUEST_LISTENER;
@@ -33,12 +36,20 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     boolean notified = false;
     boolean sendText = true;
 
+    private Button mLeftButton, mRightButton, mUpButton, mDownButton, mDirectionLeft, mDirectionRight;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.walk_path_layout);
 
+        Intent intent = getIntent();
+
+        // FIXME: 12/3/2019 This doesnt work but it should
+        String destination = intent.getStringExtra("DESTINATION");
+
+        final Navigation nav = new Navigation(getApplicationContext(), destination);
 
         snsmgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -46,11 +57,14 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
         snsmgr.registerListener(NavigationActivity.this, sns, SensorManager.SENSOR_DELAY_NORMAL);
 
-        navigate();
-    }
+        mUpButton = findViewById(R.id.up_button);
 
-    private void navigate() {
-        //setContentView(R.layout.alert_layout);
+        mUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("up");
+            }
+        });
     }
 
     public void fallDetected() {

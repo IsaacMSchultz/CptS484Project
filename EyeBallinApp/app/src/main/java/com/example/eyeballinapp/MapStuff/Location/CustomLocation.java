@@ -40,6 +40,12 @@ public class CustomLocation extends Location {
 //        this.positionX = x;
 //    }
 
+    public void setLocation(double x, double y, int floor) {
+        this.positionX = x;
+        this.positionY = y;
+        this.floorNum = floor;
+    }
+
     public double getPositionX() {
         return positionX;
     }

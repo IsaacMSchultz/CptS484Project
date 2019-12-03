@@ -19,14 +19,74 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="125dp"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:text="Stop"
-        android:background="@android:color/holo_red_dark"
-        android:gravity="center|bottom"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text=""
+                android:id="@+id/direction_left"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+               android:text="W"
+                android:id="@+id/up_button"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text=""
+                android:id="@+id/direction_right"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="a"
+                android:id="@+id/left_button"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+   android:text="s"
+                android:id="@+id/down_button"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+            android:text="d"
+                android:id="@+id/right_button"
+                />
+
+
+
+        </LinearLayout>
+
+</LinearLayout>
 </LinearLayout>

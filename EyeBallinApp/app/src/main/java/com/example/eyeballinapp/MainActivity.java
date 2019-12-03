@@ -35,17 +35,24 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
 
-        EyeBallinMap map = new EyeBallinMap(this);
-        map.setDestination("458");
+//        EyeBallinMap map = new EyeBallinMap(this);
+//        map.setDestination("458");
+//
+//        map.updateUser(new CustomLocation(0,-10,1)); //10 feet outside the south doors
+//        Route steps = map.calculateRoute(); //expecting 14 steps, starting at "South Doors"
+//
+//        map.updateUser(new CustomLocation(2,2,1));
+//        steps = map.calculateRoute(); //expecting 13 steps, starting at "Outside Hallway 1"
 
-        map.updateUser(new CustomLocation(0,-10,1)); //10 feet outside the south doors
-        Route steps = map.calculateRoute(); //expecting 14 steps, starting at "South Doors"
-
-        map.updateUser(new CustomLocation(2,2,1));
-        steps = map.calculateRoute(); //expecting 13 steps, starting at "Outside Hallway 1"
-
-        // Just used for debugging
-        System.out.print("stopping point");
+        // FIXME: 12/3/2019 The third calculateRoute() call always returns an empty route.
+        /* Im not sure why, im probably really stupid. I think it has something to do with
+         * the route method in MapGraph. I cant follow all the other method calls.
+         */
+//        map.updateUser(new CustomLocation(2,2,1));
+//        steps = map.calculateRoute(); //expecting 13 steps, starting at "Outside Hallway 1"
+//
+//        // Just used for debugging
+//        System.out.print("stopping point");
     }
 
     public void startListener(String message) {
@@ -59,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_LISTENER: {
                 String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
+                if(testMessage == null)
+                    testMessage = "repeat";
                 startProgramLoop(testMessage);
                 break;
             }
@@ -71,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
                 parser.clear();
                 Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+                myIntent.putExtra("DESTINATION", parser.getDestination());
                 startActivity(myIntent);
                 break;
             case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
