@@ -53,6 +53,8 @@ public class MapGraph {
         for (String adjacentNode : node.getAdjacency().keySet()) {
             nodes.get(adjacentNode).removeEdge(name);
         }
+
+        nodes.remove(name); //remove the node
     }
 
     // Add a single edge to the graph.
