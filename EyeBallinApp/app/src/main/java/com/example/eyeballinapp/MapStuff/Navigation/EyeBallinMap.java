@@ -1,5 +1,7 @@
 package com.example.eyeballinapp.MapStuff.Navigation;
 
+import android.content.Context;
+
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Graph.EBVector;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
@@ -13,9 +15,9 @@ public class EyeBallinMap {
     String destination;
     Route route;
 
-    public EyeBallinMap() {
+    public EyeBallinMap(Context current) {
         // build the map using the constructor in here
-        XmlParser parser = new XmlParser(map);
+        XmlParser parser = new XmlParser(current);
         map = parser.tempParse();
     }
 

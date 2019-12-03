@@ -33,7 +33,6 @@ public class XmlParser {
     public XmlParser(Context current) {
         this.graph = new MapGraph();
         this.context = current;
-
     }
 
     public XmlParser(MapGraph existingGraph) {
