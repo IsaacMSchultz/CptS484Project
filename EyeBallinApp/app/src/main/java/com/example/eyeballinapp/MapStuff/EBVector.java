@@ -9,7 +9,7 @@ public class EBVector {
         x = xDistance;
         y = yDistance;
 
-        double magnitude = Math.sqrt(x*x + y*y); // square both distances and take the square root of their sum to get the total magnitude.
+        magnitude = Math.sqrt(x*x + y*y); // square both distances and take the square root of their sum to get the total magnitude.
     }
 
     public double getY() {
