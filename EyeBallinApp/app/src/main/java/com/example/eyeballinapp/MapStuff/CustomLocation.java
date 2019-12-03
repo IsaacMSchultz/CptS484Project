@@ -12,21 +12,18 @@ public class CustomLocation extends Location {
     private int floorNum;
     private double floorHeight;
 
-    private static HashMap<Integer, Double> floorHeights = new HashMap<Integer, Double>();
-    static { //height above floor 1
-        floorHeights.put(1, 17.5);
-        floorHeights.put(2, 31.5);
-        floorHeights.put(3, 45.5);
-        floorHeights.put(4, 59.5);
-    }
-
     public CustomLocation(double x, double y, int floor) {
         // This is required
         super("PlaceHolder"); // Lets see
         this.positionX = x;
         this.positionY = y;
         this.floorNum = floor;
-        this.floorHeight = floorHeights.get(floor); //set the floor height in feet to the height of the floor being added
+
+        double h = 17.5; //first floor height is 17.5 feet
+        for (int i = 0; i > floor; i++)
+            h += 14; //each floor after #1 is 14 feet tall
+
+        this.floorHeight = h; //set the floor height in feet to the height of the floor being added
     }
 
 //    public void setPositionY(double y) {
@@ -62,7 +59,7 @@ public class CustomLocation extends Location {
         double dY = l.getPositionY() - positionY;
         double dZ = l.getFloorHeight() - floorHeight;
 
-        double magnitude = Math.sqrt(dX*dX + dY*dY + dZ*dZ);
+        double magnitude = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
 
         return (float) magnitude;
     }

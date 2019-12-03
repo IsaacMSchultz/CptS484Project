@@ -2,6 +2,7 @@ package com.example.eyeballinapp;
 
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.eyeballinapp.MapStuff.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
 import com.example.eyeballinapp.MapStuff.XmlParser;
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class MapGraphTest {
+    CustomLocation zeroZero = new CustomLocation(1,0,0);
 
     @Test
     public void getSize() {
@@ -33,15 +35,15 @@ public class MapGraphTest {
 
         assertEquals(0, map.getSize());
 
-        MapNode testNode = new MapNode("test1", 1);
+        MapNode testNode = new MapNode("test1", zeroZero);
         map.addNode(testNode);
         assertEquals(1, map.getSize());
 
-        testNode = new MapNode("test2", 1);
+        testNode = new MapNode("test2", zeroZero);
         map.addNode(testNode);
-        testNode = new MapNode("test3", 1);
+        testNode = new MapNode("test3", zeroZero);
         map.addNode(testNode);
-        testNode = new MapNode("test3", 1);
+        testNode = new MapNode("test3", zeroZero);
         map.addNode(testNode);
         assertEquals(3, map.getSize());
     }
@@ -54,9 +56,9 @@ public class MapGraphTest {
     @Test
     public void addEdge() {
         MapGraph map = new MapGraph();
-        MapNode testNode = new MapNode("test1", 1);
+        MapNode testNode = new MapNode("test1", zeroZero);
         map.addNode(testNode);
-        testNode = new MapNode("test2", 1);
+        testNode = new MapNode("test2", zeroZero);
         map.addNode(testNode);
         map.addEdge("test1", "test2", 9);
 
@@ -106,7 +108,7 @@ public class MapGraphTest {
         MapNode testNode; // Temporary node object to add to
 
         for (int j = 0; j < adjacencyMatrix.length; j++) { // Go through each vertex in the adjacency matrix
-            testNode = new MapNode("test" + j, 1);
+            testNode = new MapNode("test" + j, zeroZero);
             map.addNode(testNode);
         }
 
@@ -125,19 +127,5 @@ public class MapGraphTest {
         for (int j = 0; j < expected.length; j++) { // Go through each vertex in the adjacency matrix
             assertEquals(expected[j], steps.get(j).getName());
         }
-    }
-
-    @Test
-    public void navigateFrom1() {
-        MapGraph map = new MapGraph();
-        // build the map using the constructor in here
-        XmlParser parser = new XmlParser(map);
-        map = parser.tempParse();
-
-        List<MapNode> steps = map.navigateFrom("North Doors", "East Doors");
-
-//        assertEquals(expected.length, steps.size());
-
-        assertTrue(true);
     }
 }

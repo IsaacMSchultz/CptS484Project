@@ -84,7 +84,7 @@ public class XmlParser {
 
                 // Create a new MapNode with the values
                 MapNode newNode = new MapNode(name,
-                        new HashMap<String, Integer>(),
+                        new HashMap<String, Double>(),
                         newLocation,
                         id
                 );
@@ -103,7 +103,7 @@ public class XmlParser {
                         edgeVals.getChildNodes().item(i).getAttributes().item(1).getNodeValue()));
 
                 graph.addEdge(source, dest,
-                        Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue())/*,
+                        Double.parseDouble(edgeVals.getChildNodes().item(i).getAttributes().item(3).getNodeValue())/*,
                         getFloorNum(Integer.parseInt(edgeVals.getChildNodes().item(i).getAttributes().item(5).getNodeValue()))*/); // I removed the floor from the criteria to add an edge. Assuming that you must add all nodes involved before you can add an edge.
             }
 
