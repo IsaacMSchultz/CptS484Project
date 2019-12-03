@@ -10,10 +10,10 @@ public class EyeBallinMap {
     Route route;
 
     public EyeBallinMap() {
-    // build the map using the constructor in here
-    XmlParser parser = new XmlParser(map);
-    map = parser.tempParse();
-}
+        // build the map using the constructor in here
+        XmlParser parser = new XmlParser(map);
+        map = parser.tempParse();
+    }
 
     // add / remove the user node in the graph, connect to the closest node.
     public void updateUser(CustomLocation loc) {
@@ -37,10 +37,31 @@ public class EyeBallinMap {
     //run dijsktras and return a route to take
     public Route calculateRoute() {
         route = map.navigateFrom("USER", destination);
+
+         /*
+         since the mapgraph might have put the user in between two nodes, we dont want to have them walk backwards, and then forwards again.
+         To avoid this, we can look at the vectors of the first two steps.
+         If the magnitude of the steps added to each other is larger than both of the steps on their own, then overall they are going in the same direction.
+         However, if the magnitude of the steps added to each other is less than one of the steps on their own, then they are walking backwards, and then back forwards again.
+         In the real world, this might happen between more than just two steps, but because of the way we have our graph set up, it should be highly improbable.
+          */
+
+        // first we get the vectors of the first two steps
+        EBVector step1 = route.getStep(0).getVector();
+        EBVector step2 = route.getStep(1).getVector();
+
+        // then we add them together.
+        double totalMagnitude = step1.add(step2).getMagnitude(); // (step1 + step2).getMagnitude();
+
+        //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
+        if (totalMagnitude < step1.getMagnitude() || totalMagnitude < step2.getMagnitude()) {
+            route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+        }
+
         return route;
     }
 
     public Step nextStep() {
-        return route.TakeStep();
+        return route.takeStep();
     }
 }

@@ -23,6 +23,19 @@ public class Step {
         this.vector = new EBVector(x, y);
     }
 
+    public void updateVector(EBVector v) {
+        this.vector = v;
+    }
+
+    public void updateVector(Location loc) {
+        CustomLocation nodeLocation = (CustomLocation) node.getLocation();
+        CustomLocation l = (CustomLocation) loc;
+        double y = nodeLocation.getPositionY() - l.getPositionY();
+        double x = nodeLocation.getPositionX() - l.getPositionX();
+
+        this.vector = new EBVector(x, y);
+    }
+
     // get the magnitude of the distance to the next node.
     public double getDistance() {
         return vector.getMagnitude();
