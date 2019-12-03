@@ -4,6 +4,7 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.example.eyeballinapp.MapStuff.MapGraph;
 import com.example.eyeballinapp.MapStuff.MapNode;
+import com.example.eyeballinapp.MapStuff.XmlParser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -124,5 +125,19 @@ public class MapGraphTest {
         for (int j = 0; j < expected.length; j++) { // Go through each vertex in the adjacency matrix
             assertEquals(expected[j], steps.get(j).getName());
         }
+    }
+
+    @Test
+    public void navigateFrom1() {
+        MapGraph map = new MapGraph();
+        // build the map using the constructor in here
+        XmlParser parser = new XmlParser(map);
+        map = parser.tempParse();
+
+        List<MapNode> steps = map.navigateFrom("North Doors", "East Doors");
+
+//        assertEquals(expected.length, steps.size());
+
+        assertTrue(true);
     }
 }

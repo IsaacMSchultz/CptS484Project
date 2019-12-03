@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.eyeballinapp.MapStuff.MapGraph;
+import com.example.eyeballinapp.MapStuff.MapNode;
 import com.example.eyeballinapp.MapStuff.XmlParser;
 import com.example.eyeballinapp.SpeechStuff.ListenActivity;
 import com.example.eyeballinapp.SpeechStuff.NavigationActivity;
@@ -18,6 +19,7 @@ import com.example.eyeballinapp.SpeechStuff.SpeechParser;
 import com.example.eyeballinapp.SpeechStuff.SpeechResult;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
         graph = test.tempParse();
+
+        List<MapNode> steps = graph.navigateFrom("East Doors", "458");
 
         // Just used for debugging
         System.out.print("stopping point");

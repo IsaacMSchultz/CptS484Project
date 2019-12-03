@@ -15,4 +15,23 @@ public class EyeBallinMap {
         XmlParser parser = new XmlParser(map);
         map = parser.tempParse();
     }
+
+    // add / remove the user node in the graph, connect to the closest node.
+    public void updateUser(CustomLocation loc) {
+
+    }
+
+    // return true if the node is int he graph.
+    public boolean setDestination(String destination) {
+        return false;
+    }
+
+    //run dijsktras and return a route to take
+    public Route calculateRoute(String destination) {
+        return null;
+    }
+
+    public Step nextStep() {
+        return null;
+    }
 }

@@ -161,7 +161,12 @@
             <edge vertex1="4022" vertex2="4023" isDirect="false" weight="37" useWeight="true" id="4010017" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
 
             <edge vertex1="1020" vertex2="200" isDirect="false" weight="999" useWeight="true" id="5010000" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="1020" vertex2="308" isDirect="false" weight="999" useWeight="true" id="5010000" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="1020" vertex2="408" isDirect="false" weight="999" useWeight="true" id="5010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+
             <edge vertex1="200" vertex2="308" isDirect="false" weight="999" useWeight="true" id="5010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+            <edge vertex1="200" vertex2="408" isDirect="false" weight="999" useWeight="true" id="5010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
+
             <edge vertex1="308" vertex2="408" isDirect="false" weight="999" useWeight="true" id="5010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
         </edges>
     </graph>
