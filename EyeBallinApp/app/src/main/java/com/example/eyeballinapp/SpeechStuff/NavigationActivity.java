@@ -297,6 +297,10 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         //could probably just bind a step
         public void bind(Step stepItem) {
             mStepItemText.setText(stepItem.getNode().getName());
+            /*
+            * FIXME: 12/4/2019 Right now it has an empty direction.
+            *   Everytime the UI gets updated the setdirection is deleted.
+            * */
             switch(stepItem.getDirection()) {
                 case "forward": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_forward));
                 break;

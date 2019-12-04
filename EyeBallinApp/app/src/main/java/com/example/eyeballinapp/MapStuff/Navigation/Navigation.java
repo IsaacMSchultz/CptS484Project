@@ -79,6 +79,10 @@ public class Navigation {
     //level should be high or low, so either grab the lowest direction or the highest.
     //distance = 29 others 30, which means 29 is the closer node and whichever direction that is
     //thats what we set.
+    /*
+    *  sets the direction of the current step by calculating future steps and getting which one
+    *  is closer.
+    * */
     private void setDirection(String level) {
         CustomLocation tempLoc = userLocation;
         double[] direction = new double[4];
