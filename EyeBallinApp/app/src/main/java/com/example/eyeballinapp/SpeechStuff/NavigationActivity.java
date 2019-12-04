@@ -13,14 +13,30 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.telephony.SmsManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
+import com.example.eyeballinapp.MapStuff.Graph.Step;
 import com.example.eyeballinapp.MapStuff.Navigation.Navigation;
 import com.example.eyeballinapp.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.DecimalFormat;
+import java.util.List;
 
 import static com.example.eyeballinapp.MainActivity.REQUEST_LISTENER;
 
@@ -38,18 +54,26 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
     private Button mLeftButton, mRightButton, mUpButton, mDownButton, mDirectionLeft, mDirectionRight;
 
+    private int adapterPosition;
+    private RecyclerView mRecyclerView;
+    private DirectionAdapter mAdapter;
+    private Navigation nav;
+    private TextView mCurrentStepDistance;
+    private DecimalFormat formatter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.walk_path_layout);
 
+        formatter = new DecimalFormat("#.##");
         Intent intent = getIntent();
 
         // FIXME: 12/3/2019 This doesnt work but it should
         String destination = intent.getStringExtra("DESTINATION");
 
-        final Navigation nav = new Navigation(getApplicationContext(), destination);
+        nav = new Navigation(getApplicationContext(), destination);
 
         snsmgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -58,6 +82,9 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         snsmgr.registerListener(NavigationActivity.this, sns, SensorManager.SENSOR_DELAY_NORMAL);
 
         mUpButton = findViewById(R.id.up_button);
+        mRightButton = findViewById(R.id.right_button);
+        mDownButton = findViewById(R.id.down_button);
+        mLeftButton = findViewById(R.id.left_button);
 
         mUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +92,21 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
                 nav.navigate("up");
             }
         });
+
+        mRightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("right");
+            }
+        });
+
+        getSupportActionBar().hide();
+
+        mCurrentStepDistance = findViewById(R.id.distance_text);
+
+        mRecyclerView = findViewById(R.id.step_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        updateUI();
     }
 
     public void fallDetected() {
@@ -166,5 +208,95 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         sendText = !sendText;
         countTimer.cancel();
         notified = false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void onButtonClickedEvent(OnButtonClickedMessage message) {
+        if(message.getMessage().equals("UPDATE")) {
+            updateUI();
+        }
+    }
+
+    public void updateUI() {
+        List<Step> stepList = nav.getStepList();
+
+        if(mAdapter == null) {
+            mAdapter = new DirectionAdapter(stepList);
+            mRecyclerView.setAdapter(mAdapter);
+        }
+        else {
+            mAdapter.setStepList(stepList);
+            mAdapter.notifyItemChanged(adapterPosition);
+        }
+    }
+
+    private class DirectionHolder extends RecyclerView.ViewHolder {
+
+        private TextView mStepItemText;
+        private ImageView mStepItemImage;
+
+        public DirectionHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.step_layout, parent, false));
+
+            mStepItemText = itemView.findViewById(R.id.step_item);
+            mStepItemImage = itemView.findViewById(R.id.step_direction);
+
+        }
+
+        //could probably just bind a step
+        public void bind(Step stepItem) {
+            mStepItemText.setText(stepItem.getNode().getName());
+        }
+    }
+
+    private class DirectionAdapter extends RecyclerView.Adapter<DirectionHolder> {
+
+        private List<Step> mStepList;
+
+        public DirectionAdapter(List<Step> stepList) {
+            mStepList = stepList;
+        }
+
+        public DirectionHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+            return new DirectionHolder(layoutInflater, viewGroup);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull DirectionHolder holder, int position) {
+            if(position != 0)
+                holder.bind(mStepList.get(position));
+            else
+                mCurrentStepDistance.setText(formatter.format(mStepList.get(0).getDistance()) + " Size: "+ nav.getStepList().size());
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mStepList.size();
+        }
+
+        public void setStepList(List<Step> stepList) {
+            mStepList = stepList;
+        }
+
     }
 }

@@ -9,7 +9,7 @@
         android:textSize="45sp"
         android:text="LEFT IN 10 STEPS"
         android:textAlignment="center"
-        android:id="@+id/destination_display_text"/>
+        android:id="@+id/distance_text"/>
 
     <ImageView
         android:id="@+id/arrow_img"
@@ -17,9 +17,15 @@
         android:layout_height="350dp"
         />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="125dp"/>
+        android:layout_height="125dp"
+        android:gravity="bottom"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/step_list"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
