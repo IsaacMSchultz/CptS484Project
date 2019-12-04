@@ -12,7 +12,6 @@ import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 
 
-
 public class Navigation {
     EyeBallinMap map;
     Context mContext;
@@ -25,7 +24,7 @@ public class Navigation {
         mContext = context;
         map = new EyeBallinMap(mContext);
         //starting point
-        userLocation = new CustomLocation(0,0,1);
+        userLocation = new CustomLocation(0, 0, 1);
         // FIXME: 12/3/2019 Hardcoded the destination.
         map.setDestination("458");
         Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
@@ -33,24 +32,28 @@ public class Navigation {
 
 
     public void navigate(String direction) {
-       switch(direction) {
-           case "up": userLocation.setLocation(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
-               //update user location in map
-               map.updateUser(userLocation);
-               //recalculate route with new location
-               // FIXME: 12/3/2019 When calculating route the 2nd or 3rd time it returns a empty route.
-               steps = map.calculateRoute();
-               //print out the distance between current step and next step.
-               Toast.makeText(mContext, "Distance to next step: " + steps.getStep(0).getDistance() + "\nSize: " + steps.getStepList().size(), Toast.LENGTH_SHORT).show();
-               break;
-           case "down":
-               break;
-           case "left":
-               break;
-           case "right":
-               break;
-               default:
-       }
+        switch (direction) {
+            case "up":
+                userLocation.setLocation(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum()); //update user location in map
+                break;
+            case "down":
+                userLocation.setLocation(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum()); //update user location in map
+                break;
+            case "left":
+                userLocation.setLocation(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum()); //update user location in map
+                break;
+            case "right":
+                userLocation.setLocation(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum()); //update user location in map
+                break;
+            default:
+        }
+        map.updateUser(userLocation); //recalculate route with new location
+
+        steps = map.calculateRoute(); //print out the distance between current step and next step.
+
+        Toast.makeText(mContext, "Distance to next step: " + steps.getStep(0).getDistance() +
+                "\nSize: " + steps.getStepList().size() + "\nX: " + userLocation.getPositionX() +
+                "\tY: " + userLocation.getPositionY(), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -57,12 +57,35 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
         snsmgr.registerListener(NavigationActivity.this, sns, SensorManager.SENSOR_DELAY_NORMAL);
 
+        // get the button objects
         mUpButton = findViewById(R.id.up_button);
+        mDownButton = findViewById(R.id.down_button);
+        mDirectionLeft = findViewById(R.id.left_button);
+        mDirectionRight = findViewById(R.id.right_button);
 
+        //bind click event listeners to the navigation class
         mUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nav.navigate("up");
+            }
+        });
+        mDownButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("down");
+            }
+        });
+        mDirectionLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("left");
+            }
+        });
+        mDirectionRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("right");
             }
         });
     }
