@@ -52,16 +52,19 @@ public class EyeBallinMap {
          In the real world, this might happen between more than just two steps, but because of the way we have our graph set up, it should be highly improbable.
           */
 
-        // first we get the vectors of the first two steps
-        EBVector step1 = route.getStep(0).getVector();
-        EBVector step2 = route.getStep(1).getVector();
+        if (route.numberOfSteps() > 1) {
+            // first we get the vectors of the first two steps
+            EBVector step1 = route.getStep(0).getVector();
+            EBVector step2 = route.getStep(1).getVector();
 
-        // then we add them together.
-        double totalMagnitude = step1.add(step2).getMagnitude(); // (step1 + step2).getMagnitude();
+            // then we add them together.
+            double totalMagnitude = step1.add(step2).getMagnitude(); // (step1 + step2).getMagnitude();
 
-        //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
-        if (totalMagnitude < step1.getMagnitude() || totalMagnitude < step2.getMagnitude()) {
-            route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+            //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
+            if (totalMagnitude <= step1.getMagnitude() || totalMagnitude <= step2.getMagnitude()) {
+//        if (totalMagnitude <= (step1.getMagnitude() + step2.getMagnitude())) {
+                route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+            }
         }
 
         return route;

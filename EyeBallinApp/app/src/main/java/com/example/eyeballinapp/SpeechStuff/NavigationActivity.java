@@ -287,7 +287,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
             mStepItemText = itemView.findViewById(R.id.step_item);
             mStepItemImage = itemView.findViewById(R.id.step_direction);
-
         }
 
         //could probably just bind a step
@@ -315,7 +314,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
                 holder.bind(mStepList.get(position));
             else
                 mCurrentStepDistance.setText(formatter.format(mStepList.get(0).getDistance()) + " Size: "+ nav.getStepList().size());
-
         }
 
         @Override

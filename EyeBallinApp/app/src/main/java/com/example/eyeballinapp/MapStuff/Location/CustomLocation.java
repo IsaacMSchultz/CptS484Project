@@ -24,12 +24,14 @@ public class CustomLocation extends Location {
         this.positionX = x;
         this.positionY = y;
         this.floorNum = floor;
+        this.floorHeight = calcHeight(floor); //set the floor height in feet to the height of the floor being added
+    }
 
+    private double calcHeight(int floor) {
         double h = 17.5; //first floor height is 17.5 feet
         for (int i = 0; i < floor; i++)
             h += 14; //each floor after #1 is 14 feet tall
-
-        this.floorHeight = h; //set the floor height in feet to the height of the floor being added
+        return h;
     }
 
 //    public void setPositionY(double y) {
@@ -44,6 +46,7 @@ public class CustomLocation extends Location {
         this.positionX = x;
         this.positionY = y;
         this.floorNum = floor;
+        this.floorHeight = calcHeight(floor); //set the floor height in feet to the height of the floor being added
     }
 
     public double getPositionX() {

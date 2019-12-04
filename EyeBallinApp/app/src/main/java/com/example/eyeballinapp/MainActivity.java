@@ -30,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-        startListener(getString(R.string.init_greeting));
-        parser = new SpeechParser();
+//        startListener(getString(R.string.init_greeting));
+//        parser = new SpeechParser();
 
         if (!checkPermission(Manifest.permission.SEND_SMS)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
+
+        Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+        myIntent.putExtra("DESTINATION", "151");
+        startActivity(myIntent);
 
 //        EyeBallinMap map = new EyeBallinMap(this);
 //        map.setDestination("458");

@@ -34,11 +34,15 @@ public class Route {
     }
 
     public Step getStep(int stepNumber) {
-        return steps.get(stepNumber);
+        if (stepNumber >= 0 && stepNumber < steps.size())
+            return steps.get(stepNumber);
+        else
+            throw new ArrayIndexOutOfBoundsException("index out of bounds: " + stepNumber);
     }
 
     public Step takeStep() {
-        currentStep++;
-        return steps.get(currentStep);
+//        if (currentStep < steps.size())
+//            currentStep++;
+        return steps.get(currentStep++);
     }
 }

@@ -6,6 +6,7 @@
 package com.example.eyeballinapp.MapStuff.Navigation;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
 import com.example.eyeballinapp.MapStuff.Graph.Route;
@@ -28,7 +29,7 @@ public class Navigation {
         mContext = context;
         map = new EyeBallinMap(mContext);
         //starting point
-        userLocation = new CustomLocation(0,0,1);
+        userLocation = new CustomLocation(0, 0, 1);
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
@@ -37,25 +38,33 @@ public class Navigation {
 
 
     public void navigate(String direction) {
-       switch(direction) {
-           //do a post here using eventbus
-           case "forward": move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
-               break;
-           case "back": move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
-               break;
-           case "left": move(userLocation.getPositionX() - stepLength, userLocation.getPositionY() , userLocation.getFloorNum());
-               break;
-           case "right": move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
-               break;
-           case "up": if(userLocation.getFloorNum() != 4)
-               move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum()+1);
-               break;
-           case "down": if(userLocation.getFloorNum() != 0)
-               move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum()-1);
-               break;
-               default:
-       }
-       EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
+        switch (direction) {
+            //do a post here using eventbus
+            case "forward":
+                move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
+                break;
+            case "back":
+                move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
+                break;
+            case "left":
+                move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+                break;
+            case "right":
+                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+                break;
+            case "up":
+                if (userLocation.getFloorNum() != 4)
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1);
+                break;
+            case "down":
+                if (userLocation.getFloorNum() != 1)
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1);
+                break;
+            default:
+        }
+        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
+        Toast.makeText(mContext, steps.getStep(0).getDistance() + "\tSize: " + steps.numberOfSteps() + "\n" +
+                "X: " + userLocation.getPositionX() + "\tY: " + userLocation.getPositionY() + "\tZ: " + userLocation.getFloorNum(), Toast.LENGTH_SHORT).show();
     }
 
     public List<Step> getStepList() {
@@ -63,7 +72,7 @@ public class Navigation {
     }
 
     private void move(double x, double y, int floor) {
-        userLocation.setLocation(x,y,floor);
+        userLocation.setLocation(x, y, floor);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
     }
