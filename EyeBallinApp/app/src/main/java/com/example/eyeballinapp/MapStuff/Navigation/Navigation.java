@@ -8,9 +8,14 @@ package com.example.eyeballinapp.MapStuff.Navigation;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
 import com.example.eyeballinapp.MapStuff.Graph.Route;
+import com.example.eyeballinapp.MapStuff.Graph.Step;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 
 public class Navigation {
@@ -28,29 +33,36 @@ public class Navigation {
         userLocation = new CustomLocation(0,0,1);
         // FIXME: 12/3/2019 Hardcoded the destination.
         map.setDestination("458");
-        Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+        //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
     }
 
 
     public void navigate(String direction) {
        switch(direction) {
-           case "up": userLocation.setLocation(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
-               //update user location in map
-               map.updateUser(userLocation);
-               //recalculate route with new location
-               // FIXME: 12/3/2019 When calculating route the 2nd or 3rd time it returns a empty route.
-               steps = map.calculateRoute();
-               //print out the distance between current step and next step.
-               Toast.makeText(mContext, "Distance to next step: " + steps.getStep(0).getDistance() + "\nSize: " + steps.getStepList().size(), Toast.LENGTH_SHORT).show();
+           //do a post here using eventbus
+           case "up": move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
                break;
-           case "down":
+           case "down": move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
                break;
-           case "left":
+           case "left": move(userLocation.getPositionX() - stepLength, userLocation.getPositionY() , userLocation.getFloorNum());
                break;
-           case "right":
+           case "right": move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
                break;
                default:
        }
+       EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
+    }
+
+    public List<Step> getStepList() {
+        return steps.getStepList();
+    }
+
+    private void move(double x, double y, int floor) {
+        userLocation.setLocation(x,y,floor);
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
     }
 
 
