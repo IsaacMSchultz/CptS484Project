@@ -6,7 +6,6 @@
 package com.example.eyeballinapp.MapStuff.Navigation;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
 import com.example.eyeballinapp.MapStuff.Graph.Route;
@@ -31,8 +30,7 @@ public class Navigation {
         map = new EyeBallinMap(mContext);
         //starting point
         userLocation = new CustomLocation(0,0,1);
-        // FIXME: 12/3/2019 Hardcoded the destination.
-        map.setDestination("458");
+        map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
         //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
@@ -42,13 +40,19 @@ public class Navigation {
     public void navigate(String direction) {
        switch(direction) {
            //do a post here using eventbus
-           case "up": move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
+           case "forward": move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
                break;
-           case "down": move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
+           case "back": move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
                break;
            case "left": move(userLocation.getPositionX() - stepLength, userLocation.getPositionY() , userLocation.getFloorNum());
                break;
            case "right": move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+               break;
+           case "up": if(userLocation.getFloorNum() != 4)
+               move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum()+1);
+               break;
+           case "down": if(userLocation.getFloorNum() != 0)
+               move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum()-1);
                break;
                default:
        }

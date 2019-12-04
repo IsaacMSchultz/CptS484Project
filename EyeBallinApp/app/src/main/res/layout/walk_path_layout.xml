@@ -42,22 +42,23 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text=""
-                android:id="@+id/direction_left"
+                android:text="D"
+                android:id="@+id/elevator_down"
                 />
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-               android:text="W"
+                android:background="@drawable/ic_forward"
+                android:backgroundTint="@android:color/black"
                 android:id="@+id/up_button"
                 />
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text=""
-                android:id="@+id/direction_right"
+                android:text="U"
+                android:id="@+id/elevator_up"
                 />
 
 
@@ -72,21 +73,21 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="a"
+                android:background="@drawable/ic_left"
                 android:id="@+id/left_button"
                 />
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-   android:text="s"
+                android:background="@drawable/ic_down"
                 android:id="@+id/down_button"
                 />
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-            android:text="d"
+                android:background="@drawable/ic_right"
                 android:id="@+id/right_button"
                 />
 

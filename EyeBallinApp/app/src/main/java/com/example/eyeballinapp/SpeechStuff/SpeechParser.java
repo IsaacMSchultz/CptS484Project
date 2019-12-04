@@ -1,5 +1,7 @@
 package com.example.eyeballinapp.SpeechStuff;
 
+import android.widget.Toast;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,17 +21,26 @@ public class SpeechParser {
         Matcher m = p.matcher("yes no");
         boolean b = m.matches(); --> true*/
     public String getSpeechCommand(String sentence) {
-        Pattern p = Pattern.compile("^.*(\\btake me\\b|\\broom\\b|\\bgo to\\b|\\bnavigate\\b).*$");
+        Pattern p = Pattern.compile("^.*(\\btake me to\\b|\\broom\\b|\\bgo to\\b|\\bnavigate to\\b).*$");
         Matcher m = p.matcher(sentence);
         if(m.matches()) {
-            Pattern p2 = Pattern.compile("(\\d+)");
-            Matcher m2 = p2.matcher(sentence);
-            if(m2.find()) {
-                mDestination = m2.group(m2.groupCount());
+            // TODO: 12/4/2019 Parse the string that isn't part of the pattern p instead of the digit
+            // this is really stupid but im sleepy
+            //splits the string with the last match from the pattern about, trims the string and sets
+            //that as the destination. A problem would be the capital letters in the nodes that dont match
+            //if we want to go to a non numbered room location
+            mDestination = sentence.split(m.group(m.groupCount()))[1].trim();
+            if(mDestination != null) {
                 return "repeat";
             }
             else
                 return "room number";
+//            if(m2.find()) {
+//                mDestination = m2.group(m2.groupCount());
+//                return "repeat";
+//            }
+//            else
+//                return "room number";
         }
         else {
             Pattern p2 = Pattern.compile("^.*(\\byes\\b|\\bno\\b|\\bset up\\b|\\bcommands\\b|\\bstop\\b).*$");

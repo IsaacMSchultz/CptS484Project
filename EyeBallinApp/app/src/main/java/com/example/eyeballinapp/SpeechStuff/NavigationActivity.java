@@ -52,7 +52,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     boolean notified = false;
     boolean sendText = true;
 
-    private Button mLeftButton, mRightButton, mUpButton, mDownButton, mDirectionLeft, mDirectionRight;
+    private Button mLeftButton, mRightButton, mForwardButton, mBackButton, mElevatorUp, mElevatorDown;
 
     private int adapterPosition;
     private RecyclerView mRecyclerView;
@@ -70,7 +70,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         formatter = new DecimalFormat("#.##");
         Intent intent = getIntent();
 
-        // FIXME: 12/3/2019 This doesnt work but it should
         String destination = intent.getStringExtra("DESTINATION");
 
         nav = new Navigation(getApplicationContext(), destination);
@@ -81,15 +80,17 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
         snsmgr.registerListener(NavigationActivity.this, sns, SensorManager.SENSOR_DELAY_NORMAL);
 
-        mUpButton = findViewById(R.id.up_button);
+        mForwardButton = findViewById(R.id.up_button);
         mRightButton = findViewById(R.id.right_button);
-        mDownButton = findViewById(R.id.down_button);
+        mBackButton = findViewById(R.id.down_button);
         mLeftButton = findViewById(R.id.left_button);
+        mElevatorUp = findViewById(R.id.elevator_up);
+        mElevatorDown = findViewById(R.id.elevator_down);
 
-        mUpButton.setOnClickListener(new View.OnClickListener() {
+        mForwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nav.navigate("up");
+                nav.navigate("forward");
             }
         });
 
@@ -97,6 +98,34 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             @Override
             public void onClick(View v) {
                 nav.navigate("right");
+            }
+        });
+
+        mLeftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("left");
+            }
+        });
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("back");
+            }
+        });
+
+        mElevatorDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("down");
+            }
+        });
+
+        mElevatorUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.navigate("up");
             }
         });
 

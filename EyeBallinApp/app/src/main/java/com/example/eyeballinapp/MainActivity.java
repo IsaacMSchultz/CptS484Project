@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 //        map.updateUser(new CustomLocation(2,2,1));
 //        steps = map.calculateRoute(); //expecting 13 steps, starting at "Outside Hallway 1"
 
-        // FIXME: 12/3/2019 The third calculateRoute() call always returns an empty route.
         /* Im not sure why, im probably really stupid. I think it has something to do with
          * the route method in MapGraph. I cant follow all the other method calls.
          */
@@ -77,11 +78,15 @@ public class MainActivity extends AppCompatActivity {
     private void startProgramLoop(String message) {
         //parse the message
         switch(parser.getSpeechCommand(message)) {
+            // TODO: 12/4/2019 Check if destination exists before proceeding
             case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
-                parser.clear();
+                //parser.clear();
+                Log.d("TEST", parser.getDestination());
+                Toast.makeText(this, parser.getDestination(), Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
                 myIntent.putExtra("DESTINATION", parser.getDestination());
                 startActivity(myIntent);
+                parser.clear();
                 break;
             case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
                 break;
