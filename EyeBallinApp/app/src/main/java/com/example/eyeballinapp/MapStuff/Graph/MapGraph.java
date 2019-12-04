@@ -80,6 +80,19 @@ public class MapGraph {
     }
 
     // Find the node that is closest to the location passed.
+    /* // FIXME: 12/4/2019?
+    * Does nearestNode take floor numbers into account? I run into a problem that when i move
+    * towards the y axis in floor 1 and the nearestNode returns a node in floor 4.
+    *
+    * We can use the first number of id to identify each floor. Idk where to change tho.
+    *
+    * Or we can just move to the next node everytime we press a button as long as we are in
+    * the right direction.
+    *
+    * Or use the distance to calculate the stepLength so we would only have to press the button
+    * a few times.
+    *
+    * */
     public Step nearestNode(Location loc) {
         double lowest = Double.MAX_VALUE;
         MapNode lowestNode = new MapNode("N/A", new CustomLocation(0, 0, 0));
