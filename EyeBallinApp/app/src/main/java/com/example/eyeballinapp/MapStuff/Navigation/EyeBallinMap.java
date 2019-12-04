@@ -70,4 +70,10 @@ public class EyeBallinMap {
     public Step nextStep() {
         return route.takeStep();
     }
+
+    public void setDirection() {
+
+    }
+
+
 }

@@ -32,6 +32,7 @@ public class Navigation {
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
+        setDirection("highest");
         //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
     }
 
@@ -40,13 +41,17 @@ public class Navigation {
        switch(direction) {
            //do a post here using eventbus
            case "forward": move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
+                setDirection("highest");
                break;
            case "back": move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
-               break;
+               setDirection("highest");
+           break;
            case "left": move(userLocation.getPositionX() - stepLength, userLocation.getPositionY() , userLocation.getFloorNum());
-               break;
+               setDirection("highest");
+           break;
            case "right": move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
-               break;
+               setDirection("highest");
+           break;
            case "up": if(userLocation.getFloorNum() != 4)
                move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum()+1);
                break;
@@ -65,7 +70,60 @@ public class Navigation {
     private void move(double x, double y, int floor) {
         userLocation.setLocation(x,y,floor);
         map.updateUser(userLocation);
+        int stepLength = steps.getStepList().size();
         steps = map.calculateRoute();
+        if(stepLength != steps.getStepList().size())
+            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED"));
+    }
+
+    //level should be high or low, so either grab the lowest direction or the highest.
+    //distance = 29 others 30, which means 29 is the closer node and whichever direction that is
+    //thats what we set.
+    private void setDirection(String level) {
+        CustomLocation tempLoc = userLocation;
+        double[] direction = new double[4];
+        int index = 0;
+        move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
+        direction[0] = steps.getStep(0).getDistance();
+        move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
+        direction[1] = steps.getStep(0).getDistance();
+        move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+        direction[2] = steps.getStep(0).getDistance();
+        move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+        direction[3] = steps.getStep(0).getDistance();
+        if(level.equals("highest")) {
+            index = getHighest(direction);
+            String dir = directionString(index);
+            steps.getStep(0).setDirection(dir);
+        }
+        else {
+
+        }
+        move(tempLoc.getPositionX(), tempLoc.getPositionY(), tempLoc.getFloorNum());
+    }
+
+    private int getHighest(double[] dir) {
+        int index = 0;
+        for(int i = 1; i < dir.length; i++) {
+            if(dir[i] > dir[index]) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private void getLowest(double[] dir) {
+
+    }
+
+    private String directionString(int dirIndex) {
+        switch(dirIndex) {
+            case 0: return "forward";
+            case 1: return "back";
+            case 2: return "right";
+            case 3: return "left";
+        }
+        return "forward";
     }
 
 

@@ -30,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-        startListener(getString(R.string.init_greeting));
-        parser = new SpeechParser();
+        //startListener(getString(R.string.init_greeting));
+        //parser = new SpeechParser();
+
+
 
         if (!checkPermission(Manifest.permission.SEND_SMS)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
@@ -54,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 //
 //        // Just used for debugging
 //        System.out.print("stopping point");
+
+        EyeBallinMap map = new EyeBallinMap(this);
+        if(map.setDestination("458")) {
+            Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+            myIntent.putExtra("DESTINATION", "458");
+            startActivity(myIntent);
+        }
     }
 
     public void startListener(String message) {
@@ -69,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
                 if(testMessage == null)
                     testMessage = "repeat";
+                if(testMessage == "navigate") {
+                    EyeBallinMap map = new EyeBallinMap(this);
+                    if(!map.setDestination(parser.getDestination()))
+                        testMessage = "room number";
+                }
                 startProgramLoop(testMessage);
                 break;
             }
@@ -94,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "room number": startListener(getString(R.string.room_number));
                 //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
+                break;
+            case "not exist":startListener(getString(R.string.not_exist));
                 break;
             default: startListener(getString(R.string.please_repeat));
         }

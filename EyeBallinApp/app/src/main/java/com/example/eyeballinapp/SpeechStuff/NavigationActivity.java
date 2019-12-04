@@ -262,6 +262,10 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         if(message.getMessage().equals("UPDATE")) {
             updateUI();
         }
+        if(message.getMessage().equals("CHANGED")) {
+            mAdapter.notifyDataSetChanged();
+            updateUI();
+        }
     }
 
     public void updateUI() {
@@ -293,6 +297,16 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         //could probably just bind a step
         public void bind(Step stepItem) {
             mStepItemText.setText(stepItem.getNode().getName());
+            switch(stepItem.getDirection()) {
+                case "forward": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_forward));
+                break;
+                case "back": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_down));
+                break;
+                case "right": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_right));
+                break;
+                case "left": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_left));
+                break;
+            }
         }
     }
 
