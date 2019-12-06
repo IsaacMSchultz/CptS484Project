@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
 
-        Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
-        myIntent.putExtra("DESTINATION", "151");
-        startActivity(myIntent);
 
 //        EyeBallinMap map = new EyeBallinMap(this);
 //        map.setDestination("458");

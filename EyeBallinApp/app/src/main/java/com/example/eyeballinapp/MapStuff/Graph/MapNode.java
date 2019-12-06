@@ -11,6 +11,7 @@ public class MapNode {
     private Location location; // GPS location of the node
     private int id;
     private HashMap<String, Double> adjacency; //one slice of the adjacency matrix.
+    private boolean isRequired; // Some nodes cannot be skipped diagonally because they avoid walls.
 
     public MapNode(String nodeName, HashMap<String, Double> adjacentNodes, CustomLocation loc, int id) {
         this.name = nodeName;
@@ -22,6 +23,17 @@ public class MapNode {
     public MapNode(String nodeName, CustomLocation loc) {
         name = nodeName;
         adjacency = new HashMap<String, Double>();
+        isRequired = false;
+
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
+        location = loc; //Cannot run android specific things in tests on laptop!!!
+        // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
+    }
+
+    public MapNode(String nodeName, CustomLocation loc, boolean req) {
+        name = nodeName;
+        adjacency = new HashMap<String, Double>();
+        this.isRequired = req;
 
         // COMMENT OUT LOCATION IF YOU WANT TO RUN UNIT TESTS IN ANDROID STUDIO
         location = loc; //Cannot run android specific things in tests on laptop!!!
