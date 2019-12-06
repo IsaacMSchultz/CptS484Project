@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Route {
     private ArrayList<Step> steps;
     private int currentStep;
+    private boolean isArrived;
 
     public Route(ArrayList<Step> steps) {
         this.steps = steps;
@@ -41,8 +42,9 @@ public class Route {
     }
 
     public Step takeStep() {
-//        if (currentStep < steps.size())
-//            currentStep++;
-        return steps.get(currentStep++);
+        Step s = steps.get(currentStep);
+        if (currentStep < steps.size() - 1) //cannot take a step when you are at the last step.
+            currentStep++;
+        return s;
     }
 }

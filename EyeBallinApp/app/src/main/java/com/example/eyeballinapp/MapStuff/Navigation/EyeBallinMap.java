@@ -52,18 +52,33 @@ public class EyeBallinMap {
          In the real world, this might happen between more than just two steps, but because of the way we have our graph set up, it should be highly improbable.
           */
 
+        // if there are steps to take, and the vectors are not 0;
         if (route.numberOfSteps() > 1) {
-            // first we get the vectors of the first two steps
-            EBVector step1 = route.getStep(0).getVector();
-            EBVector step2 = route.getStep(1).getVector();
+            if (!route.getStep(0).hasZComponent()) {
+                route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
+            } else if (!route.getStep(1).hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
+                // first we get the vectors of the first two steps
+                Step step1 = route.getStep(0);
+                Step step2 = route.getStep(1);
 
-            // then we add them together.
-            double totalMagnitude = step1.add(step2).getMagnitude(); // (step1 + step2).getMagnitude();
+                EBVector v1 = step1.getVector();
+                EBVector v2 = step2.getVector();
 
-            //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
-            if (totalMagnitude <= step1.getMagnitude() || totalMagnitude <= step2.getMagnitude()) {
-//        if (totalMagnitude <= (step1.getMagnitude() + step2.getMagnitude())) {
-                route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+                // then we add them together.
+                double totalMagnitude = v1.add(v2).getMagnitude(); // (step1 + step2).getMagnitude();
+                double v1m = v1.getMagnitude();
+                double v2m = v2.getMagnitude();
+
+                if ((v1.getX() == 0 && v2.getY() != 0) || (v1.getY() == 0 && v2.getX() != 0)) {// we are dealing with a 90 degree turn, since we already handle the case of a vertical step in previous IF's
+                    if (v1m > 3 || v2m > 3) { // we only want to be able to skip an essential 90 degree turn if we are within 3 feet of it.
+
+                    }
+                }
+                //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
+                if (totalMagnitude <= v1.getMagnitude() || totalMagnitude <= v2.getMagnitude()) {
+                    // if (totalMagnitude <= (step1.getMagnitude() + step2.getMagnitude())) {
+                    route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+                }
             }
         }
 
