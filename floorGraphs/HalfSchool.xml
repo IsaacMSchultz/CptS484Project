@@ -6,7 +6,6 @@
             <node positionX="0" positionY="55" id="101" mainText="Outside Elevator 1" upText=""></node>
             <node positionX="0" positionY="30" id="102" mainText="Outside Hallway 1" upText=""></node>
             <node positionX="0" positionY="0" id="103" mainText="South Doors" upText=""></node>
-            <node positionX="6" positionY="21" id="104" mainText="Water Fountain 1" upText=""></node>
             <node positionX="9" positionY="30" id="105" mainText="Floor 1 hallway" upText=""></node>
             <node positionX="28" positionY="30" id="106" mainText="Outside Bathroom 1" upText=""></node>
             <node positionX="28" positionY="22" id="107" mainText="Bathroom 1" upText=""></node>
@@ -28,7 +27,6 @@
             <node positionX="0" positionY="55" id="201" mainText="Outside Elevator 2" upText=""></node>
             <node positionX="0" positionY="30" id="202" mainText="Outside Hallway 2" upText=""></node>
             <node positionX="9" positionY="30" id="203" mainText="Floor 2 Hallway" upText=""></node>
-            <node positionX="6" positionY="21" id="204" mainText="Water Fountain 2" upText=""></node>
             <node positionX="26" positionY="30" id="205" mainText="Outside Bathroom 2" upText=""></node>
             <node positionX="26" positionY="22" id="206" mainText="Bathroom 2" upText=""></node>
             <node positionX="48" positionY="30" id="207" mainText="Outside 254, 251" upText=""></node>
@@ -87,8 +85,6 @@
             <edge vertex1="101" vertex2="102" isDirect="false" weight="25" useWeight="true" id="1010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="102" vertex2="103" isDirect="false" weight="30" useWeight="true" id="1010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="105" vertex2="102" isDirect="false" weight="9" useWeight="true" id="1010003" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
-            <edge vertex1="102" vertex2="104" isDirect="false" weight="11" useWeight="true" id="1010004" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
-            <edge vertex1="104" vertex2="103" isDirect="false" weight="22" useWeight="true" id="1010005" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="106" vertex2="105" isDirect="false" weight="19" useWeight="true" id="1010006" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="106" vertex2="107" isDirect="false" weight="8" useWeight="true" id="1010007" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="108" vertex2="106" isDirect="false" weight="28" useWeight="true" id="1010008" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
@@ -108,7 +104,6 @@
             <edge vertex1="200" vertex2="201" isDirect="false" weight="9" useWeight="true" id="2010001" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="201" vertex2="202" isDirect="false" weight="25" useWeight="true" id="2010002" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="202" vertex2="203" isDirect="false" weight="9" useWeight="true" id="2010003" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
-            <edge vertex1="202" vertex2="204" isDirect="false" weight="11" useWeight="true" id="2010004" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="203" vertex2="205" isDirect="false" weight="17" useWeight="true" id="2010005" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="205" vertex2="206" isDirect="false" weight="9" useWeight="true" id="2010006" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
             <edge vertex1="207" vertex2="208" isDirect="false" weight="9" useWeight="true" id="2010007" text="" arrayStyleStart="" arrayStyleFinish="" model_width="4" model_type="0" model_curvedValue="0.1"></edge>
