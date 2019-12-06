@@ -5,11 +5,14 @@ public class EBVector {
     private double x;
     private double magnitude;
 
+    public static double ThirtyDegrees = 1.732 / 2; // 5pi/6
+    public static double NegThirtyDegrees = 1.732 / -2; // pi/6
+
     public EBVector(double xDistance, double yDistance) {
         x = xDistance;
         y = yDistance;
 
-        magnitude = Math.sqrt(x*x + y*y); // square both distances and take the square root of their sum to get the total magnitude.
+        magnitude = Math.sqrt(x * x + y * y); // square both distances and take the square root of their sum to get the total magnitude.
     }
 
     public double getY() {
@@ -22,6 +25,16 @@ public class EBVector {
 
     public double getMagnitude() {
         return magnitude;
+    }
+
+    public EBVector getUnitVector() {
+        if (magnitude == 0)
+            return new EBVector(0, 0);
+
+        double newX = x / magnitude;
+        double newY = y / magnitude;
+
+        return new EBVector(newX, newY);
     }
 
     // Behaves like + operator, does not update internal values, and instead returns a new EBVector that has the addition.

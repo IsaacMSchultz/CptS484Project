@@ -41,7 +41,7 @@ public class EyeBallinMap {
     }
 
     //run dijsktras and return a route to take
-    public Route calculateRoute() {
+    public Route calculateRoute1() { //rename to use this one,
         route = map.navigateFrom("USER", destination);
 
          /*
@@ -54,26 +54,97 @@ public class EyeBallinMap {
 
         // if there are steps to take, and the vectors are not 0;
         if (route.numberOfSteps() > 1) {
+            // first we get the vectors of the first two steps
+            Step step1 = route.getStep(0);
+            Step step2 = route.getStep(1);
+
+            EBVector v1 = step1.getVector();
+            EBVector v2 = step2.getVector();
+
+            // then we add them together.
+            double totalMagnitude = v1.add(v2).getMagnitude(); // (step1 + step2).getMagnitude();
+            double dot = v1.getUnitVector().dot(v2.getUnitVector()); //we can get the dot pruduct (of unit vectors) for some information about the direction the vectors are facing
+            // since these are unit vectors, the output we get is the angle in radians
+
             if (route.getStep(0).hasZComponent()) {
                 route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
             } else if (!route.getStep(1).hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
-                // first we get the vectors of the first two steps
-                Step step1 = route.getStep(0);
-                Step step2 = route.getStep(1);
-
-                EBVector v1 = step1.getVector();
-                EBVector v2 = step2.getVector();
-
-                // then we add them together.
-                double totalMagnitude = v1.add(v2).getMagnitude(); // (step1 + step2).getMagnitude();
-                double dot = v1.dot(v2); //we can get the dot pruduct for some information about the direction the vectors are facing
 
                 //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
                 if (totalMagnitude <= v1.getMagnitude() || totalMagnitude <= v2.getMagnitude()) {
                     // if (totalMagnitude <= (step1.getMagnitude() + step2.getMagnitude())) {
-                    if (dot > 0 || v1.getMagnitude() < 3) // remove the step if the vectors are in the same general direction. or if you are within 3 feet of the target node
+                    if (v1.getMagnitude() < 3) // are within 3 feet of the target node
                         route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+                    else if (dot > 0) // vectors are in the same general direction, but not orthogonal. (includes 1, which is in the same direction)
+                        route.removeStep(0);
+                    else if (dot == -1) // vectors are opposite to each other
+                        route.removeStep(0);
                 }
+            }
+        }
+
+        return route;
+    }
+
+    //run dijsktras and return a route to
+    // remo
+    public Route calculateRoute() {
+        boolean ghettoFlag = false;
+
+        route = map.navigateFrom("USER", destination);
+
+        // handle removal of useless steps related to the user's location
+        if (route.numberOfSteps() > 1) { // if there at least 2 steps.
+            // first we get the vectors of the first two steps
+            Step step1 = route.getStep(0);
+            Step step2 = route.getStep(1);
+
+            double step1Magnitude = step1.getVector().getMagnitude();
+
+            EBVector unitVector1 = step1.getVector().getUnitVector();
+            EBVector unitVector2 = step2.getVector().getUnitVector();
+
+            double angleBetween = unitVector1.dot(unitVector2);  // We can get the dot product (of unit vectors) for some information about the direction the vectors are facing.
+            // since these are unit vectors, the output we get is the angle in radians (ranged from -1 to 1 on the unit circle)
+
+            if (step1.hasZComponent()) {
+                route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
+            } else if (!step2.hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
+                // now we can check for removal cases based on user location criteria.
+                if (step1Magnitude < 3) { // are within 3 feet of the target node
+                    route.removeStep(0);
+                } else if (angleBetween > EBVector.ThirtyDegrees || angleBetween < EBVector.NegThirtyDegrees) { // vectors are within 30 degrees of the same direction. ( does not appear in our unless the user is close to a node but not orthogonal to it)
+                    route.removeStep(0);
+                } else if (angleBetween == -1) { // vectors are opposite to each other. This will never be a path created by dijkstra with our map. So this is because the user is closest to the previous node.
+                    route.removeStep(0);
+                }
+            }
+        }
+
+        // remove steps so its just the start and end of long stretches of straight walking.
+        for (int currentNode = 0; currentNode + 1 < route.numberOfSteps(); currentNode++) { // go through all the steps. We need to look 2 nodes ahead to see if there is a stretch of straight line
+            int removalNode = currentNode + 1; // node that we will remove if there is a straight line
+
+            // get unit vectors of the next two steps
+            EBVector unitVector1 = route.getStep(currentNode).getVector().getUnitVector();
+            EBVector unitVector2 = route.getStep(currentNode + 1).getVector().getUnitVector();
+
+            // We can get the dot product (of unit vectors) for some information about the direction the vectors are facing.
+            // since these are unit vectors, the output we get is the angle in radians (ranged from -1 to 1 on the unit circle)
+            double angleBetween12 = unitVector1.dot(unitVector2);
+
+
+            // remove the step if it is in a straight line
+            while (angleBetween12 == 1) {
+                // (but NOT if it has any vertical components. This wont happen since they always have unit vectors of 0
+                route.removeStep(currentNode); //remove the middle step
+
+                if (currentNode > route.numberOfSteps())
+                    break; //end the while loop if we reach the end of the route.
+
+                // update vector2 and the angle between the old and the new
+                unitVector2 = route.getStep(currentNode).getVector().getUnitVector();
+                angleBetween12 = unitVector1.dot(unitVector2);
             }
         }
 
@@ -88,5 +159,21 @@ public class EyeBallinMap {
 
     }
 
+    // get the unit vector (angle in radians) of the difference between the next to step vectors
+    private double getNextStepDirection(int startingIndex) {
+        if (startingIndex + 1 < route.numberOfSteps()) {
+            // first we get the vectors of the first two steps
+            Step step1 = route.getStep(startingIndex);
+            Step step2 = route.getStep(startingIndex + 1);
+
+            EBVector v1 = step1.getVector();
+            EBVector v2 = step2.getVector();
+
+            return v1.getUnitVector().dot(v2.getUnitVector()); //we can get the dot product (of unit vectors) for some information about the direction the vectors are facing
+            // since these are unit vectors, the output we get is the angle in radians
+        } else {
+            return 0.0;
+        }
+    }
 
 }

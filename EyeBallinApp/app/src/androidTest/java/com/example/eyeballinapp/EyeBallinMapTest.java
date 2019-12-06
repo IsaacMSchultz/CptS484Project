@@ -38,7 +38,7 @@ public class EyeBallinMapTest {
 
     @Test
     public void CalculateRoute() {
-        String[] expectedSteps = {"Outside Hallway 1", "Floor 1 hallway", "Outside Bathroom 1", "Outside 151, 152", "151"};
+        String[] expectedSteps = {"Outside Hallway 1", "Outside 151, 152", "151"};
 
         CustomLocation userLocation = new CustomLocation(0, 0, 1);
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
@@ -55,7 +55,7 @@ public class EyeBallinMapTest {
 
     //This test mocks the user walking from the south doors to 151
     @Test
-    public void navigateFrom() {
+    public void navigateFromSouthDoorsto151() {
         String[] expectedSteps = {"Outside Hallway 1", "Floor 1 hallway", "Outside Bathroom 1", "Outside 151, 152", "151"};
         Route steps;
         CustomLocation userLocation;
