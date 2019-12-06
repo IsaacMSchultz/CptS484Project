@@ -1,5 +1,6 @@
 package com.example.eyeballinapp.test;
 
+import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Graph.MapGraph;
 import com.example.eyeballinapp.MapStuff.Graph.MapNode;
@@ -110,12 +111,12 @@ public class MapGraphTest {
                     map.addEdge("test" + j, "test" + k, adjacencyMatrix[j][k]); // add the node adjacency tuple to the hashmap
         }
 
-        List<MapNode> steps = map.navigateFrom("test0", "test19");
+        Route steps = map.navigateFrom("test0", "test19");
 
-        assertEquals(expected.length, steps.size());
+        assertEquals(expected.length, steps.getStepList().size());
 
         for (int j = 0; j < expected.length; j++) { // Go through each vertex in the adjacency matrix
-            assertEquals(expected[j], steps.get(j).getName());
+            assertEquals(expected[j], steps.takeStep().getNode().getName());
         }
     }
 }

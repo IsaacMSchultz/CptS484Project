@@ -56,7 +56,7 @@ public class EyeBallinMapTest {
     //This test mocks the user walking from the south doors to 151
     @Test
     public void navigateFromSouthDoorsto151() {
-        String[] expectedSteps = {"Outside Hallway 1", "Floor 1 hallway", "Outside Bathroom 1", "Outside 151, 152", "151"};
+        String[] expectedSteps = {"Outside Hallway 1", "Outside 151, 152", "151"};
         Route steps;
         CustomLocation userLocation;
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
@@ -81,7 +81,7 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(0, 30, 1);
-        expectedSteps = new String[]{"Floor 1 hallway", "Outside Bathroom 1", "Outside 151, 152", "151"};
+        expectedSteps = new String[]{ "Outside 151, 152", "151"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -91,7 +91,7 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(9, 30, 1);
-        expectedSteps = new String[]{"Outside Bathroom 1", "Outside 151, 152", "151"};
+        expectedSteps = new String[]{ "Outside 151, 152", "151"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -101,7 +101,7 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(18, 30, 1);
-        expectedSteps = new String[]{"Outside Bathroom 1", "Outside 151, 152", "151"};
+        expectedSteps = new String[]{"Outside 151, 152", "151"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -154,7 +154,7 @@ public class EyeBallinMapTest {
     //This test mocks the user walking from the south doors to 151 while stepping exactly on each node
     @Test
     public void navigateFrom151to440() {
-        String[] expectedSteps = {"Outside 151, 152", "Outside Bathroom 1", "Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
+        String[] expectedSteps = {"Outside 151, 152", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         Route steps;
         CustomLocation userLocation;
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
@@ -169,7 +169,8 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
-        userLocation = new CustomLocation(56, 29, 1); //151
+        userLocation = new CustomLocation(56, 29, 1); // This is within 3 feet of the node
+        expectedSteps = new String[]{"Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -179,7 +180,6 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(56, 30, 1);
-        expectedSteps = new String[]{"Outside Bathroom 1", "Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -189,7 +189,7 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(28, 30, 1);
-        expectedSteps = new String[]{"Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
+        expectedSteps = new String[]{"Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -293,7 +293,7 @@ public class EyeBallinMapTest {
     //This test mocks the user walking from the south doors to 151 while stepping exactly on each node
     @Test
     public void navigateFrom151to440WithSlightMisses() {
-        String[] expectedSteps = {"Outside 151, 152", "Outside Bathroom 1", "Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
+        String[] expectedSteps = {"Outside 151, 152", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         Route steps;
         CustomLocation userLocation;
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
@@ -308,7 +308,8 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
-        userLocation = new CustomLocation(56, 29, 1); //151
+        userLocation = new CustomLocation(56, 29, 1);
+        expectedSteps = new String[]{"Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -317,8 +318,7 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
-        userLocation = new CustomLocation(56, 30, 1);
-        expectedSteps = new String[]{"Outside Bathroom 1", "Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
+        userLocation = new CustomLocation(50, 28, 1);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -337,25 +337,6 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(28, 30, 1);
-        expectedSteps = new String[]{"Floor 1 hallway", "Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
-        map.updateUser(userLocation);
-        steps = map.calculateRoute();
-
-        assertEquals(expectedSteps.length, steps.getStepList().size()); // are the expected and actual the same size?
-        for (String s : expectedSteps) { // are they the same order?
-            assertEquals(s, steps.takeStep().getNode().getName());
-        }
-
-        userLocation = new CustomLocation(10, 30, 1);
-        map.updateUser(userLocation);
-        steps = map.calculateRoute();
-
-        assertEquals(expectedSteps.length, steps.getStepList().size()); // are the expected and actual the same size?
-        for (String s : expectedSteps) { // are they the same order?
-            assertEquals(s, steps.takeStep().getNode().getName());
-        }
-
-        userLocation = new CustomLocation(9, 30, 1);
         expectedSteps = new String[]{"Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
@@ -365,7 +346,27 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
+        userLocation = new CustomLocation(10, 30, 1);
+        expectedSteps = new String[]{"Outside Hallway 1", "Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+
+        assertEquals(expectedSteps.length, steps.getStepList().size()); // are the expected and actual the same size?
+        for (String s : expectedSteps) { // are they the same order?
+            assertEquals(s, steps.takeStep().getNode().getName());
+        }
+
+        userLocation = new CustomLocation(9, 30, 1);
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+
+        assertEquals(expectedSteps.length, steps.getStepList().size()); // are the expected and actual the same size?
+        for (String s : expectedSteps) { // are they the same order?
+            assertEquals(s, steps.takeStep().getNode().getName());
+        }
+
         userLocation = new CustomLocation(3, 30, 1);
+        expectedSteps = new String[]{"Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -375,7 +376,6 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(0, 30, 1);
-        expectedSteps = new String[]{"Outside Elevator 1", "Elevator 1", "Elevator 4", "Outside Elevator 4", "Outside Hallway 4", "Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -403,7 +403,7 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
-        userLocation = new CustomLocation(5, 55, 1);
+        userLocation = new CustomLocation(7, 55, 1);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -469,7 +469,17 @@ public class EyeBallinMapTest {
             assertEquals(s, steps.takeStep().getNode().getName());
         }
 
-        userLocation = new CustomLocation(0, 30, 4);
+        userLocation = new CustomLocation(4, 30, 4);
+        expectedSteps = new String[]{"Outside Hallway 4", "Water Fountain 4", "440"};
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+
+        assertEquals(expectedSteps.length, steps.getStepList().size()); // are the expected and actual the same size?
+        for (String s : expectedSteps) { // are they the same order?
+            assertEquals(s, steps.takeStep().getNode().getName());
+        }
+
+        userLocation = new CustomLocation(3, 30, 4);
         expectedSteps = new String[]{"Water Fountain 4", "440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
@@ -480,6 +490,7 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(5, 20, 4);
+        expectedSteps = new String[]{"440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
@@ -489,7 +500,6 @@ public class EyeBallinMapTest {
         }
 
         userLocation = new CustomLocation(6, 21, 4);
-        expectedSteps = new String[]{"440"};
         map.updateUser(userLocation);
         steps = map.calculateRoute();
 
