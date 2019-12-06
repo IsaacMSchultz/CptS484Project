@@ -107,45 +107,41 @@ public class EyeBallinMap {
             double angleBetween = unitVector1.dot(unitVector2);  // We can get the dot product (of unit vectors) for some information about the direction the vectors are facing.
             // since these are unit vectors, the output we get is the angle in radians (ranged from -1 to 1 on the unit circle)
 
-            if (step1.hasZComponent()) {
-                route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
-            } else if (!step2.hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
+//            if (step1.hasZComponent()) {
+//                route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
+//            } else if (!step2.hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
                 // now we can check for removal cases based on user location criteria.
-                if (step1Magnitude < 3) { // are within 3 feet of the target node
-                    route.removeStep(0);
+                if (step1Magnitude <= 3) { // are within 3 feet of the target node
+                    if (!step2.hasZComponent())
+                        route.removeStep(0);
+                    else if (step1Magnitude < 1) // are less than 1 foot from the elevator call buttons
+                        route.removeStep(0);
                 } else if (angleBetween > EBVector.ThirtyDegrees || angleBetween < EBVector.NegThirtyDegrees) { // vectors are within 30 degrees of the same direction. ( does not appear in our unless the user is close to a node but not orthogonal to it)
                     route.removeStep(0);
                 } else if (angleBetween == -1) { // vectors are opposite to each other. This will never be a path created by dijkstra with our map. So this is because the user is closest to the previous node.
                     route.removeStep(0);
                 }
-            }
+//            }
         }
 
         // remove steps so its just the start and end of long stretches of straight walking.
-        for (int currentNode = 0; currentNode + 1 < route.numberOfSteps(); currentNode++) { // go through all the steps. We need to look 2 nodes ahead to see if there is a stretch of straight line
-            int removalNode = currentNode + 1; // node that we will remove if there is a straight line
-
-            // get unit vectors of the next two steps
-            EBVector unitVector1 = route.getStep(currentNode).getVector().getUnitVector();
-            EBVector unitVector2 = route.getStep(currentNode + 1).getVector().getUnitVector();
+        EBVector removalVector = route.getStep(0).getVector().getUnitVector();
+        int removalNode = 0;
+        for (int currentNode = 1; currentNode < route.numberOfSteps();/*increment nothing*/) { // go through all the steps. We need to look 2 nodes ahead to see if there is a stretch of straight line
+            EBVector nextVector = route.getStep(currentNode).getVector().getUnitVector(); //get the vector of the next step so we can compare it
 
             // We can get the dot product (of unit vectors) for some information about the direction the vectors are facing.
             // since these are unit vectors, the output we get is the angle in radians (ranged from -1 to 1 on the unit circle)
-            double angleBetween12 = unitVector1.dot(unitVector2);
+            double angleBetween = removalVector.dot(nextVector);
 
-
-            // remove the step if it is in a straight line
-            while (angleBetween12 == 1) {
-                // (but NOT if it has any vertical components. This wont happen since they always have unit vectors of 0
-                route.removeStep(currentNode); //remove the middle step
-
-                if (currentNode > route.numberOfSteps())
-                    break; //end the while loop if we reach the end of the route.
-
-                // update vector2 and the angle between the old and the new
-                unitVector2 = route.getStep(currentNode).getVector().getUnitVector();
-                angleBetween12 = unitVector1.dot(unitVector2);
+            // if the vectors are in the same direction, combine these steps.
+            if ((angleBetween >= 0.93 || angleBetween <= -0.93)) {
+                route.removeStep(removalNode); //remove the middle step
+            } else { // if the vectors are in different directions, update the removal node index, and update the comparison vector.
+                removalNode = currentNode++;
+                removalVector = route.getStep(removalNode).getVector().getUnitVector();
             }
+
         }
 
         return route;
