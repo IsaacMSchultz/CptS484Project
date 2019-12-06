@@ -104,7 +104,7 @@ public class Navigation {
         if(level.equals("highest")) {
             index = getHighest(direction);
             String dir = directionString(index);
-            steps.getStep(0).setDirection(dir);
+            steps.getStep(0).setUserDirection(dir);
         }
         else {
 

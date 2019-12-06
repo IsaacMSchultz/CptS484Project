@@ -86,6 +86,9 @@ public class Step {
      * @param dir a string representing the direction in the form: (positive|negative)(X|Y)
      */
     public String setUserDirection(String dir) {
+
+        //need to add directions to give for when you are in an elevator. Just tell them what floor to go to.
+
         EBVector directionVector;
         double vx = vector.getX();
         double vy = vector.getY();
@@ -93,11 +96,11 @@ public class Step {
         // we need to rotate our direction vector based on the direction the user is facing so that our orientation is the same.
         // To do this, we use a rotation matrix for 90, 180, and 270 degrees based on which direction they are facing.
         // rotations for exact 90 degree angles are simply transformations of the signs of the components.
-        if (dir.equals("positiveY")) {
+        if (dir.equals("forward")) { //positive Y direction
             directionVector = new EBVector(vy, -vx); // transformation: <y, -x>
-        } else if (dir.equals("negativeX")) {
+        } else if (dir.equals("left")) { // negative x direction
             directionVector = new EBVector(-vx, -vy); // transformation: <-x, -y>
-        } else if (dir.equals("negativeY")) {
+        } else if (dir.equals("back")) { //negative y direction
             directionVector = new EBVector(-vy, vx); // transformation: <-y, x>
         } else { // we do not need to rotate if they are facing in the positive X direction since their vectors already line up with our representation of directions.
             directionVector = vector;

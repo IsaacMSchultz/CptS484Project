@@ -47,4 +47,10 @@ public class Route {
             currentStep++;
         return s;
     }
+
+    // pass in the direction the user is facing, and get the direction they need to turn as a string.
+    public String getDirections(String userIsFacing) {
+        Step s = steps.get(currentStep);
+        return "";
+    }
 }
