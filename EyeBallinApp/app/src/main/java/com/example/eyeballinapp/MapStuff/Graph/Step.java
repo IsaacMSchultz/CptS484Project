@@ -9,6 +9,7 @@ import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 public class Step {
     private MapNode node;
     private EBVector vector;
+    private String direction;
 
     public Step(MapNode node, double distanceX, double distanceY) {
         this.node = node;
@@ -49,5 +50,13 @@ public class Step {
 
     public MapNode getNode() {
         return node;
+    }
+
+    public void setDirection(String dir) {
+        direction = dir;
+    }
+
+    public String getDirection() {
+        return direction;
     }
 }

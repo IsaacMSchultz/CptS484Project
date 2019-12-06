@@ -10,4 +10,5 @@
     <string name="notify_text">Fall detected, this person might be in a critical condition</string>
     <string name="please_repeat">Sorry, i didnt hear that, please repeat</string>
     <string name="room_number">Sorry, you need to specify a room number to navigate to</string>
+    <string name="not_exist">Sorry that room doesnt exist</string>
 </resources>
