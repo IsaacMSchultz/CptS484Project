@@ -141,7 +141,6 @@ public class EyeBallinMap {
                 removalNode = currentNode++;
                 removalVector = route.getStep(removalNode).getVector().getUnitVector();
             }
-
         }
 
         return route;

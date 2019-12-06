@@ -38,6 +38,7 @@ public class Navigation {
     }
 
 
+
     public void navigate(String direction) {
         switch (direction) {
             //do a post here using eventbus
