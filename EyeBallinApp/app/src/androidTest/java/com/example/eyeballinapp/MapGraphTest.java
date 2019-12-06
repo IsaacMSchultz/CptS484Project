@@ -101,7 +101,7 @@ public class MapGraphTest {
         };
 
         // expected path from 0 to 19 is:
-        String[] expected = {"test0", "test1", "test2", "test5", "test6", "test8", "test11", "test14", "test17", "test19"};
+        String[] expected = {"test1", "test2", "test5", "test6", "test8", "test11", "test14", "test17", "test19"};
 
         MapNode testNode; // Temporary node object to add to
 
