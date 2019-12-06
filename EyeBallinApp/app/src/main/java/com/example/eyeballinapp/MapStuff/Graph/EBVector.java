@@ -40,5 +40,13 @@ public class EBVector {
         return new EBVector(newX, newY);
     }
 
+    // Behaves like . operator, does not update internal values, and instead returns a new EBVector.
+    public double dot(EBVector v) {
+        double newX = x * v.getX();
+        double newY = y * v.getY();
+
+        return newX + newY;
+    }
+
     // other vector addition functions and shit
 }

@@ -11,15 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409500ae-4187-4d78-8715-c769dd02dfd0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/halfschool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/halfschool.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../floorGraphs/HalfSchool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../floorGraphs/HalfSchool.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +23,28 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
+  </component>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="319">
+                    <caret line="46" selection-start-line="46" selection-end-line="46" />
+                    <folding>
+                      <element signature="imports" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="26c40eda" />
   <component name="ExternalProjectsManager">
@@ -40,20 +56,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3387#3388#0" expanded="true" />
-                <element signature="e#3426#3427#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/Navigation.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -67,31 +69,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="43" column="26" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/NavigationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3504">
-              <caret line="315" selection-start-line="315" selection-end-line="315" />
+            <state relative-caret-position="-1052">
+              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/SpeechParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="23" column="68" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="68" />
+              <folding>
+                <element signature="e#2437#2438#0" expanded="true" />
+                <element signature="e#2472#2473#0" expanded="true" />
+                <element signature="e#2499#2500#0" expanded="true" />
+                <element signature="e#2532#2533#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,14 +104,40 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="152" column="1" lean-forward="true" selection-start-line="152" selection-start-column="1" selection-end-line="152" selection-end-column="1" />
+            <state relative-caret-position="-1564">
+              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="893">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1247#1248#0" expanded="true" />
+                <element signature="e#1697#1698#0" expanded="true" />
+                <element signature="e#1741#1742#0" expanded="true" />
+                <element signature="e#2284#2285#0" expanded="true" />
+                <element signature="e#2348#2349#0" expanded="true" />
+                <element signature="e#2407#2408#0" expanded="true" />
+                <element signature="e#2482#2483#0" expanded="true" />
+                <element signature="e#2550#2551#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -123,17 +145,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Route.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="536">
+              <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/parsing/XmlParser.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="47" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="269">
+              <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4224#4225#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -189,7 +215,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Step.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Route.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/EyeBallinMap.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/parsing/XmlParser.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/EventBus/OnButtonClickedMessage.java" />
@@ -197,14 +222,16 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/walk_path_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/SpeechParser.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/NavigationActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/Navigation.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapNode.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Route.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java" />
       </list>
     </option>
   </component>
@@ -743,34 +770,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 04m 24s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 06m 09s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 06m 36s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 06m 55s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 19m 59s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 21m 23s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 22m 04s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 25m 08s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 28m 18s.xml">
-      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 28m 52s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 37m 42s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 48m 36s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 50m 30s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 51m 18s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 19h 58m 42s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 20h 13m 13s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 20h 16m 32s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 20h 22m 01s.xml">
+      <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="EyeBallinMapTest - 2019.12.05 at 20h 59m 47s.xml">
       <configuration name="EyeBallinMapTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
   </component>
@@ -814,34 +841,6 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26066098" />
-      <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" side_tool="true" />
-      <window_info id="Image Layers" order="5" />
-      <window_info id="Designer" order="6" />
-      <window_info id="Resources Explorer" order="7" />
-      <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Find" order="0" weight="0.32872504" />
-      <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info anchor="bottom" id="Logcat" order="2" weight="0.329429" />
-      <window_info anchor="bottom" id="TODO" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="6" weight="0.3271028" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" />
-      <window_info anchor="bottom" id="Run" order="8" weight="0.32917964" />
-      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.5576324" />
-      <window_info anchor="right" id="Preview" order="0" />
-      <window_info anchor="right" id="Assistant" order="1" weight="0.32995737" />
-      <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Gradle" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
@@ -858,6 +857,35 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="EyeBallinMapTest">
+        <watch expression="steps" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -971,7 +999,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/FallDialog.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/SingleFragmentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1025,17 +1052,6 @@
           <caret line="108" column="78" selection-start-line="108" selection-start-column="78" selection-end-line="108" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="e#532#533#0" expanded="true" />
-            <element signature="e#564#565#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1112,19 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/SpeechParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
-          <folding>
-            <element signature="e#214#215#0" expanded="true" />
-            <element signature="e#243#244#0" expanded="true" />
-            <element signature="e#2472#2473#0" expanded="true" />
-            <element signature="e#2532#2533#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1136,17 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1183,35 +1175,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="43" column="26" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+        <state relative-caret-position="361">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/NavigationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3504">
-          <caret line="315" selection-start-line="315" selection-end-line="315" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Route.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="99" column="82" lean-forward="true" selection-start-line="99" selection-start-column="82" selection-end-line="99" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="536">
+          <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1225,24 +1200,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/MapGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="-1564">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/NavigationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1052">
+          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/SpeechStuff/SpeechParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="23" column="68" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="68" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3426#3427#0" expanded="true" />
+            <element signature="e#2437#2438#0" expanded="true" />
+            <element signature="e#2472#2473#0" expanded="true" />
+            <element signature="e#2499#2500#0" expanded="true" />
+            <element signature="e#2532#2533#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/EBVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="152" column="1" lean-forward="true" selection-start-line="152" selection-start-column="1" selection-end-line="152" selection-end-column="1" />
+        <state relative-caret-position="319">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/MapGraphTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="99" column="82" lean-forward="true" selection-start-line="99" selection-start-column="82" selection-end-line="99" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="893">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1247#1248#0" expanded="true" />
+            <element signature="e#1697#1698#0" expanded="true" />
+            <element signature="e#1741#1742#0" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+            <element signature="e#2348#2349#0" expanded="true" />
+            <element signature="e#2407#2408#0" expanded="true" />
+            <element signature="e#2482#2483#0" expanded="true" />
+            <element signature="e#2550#2551#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4224#4225#0" expanded="true" />
           </folding>
         </state>
       </provider>

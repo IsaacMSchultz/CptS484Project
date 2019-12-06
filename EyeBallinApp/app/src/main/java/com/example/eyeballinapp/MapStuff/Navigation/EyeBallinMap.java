@@ -54,7 +54,7 @@ public class EyeBallinMap {
 
         // if there are steps to take, and the vectors are not 0;
         if (route.numberOfSteps() > 1) {
-            if (!route.getStep(0).hasZComponent()) {
+            if (route.getStep(0).hasZComponent()) {
                 route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
             } else if (!route.getStep(1).hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
                 // first we get the vectors of the first two steps
@@ -66,18 +66,13 @@ public class EyeBallinMap {
 
                 // then we add them together.
                 double totalMagnitude = v1.add(v2).getMagnitude(); // (step1 + step2).getMagnitude();
-                double v1m = v1.getMagnitude();
-                double v2m = v2.getMagnitude();
+                double dot = v1.dot(v2); //we can get the dot pruduct for some information about the direction the vectors are facing
 
-                if ((v1.getX() == 0 && v2.getY() != 0) || (v1.getY() == 0 && v2.getX() != 0)) {// we are dealing with a 90 degree turn, since we already handle the case of a vertical step in previous IF's
-                    if (v1m > 3 || v2m > 3) { // we only want to be able to skip an essential 90 degree turn if we are within 3 feet of it.
-
-                    }
-                }
                 //then we check to see if the magnitude of the steps combined is less than of the steps on their own.
                 if (totalMagnitude <= v1.getMagnitude() || totalMagnitude <= v2.getMagnitude()) {
                     // if (totalMagnitude <= (step1.getMagnitude() + step2.getMagnitude())) {
-                    route.removeStep(0); // we need to remove the first step, since it is counterproductive.
+                    if (dot > 0 || v1.getMagnitude() < 3) // remove the step if the vectors are in the same general direction. or if you are within 3 feet of the target node
+                        route.removeStep(0); // we need to remove the first step, since it is counterproductive.
                 }
             }
         }
