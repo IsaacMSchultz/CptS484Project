@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-        //startListener(getString(R.string.init_greeting));
-        //parser = new SpeechParser();
+        startListener(getString(R.string.init_greeting));
+        parser = new SpeechParser();
 
 
 
@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
 //        // Just used for debugging
 //        System.out.print("stopping point");
 
-        EyeBallinMap map = new EyeBallinMap(this);
-        if(map.setDestination("458")) {
-            Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
-            myIntent.putExtra("DESTINATION", "458");
-            startActivity(myIntent);
-        }
+        //EyeBallinMap map = new EyeBallinMap(this);
+        //if(map.setDestination("458")) {
+        //    Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+       //     myIntent.putExtra("DESTINATION", "458");
+        //    startActivity(myIntent);
+        //}
     }
 
     public void startListener(String message) {
