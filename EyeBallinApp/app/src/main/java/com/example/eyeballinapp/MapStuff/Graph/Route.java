@@ -51,6 +51,17 @@ public class Route {
     // pass in the direction the user is facing, and get the direction they need to turn as a string.
     public String getDirections(String userIsFacing) {
         Step s = steps.get(currentStep);
+        String direction = s.setUserDirection(userIsFacing); //pass the direction the user is facing to the step to see which direction we need to turn.
+
+        // either need to get the direction and build a voice string from it here, or change the return value of direction in the other class to return the voice string.
+        // It probably makes more sense to use a case statement here just in case we need direction in another locaation.
+        // Since we are using easy to define strings, a switch statement is likely the easiest approach.
+
+        // We want this to return the direction the user needs to turn, and then tell them how far to walk in that direction.
+
+        // Should say things like "continue straight for 10 feet"
+
         return "";
     }
+
 }
