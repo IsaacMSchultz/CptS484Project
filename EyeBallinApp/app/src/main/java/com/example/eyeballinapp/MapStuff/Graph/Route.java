@@ -88,12 +88,9 @@ public class Route {
             int currentFloor = l.getFloorNum();
 
             // create directions based on which way we need to go.
-            spokenDirections = "You are at the elevators on floor " + currentFloor + ", there are elevator doors to one elevator on your right, and one to your left. The buttons to call the elevator are in front of you. ";
-            if (currentFloor > destinationFloor) { // If we are higher than we need to go
-                spokenDirections += "Call an elevator, and "; // WORKING HERE
-            } else {
+            spokenDirections = "You are at the elevators on floor " + currentFloor + ", there are elevator doors to one elevator on your right," +
+                    " and one to your left. The buttons to call the elevator are in front of you. Call an elevator, and go to floor " + destinationFloor;
 
-            }
         } else {
 
             // Add the direction to go at the start of the string that will be spoken
