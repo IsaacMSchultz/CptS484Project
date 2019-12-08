@@ -83,6 +83,7 @@ public class Step {
 
     /**
      * https://i.imgur.com/QHf5w6n.jpg drawing explanation of the breakup of directions.
+     * NOTE: The graph drawn has left and right mixed up! they are opposites!
      * @param dir a string representing the direction that is either 'up', 'left', 'right', 'down' relative to the coordinate plane where positive Y is up and positive X is right.
      */
     public String setUserDirection(String dir) {
@@ -116,24 +117,24 @@ public class Step {
 
         //if we split the unit circle based on the y component, we can make a more clear if-else chain
         if (y >= EBVector.twentyThreePiOver12y) { // vector is pointing between F and B.
-            if (x < EBVector.piOver12x) {
+            if (x > EBVector.piOver12x) {
                 direction = "forward";
-            } else if (x < EBVector.fivePiOver12x) {
-                direction = "slight_right";
-            } else if (x < EBVector.sevenPiOver12x) {
-                direction = "right";
-            } else if (x < EBVector.elevenPiOver12x) {
-                direction = "120degrees_right";
-            } else {
-                direction = "backwards";
-            }
-        } else { // Vector is pointing between 120L and SL
-            if (x > EBVector.nineteenPiOver12x) {
+            } else if (x > EBVector.fivePiOver12x) {
                 direction = "slight_left";
-            } else if (x > EBVector.seventeenPiOver12x) {
+            } else if (x > EBVector.sevenPiOver12x) {
                 direction = "left";
-            } else {
+            } else if (x > EBVector.elevenPiOver12x) {
                 direction = "120degrees_left";
+            } else {
+                direction = "backward";
+            }
+        } else { // Vector is pointing between 120R and SR
+            if (x > EBVector.nineteenPiOver12x) {
+                direction = "slight_right";
+            } else if (x > EBVector.seventeenPiOver12x) {
+                direction = "right";
+            } else {
+                direction = "120degrees_right";
             }
         }
 

@@ -31,17 +31,15 @@ public class StepTest {
     }
 
     @Test
-    public void directionTesting() {
-        String[] expectedSteps = {"Outside Hallway 1", "Outside 151, 152", "151"};
-
-        CustomLocation userLocation = new CustomLocation(-1, 0, 1);
+    public void UpCardinalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(0, -1, 1);
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
-        map.setDestination("151");
+        map.setDestination("South Doors");
         map.updateUser(userLocation);
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("forward");
+        direction = steps.getStep(0).setUserDirection("up");
         assertEquals("forward", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -51,7 +49,118 @@ public class StepTest {
         assertEquals("left", direction);
 
         direction = steps.getStep(0).setUserDirection("down");
-        assertEquals("backwards", direction);
-
+        assertEquals("backward", direction);
     }
+
+    @Test
+    public void RightCardinalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(3, 0, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("South Doors");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        direction = steps.getStep(0).setUserDirection("up");
+        assertEquals("left", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("forward", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("backward", direction);
+
+        direction = steps.getStep(0).setUserDirection("down");
+        assertEquals("right", direction);
+    }
+
+    @Test
+    public void LeftCardinalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(-3, 0, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("South Doors");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        direction = steps.getStep(0).setUserDirection("up");
+        assertEquals("slight_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("slight_right", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("120degrees_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("down");
+        assertEquals("120degrees_right", direction);
+    }
+
+    @Test
+    public void DownCardinalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(3, 0, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("South Doors");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        direction = steps.getStep(0).setUserDirection("up");
+        assertEquals("slight_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("slight_right", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("120degrees_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("down");
+        assertEquals("120degrees_right", direction);
+    }
+
+    @Test
+    public void UpRightDiagonalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(-3, -3, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("South Doors");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        direction = steps.getStep(0).setUserDirection("up");
+        assertEquals("slight_right", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("120degrees_right", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("slight_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("down");
+        assertEquals("120degrees_left", direction);
+    }
+
+    @Test
+    public void UpLeftDiagonalDirectionTesting() {
+        CustomLocation userLocation = new CustomLocation(3, -3, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("South Doors");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        direction = steps.getStep(0).setUserDirection("up");
+        assertEquals("slight_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("slight_right", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("120degrees_left", direction);
+
+        direction = steps.getStep(0).setUserDirection("down");
+        assertEquals("120degrees_right", direction);
+    }
+
+
 }
