@@ -37,8 +37,6 @@ public class Navigation {
         //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
     }
 
-
-
     public void navigate(String direction) {
         switch (direction) {
             //do a post here using eventbus

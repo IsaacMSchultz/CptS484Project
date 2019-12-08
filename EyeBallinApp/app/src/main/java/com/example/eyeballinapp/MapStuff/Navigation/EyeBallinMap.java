@@ -112,11 +112,11 @@ public class EyeBallinMap {
 //            } else if (!step2.hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
                 // now we can check for removal cases based on user location criteria.
                 if (step1Magnitude <= 3) { // are within 3 feet of the target node
-                    if (!step2.hasZComponent())
+                    if (!step2.hasZComponent()) // only remove elvator instructions if they are in the elevator
                         route.removeStep(0);
                     else if (step1Magnitude < 1) // are less than 1 foot from the elevator call buttons
                         route.removeStep(0);
-                } else if (angleBetween > EBVector.ThirtyDegrees || angleBetween < EBVector.NegThirtyDegrees) { // vectors are within 30 degrees of the same direction. ( does not appear in our unless the user is close to a node but not orthogonal to it)
+                } else if (angleBetween > EBVector.ThirtyDegrees) { // vectors are within 30 degrees of the same direction. ( does not appear in our unless the user is close to a node but not orthogonal to it)
                     route.removeStep(0);
                 } else if (angleBetween == -1) { // vectors are opposite to each other. This will never be a path created by dijkstra with our map. So this is because the user is closest to the previous node.
                     route.removeStep(0);

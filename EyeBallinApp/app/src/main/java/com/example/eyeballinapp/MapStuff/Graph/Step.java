@@ -84,9 +84,15 @@ public class Step {
     /**
      * https://i.imgur.com/QHf5w6n.jpg drawing explanation of the breakup of directions.
      * NOTE: The graph drawn has left and right mixed up! they are opposites!
-     * @param dir a string representing the direction that is either 'up', 'left', 'right', 'down' relative to the coordinate plane where positive Y is up and positive X is right.
+     * @param dir a string representing the direction that is either 'forward', 'left', 'right', 'back' relative to the coordinate plane where positive Y is up and positive X is right.
      */
     public String setUserDirection(String dir) {
+
+        // cannot give them a direction to turn if they are in the elevator
+        if (this.hasZComponent()) {
+            direction = "elevator";
+            return direction;
+        }
 
         //need to add directions to give for when you are in an elevator. Just tell them what floor to go to.
 
@@ -97,14 +103,16 @@ public class Step {
         // we need to rotate our direction vector based on the direction the user is facing so that our orientation is the same.
         // To do this, we use a rotation matrix for 90, 180, and 270 degrees based on which direction they are facing.
         // rotations for exact 90 degree angles are simply transformations of the signs of the components.
-        if (dir.equals("up")) { //positive Y direction
+        if (dir.equals("forward")) { //positive Y direction
             directionVector = new EBVector(vy, -vx); // transformation: <y, -x>
         } else if (dir.equals("left")) { // negative x direction
             directionVector = new EBVector(-vx, -vy); // transformation: <-x, -y>
-        } else if (dir.equals("down")) { //negative y direction
+        } else if (dir.equals("back")) { //negative y direction
             directionVector = new EBVector(-vy, vx); // transformation: <-y, x>
-        } else { // we do not need to rotate if they are facing in the positive X direction since their vectors already line up with our representation of directions.
+        } else if (dir.equals("right")) { // we do not need to rotate if they are facing in the positive X direction since their vectors already line up with our representation of directions.
             directionVector = vector;
+        } else {
+            throw new IndexOutOfBoundsException("expected string in the form 'forward', 'left', 'right', 'back' and got" + dir);
         }
 
         // calculate the unit vector so we can determine which whay to tell the user to go.

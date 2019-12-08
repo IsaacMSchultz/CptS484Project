@@ -39,7 +39,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("forward", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -48,7 +48,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("left", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("backward", direction);
     }
 
@@ -61,7 +61,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("left", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -70,7 +70,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("backward", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("right", direction);
     }
 
@@ -83,7 +83,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("right", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -92,7 +92,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("forward", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("left", direction);
     }
 
@@ -105,7 +105,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("backward", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -114,7 +114,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("right", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("forward", direction);
     }
 
@@ -127,7 +127,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("slight_right", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -136,7 +136,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("slight_left", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("120degrees_left", direction);
     }
 
@@ -149,7 +149,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("slight_left", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -158,7 +158,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("120degrees_left", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("120degrees_right", direction);
     }
 
@@ -171,7 +171,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("120degrees_right", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -180,7 +180,7 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("slight_right", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("slight_left", direction);
     }
 
@@ -193,7 +193,7 @@ public class StepTest {
         Route steps = map.calculateRoute();
         String direction;
 
-        direction = steps.getStep(0).setUserDirection("up");
+        direction = steps.getStep(0).setUserDirection("forward");
         assertEquals("120degrees_left", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
@@ -202,8 +202,32 @@ public class StepTest {
         direction = steps.getStep(0).setUserDirection("right");
         assertEquals("120degrees_right", direction);
 
-        direction = steps.getStep(0).setUserDirection("down");
+        direction = steps.getStep(0).setUserDirection("back");
         assertEquals("slight_right", direction);
+    }
+
+    @Test
+    public void ElevatorTesting() {
+        CustomLocation userLocation = new CustomLocation(9, 55, 1); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("Elevator 3");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
+
+        // we do not need to do elevator testing for diagonal since it will only trigger if they are EXACTLY on the point of the elevator
+
+        direction = steps.getStep(0).setUserDirection("forward");
+        assertEquals("elevator", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("elevator", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("elevator", direction);
+
+        direction = steps.getStep(0).setUserDirection("back");
+        assertEquals("elevator", direction);
     }
 
 
