@@ -11,12 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409500ae-4187-4d78-8715-c769dd02dfd0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,8 +129,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="325">
+              <caret line="193" column="25" lean-forward="true" selection-start-line="193" selection-start-column="25" selection-end-line="193" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -216,8 +211,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Navigation/EyeBallinMap.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/example/eyeballinapp/test/MapGraphTest.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/EyeBallinMapTest.java" />
-        <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/eyeballinapp/MapStuff/Graph/Step.java" />
+        <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java" />
       </list>
     </option>
   </component>
@@ -554,23 +549,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.RightCardinalDirec...()">
-    <configuration name="MapGraphTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
-      <module name="app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.eyeballinapp.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.eyeballinapp.test" />
-      <option name="MAIN_CLASS_NAME" value="com.example.eyeballinapp.test.MapGraphTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Android Instrumented Tests.StepTest">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -627,6 +606,55 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DownCardinalDirect...()" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <option name="TESTING_TYPE" value="3" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="androidx.test.runner.AndroidJUnitRunner" />
+      <option name="METHOD_NAME" value="DownCardinalDirectionTesting" />
+      <option name="CLASS_NAME" value="com.example.eyeballinapp.StepTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -729,7 +757,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StepTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+    <configuration name="StepTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" nameIsGenerated="true">
       <module name="app" />
       <option name="TESTING_TYPE" value="2" />
       <option name="INSTRUMENTATION_RUNNER_CLASS" value="androidx.test.runner.AndroidJUnitRunner" />
@@ -878,22 +906,21 @@
     </configuration>
     <list>
       <item itemvalue="Android App.app" />
+      <item itemvalue="Android Instrumented Tests.StepTest" />
       <item itemvalue="Android Instrumented Tests.MapGraphTest" />
       <item itemvalue="Android Instrumented Tests.EyeBallinMapTest" />
       <item itemvalue="Android Instrumented Tests.CalculateRoute()" />
-      <item itemvalue="Android JUnit.MapGraphTest" />
-      <item itemvalue="Android Instrumented Tests.StepTest" />
-      <item itemvalue="Android Instrumented Tests.UpRightDiagonalDir...()" />
-      <item itemvalue="Android Instrumented Tests.UpLeftDiagonalDire...()" />
+      <item itemvalue="Android Instrumented Tests.DownCardinalDirect...()" />
       <item itemvalue="Android Instrumented Tests.RightCardinalDirec...()" />
+      <item itemvalue="Android Instrumented Tests.UpLeftDiagonalDire...()" />
+      <item itemvalue="Android Instrumented Tests.UpRightDiagonalDir...()" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Android Instrumented Tests.DownCardinalDirect...()" />
         <item itemvalue="Android Instrumented Tests.RightCardinalDirec...()" />
         <item itemvalue="Android Instrumented Tests.UpLeftDiagonalDire...()" />
         <item itemvalue="Android Instrumented Tests.UpRightDiagonalDir...()" />
-        <item itemvalue="Android Instrumented Tests.StepTest" />
-        <item itemvalue="Android JUnit.MapGraphTest" />
       </list>
     </recent_temporary>
   </component>
@@ -911,24 +938,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="StepTest - 2019.12.08 at 13h 56m 33s.xml">
-      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="StepTest - 2019.12.08 at 13h 56m 52s.xml">
-      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="StepTest - 2019.12.08 at 13h 57m 09s.xml">
-      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="StepTest - 2019.12.08 at 14h 02m 51s.xml">
-      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="StepTest - 2019.12.08 at 14h 02m 53s.xml">
-      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UpRightDiagonalDir___() - 2019.12.08 at 14h 03m 59s.xml">
-      <configuration name="UpRightDiagonalDir...()" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="UpRightDiagonalDir___() - 2019.12.08 at 14h 04m 14s.xml">
       <configuration name="UpRightDiagonalDir...()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
@@ -940,6 +949,24 @@
     </history-entry>
     <history-entry file="RightCardinalDirec___() - 2019.12.08 at 14h 10m 53s.xml">
       <configuration name="RightCardinalDirec...()" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="RightCardinalDirec___() - 2019.12.08 at 14h 12m 34s.xml">
+      <configuration name="RightCardinalDirec...()" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DownCardinalDirect___() - 2019.12.08 at 14h 13m 31s.xml">
+      <configuration name="DownCardinalDirect...()" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DownCardinalDirect___() - 2019.12.08 at 14h 14m 03s.xml">
+      <configuration name="DownCardinalDirect...()" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DownCardinalDirect___() - 2019.12.08 at 14h 14m 11s.xml">
+      <configuration name="DownCardinalDirect...()" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="StepTest - 2019.12.08 at 14h 14m 30s.xml">
+      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="StepTest - 2019.12.08 at 14h 17m 55s.xml">
+      <configuration name="StepTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1443,8 +1470,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/eyeballinapp/StepTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="325">
+          <caret line="193" column="25" lean-forward="true" selection-start-line="193" selection-start-column="25" selection-end-line="193" selection-end-column="25" />
         </state>
       </provider>
     </entry>
