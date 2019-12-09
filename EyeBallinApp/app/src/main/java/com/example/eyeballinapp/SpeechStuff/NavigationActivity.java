@@ -393,7 +393,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             if(position != 0)
                 holder.bind(mStepList.get(position));
             else
-                mCurrentStepDistance.setText(formatter.format(mStepList.get(0).getDistance()) + " Size: "+ nav.getStepList().size());
+                mCurrentStepDistance.setText(formatter.format(mStepList.get(0).getDistance()) + " Feet");
         }
 
         @Override

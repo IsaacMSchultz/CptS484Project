@@ -41,8 +41,7 @@ public class Navigation {
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-
-        say = new SpeakActivity(mContext, "");
+        say = new SpeakActivity(mContext, "Go forward for " + steps.getStep(0).getDistance() + " feet");
     }
 
     public Navigation(Context context, String destination, String test) {
@@ -54,7 +53,6 @@ public class Navigation {
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-
         say = new SpeakActivity(mContext, "");
     }
 
