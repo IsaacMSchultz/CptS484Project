@@ -111,7 +111,7 @@ public class EyeBallinMap {
 //                route.removeStep(0); // we need to remove the first step, since it is something in an elevator.
 //            } else if (!step2.hasZComponent()) { // we do not want to remove a step if the second one has a vertical component.
                 // now we can check for removal cases based on user location criteria.
-                if (step1Magnitude <= 3) { // are within 3 feet of the target node
+                if (step1Magnitude < 1) { // are within 3 feet of the target node
                     if (!step2.hasZComponent()) // only remove elvator instructions if they are in the elevator
                         route.removeStep(0);
                     else if (step1Magnitude < 1) // are less than 1 foot from the elevator call buttons
