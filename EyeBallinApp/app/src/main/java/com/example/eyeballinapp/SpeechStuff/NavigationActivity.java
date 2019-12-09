@@ -358,13 +358,12 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private class DirectionHolder extends RecyclerView.ViewHolder {
 
         private TextView mStepItemText;
-        private ImageView mStepItemImage;
+
 
         public DirectionHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.step_layout, parent, false));
 
             mStepItemText = itemView.findViewById(R.id.step_item);
-            mStepItemImage = itemView.findViewById(R.id.step_direction);
         }
 
         //could probably just bind a step
