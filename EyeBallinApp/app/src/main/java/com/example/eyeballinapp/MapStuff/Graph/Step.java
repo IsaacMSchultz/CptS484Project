@@ -131,7 +131,10 @@ public class Step {
         double y = turningDirection.getY();
 
         //if we split the unit circle based on the y component, we can make a more clear if-else chain
-        if (y >= EBVector.twentyThreePiOver12y) { // vector is pointing between F and B.
+
+        if ((x < 0.5 && y < 0.5) && (x > -0.5 && y > -0.5)) { // the vector components are not on the unit circle. This means the vector is 0. We have arrived
+            direction = "arrived";
+        } else if (y >= EBVector.twentyThreePiOver12y) { // vector is pointing between F and B.
             if (x > EBVector.piOver12x) {
                 direction = "forward";
             } else if (x > EBVector.fivePiOver12x) {
