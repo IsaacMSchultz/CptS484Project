@@ -40,7 +40,7 @@ public class Navigation {
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-        say = new SpeakActivity(mContext, "Go forward for " + steps.getStep(0).getDistance() + " feet");
+        say = new SpeakActivity(mContext, "Take a step in any direction to calibrate the direction sensor");
     }
 
     public Navigation(Context context, String destination, String test) {
