@@ -26,8 +26,8 @@ public class Navigation {
 
     private String lastDirection = "N/A";
     private String buttonLocation = "forward";
+    private double distanceToNode = 0;
     private SpeakActivity say;
-    private double distanceToNextStep = 1;
     private int stepLength = 1;
 
     public Navigation(Context context, String destination) {
@@ -44,6 +44,14 @@ public class Navigation {
     }
 
     public void navigate(String direction) {
+
+//        // some code to make sure you can only move really fast in the direction of the next node.
+//        if (direction.equals(buttonLocation) && distanceToNode - stepLength < 10) {
+//            stepLength += stepLength;
+//        } else {
+//            stepLength = 1;
+//        }
+
         switch (direction) {
             //do a post here using eventbus
             case "forward":
@@ -84,13 +92,7 @@ public class Navigation {
         map.updateUser(userLocation); //update the user's location in the map
         steps = map.calculateRoute(); // re-calculate the route
 
-        // some code to make long distances easier to travel in the app.
-        distanceToNextStep = steps.getStep(0).getDistance();
-        if (distanceToNextStep > 10)
-            stepLength = (int) distanceToNextStep / 3;
-        else
-            stepLength = 1;
-
+        distanceToNode = steps.getStep(0).getDistance();
         String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
 
         // for mocking elevator stuff
