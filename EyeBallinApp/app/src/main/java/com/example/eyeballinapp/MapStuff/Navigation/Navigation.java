@@ -36,7 +36,7 @@ public class Navigation {
         map = new EyeBallinMap(mContext);
 
         //starting point
-        userLocation = new CustomLocation(0, 55, 1);
+        userLocation = new CustomLocation(0, -5, 1);
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
