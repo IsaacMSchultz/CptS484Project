@@ -13,6 +13,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
+import com.example.eyeballinapp.MainActivity;
 import com.example.eyeballinapp.MapStuff.Graph.Step;
+import com.example.eyeballinapp.MapStuff.Navigation.EyeBallinMap;
 import com.example.eyeballinapp.MapStuff.Navigation.Navigation;
 import com.example.eyeballinapp.R;
 
@@ -40,9 +43,11 @@ import java.util.List;
 
 import static com.example.eyeballinapp.MainActivity.REQUEST_LISTENER;
 
+
 public class NavigationActivity extends AppCompatActivity implements SensorEventListener {
 
 
+    public static final int REQUEST_LISTENER_END = 1;
     private SensorManager snsmgr;
     private Sensor sns;
     long interval;
@@ -53,6 +58,8 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     boolean sendText = true;
 
     private Button mLeftButton, mRightButton, mForwardButton, mBackButton, mElevatorUp, mElevatorDown;
+
+    private ImageView mDirectionArrow;
 
     private int adapterPosition;
     private RecyclerView mRecyclerView;
@@ -129,6 +136,11 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             }
         });
 
+        mDirectionArrow = findViewById(R.id.arrow_img);
+
+        mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
+
+
         getSupportActionBar().hide();
 
         mCurrentStepDistance = findViewById(R.id.distance_text);
@@ -155,7 +167,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             }
         }.start();
 
-        startListener(getString(R.string.notify_fall));
+        startListener(getString(R.string.notify_fall),REQUEST_LISTENER);
     }
 
     @Override
@@ -177,7 +189,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
     }
 
-    public void startListener(String message) {
+    public void startListener(String message,int code) {
         Intent myIntent = new Intent(NavigationActivity.this, ListenActivity.class);
         SpeechResult.get(getApplicationContext()).setSpeechText(message);
         startActivityForResult(myIntent, REQUEST_LISTENER);
@@ -189,6 +201,9 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             case REQUEST_LISTENER: {
                 String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
                 handleAlert(testMessage);
+                break;
+            }
+            case REQUEST_LISTENER_END: {
                 break;
             }
         }
@@ -261,12 +276,73 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     public void onButtonClickedEvent(OnButtonClickedMessage message) {
         if(message.getMessage().equals("UPDATE")) {
             updateUI();
+            switch(message.getDirection()) {
+                case "forward": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
+                    break;
+                case "back": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_down));
+                    break;
+                case "right": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_right));
+                    break;
+                case "left": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_left));
+                    break;
+                case "elevator": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
+            }
         }
         if(message.getMessage().equals("CHANGED")) {
             mAdapter.notifyDataSetChanged();
             updateUI();
         }
+
+        if(message.getMessage().equals("FINISHED")) {
+            startListener("Do you wanna go again?",REQUEST_LISTENER_END);
+        }
+
+
     }
+
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//            case REQUEST_LISTENER: {
+//                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
+//                if(testMessage == null)
+//                    testMessage = "repeat";
+//                if(testMessage == "navigate") {
+//                    EyeBallinMap map = new EyeBallinMap(this);
+//                    if(!map.setDestination(parser.getDestination()))
+//                        testMessage = "room number";
+//                }
+//                startProgramLoop(testMessage);
+//                break;
+//            }
+//        }
+//    }
+
+//    private void startProgramLoop(String message) {
+//        //parse the message
+//        switch(parser.getSpeechCommand(message)) {
+//            // TODO: 12/4/2019 Check if destination exists before proceeding
+//            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+//                //parser.clear();
+//                Log.d("TEST", parser.getDestination());
+//                Toast.makeText(this, parser.getDestination(), Toast.LENGTH_SHORT).show();
+//                Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+//                myIntent.putExtra("DESTINATION", parser.getDestination());
+//                startActivity(myIntent);
+//                parser.clear();
+//                break;
+//            case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
+//                break;
+//            case "no": startListener(getString(R.string.init_greeting));
+//                break;
+//            case "room number": startListener(getString(R.string.room_number));
+//                //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
+//                break;
+//            case "not exist":startListener(getString(R.string.not_exist));
+//                break;
+//            default: startListener(getString(R.string.please_repeat));
+//        }
+//    }
 
     public void updateUI() {
         List<Step> stepList = nav.getStepList();
@@ -296,20 +372,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         //could probably just bind a step
         public void bind(Step stepItem) {
             mStepItemText.setText(stepItem.getNode().getName());
-            /*
-            * FIXME: 12/4/2019 Right now it has an empty direction.
-            *   Everytime the UI gets updated the setdirection is deleted.
-            * */
-//            switch(stepItem.getDirection()) {
-//                case "forward": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_forward));
-//                break;
-//                case "back": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_down));
-//                break;
-//                case "right": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_right));
-//                break;
-//                case "left": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_left));
-//                break;
-//            }
         }
     }
 
@@ -342,6 +404,8 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         public void setStepList(List<Step> stepList) {
             mStepList = stepList;
         }
+
+
 
     }
 }

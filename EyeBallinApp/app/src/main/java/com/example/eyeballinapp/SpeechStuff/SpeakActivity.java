@@ -17,7 +17,7 @@ public class SpeakActivity {
 
             @Override
             public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
+                if(status != TextToSpeech.ERROR) {
                     mTts.setLanguage(Locale.US);
                     mTts.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, UTTER_ID);
                     //while(mTts.isSpeaking()) {}
@@ -30,6 +30,9 @@ public class SpeakActivity {
         mTts.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, UTTER_ID);
         //while(mTts.isSpeaking()) {}
     }
+
+
+
 
     public boolean isSpeaking() {
         return mTts.isSpeaking();

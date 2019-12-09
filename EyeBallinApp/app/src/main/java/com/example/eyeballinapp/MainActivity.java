@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void startListener(String message) {
+    private void startListener(String message) {
         Intent myIntent = new Intent(MainActivity.this, ListenActivity.class);
         SpeechResult.get(getApplicationContext()).setSpeechText(message);
         startActivityForResult(myIntent, REQUEST_LISTENER);
