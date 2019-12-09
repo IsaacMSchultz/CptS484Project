@@ -27,7 +27,7 @@ public class Navigation {
 
     private String lastDirection = "N/A";
     private String buttonLocation = "forward";
-    private double distanceToNode = 0;
+    private String lastForwardDirection = "N/A";
     private SpeakActivity say;
     private int stepLength = 1;
 
@@ -58,15 +58,16 @@ public class Navigation {
     }
 
 
-
     public void navigate(String direction) {
 
-//        // some code to make sure you can only move really fast in the direction of the next node.
-//        if (direction.equals(buttonLocation) && distanceToNode - stepLength < 10) {
-//            stepLength += stepLength;
-//        } else {
-//            stepLength = 1;
-//        }
+        // some code to make sure you can only move really fast in the direction of the next node.
+        // some code to make long distances easier to travel in the app.
+        double distanceToNextStep = steps.getStep(0).getDistance();
+        if (direction.equals(lastForwardDirection) && distanceToNextStep > 7) {
+            stepLength = (int) distanceToNextStep / 3;
+        } else {
+            stepLength = 1;
+        }
 
         switch (direction) {
             //do a post here using eventbus
@@ -108,15 +109,11 @@ public class Navigation {
         map.updateUser(userLocation); //update the user's location in the map
         steps = map.calculateRoute(); // re-calculate the route
 
-        // // some code to make long distances easier to travel in the app.
-        // distanceToNextStep = steps.getStep(0).getDistance();
-        // if (distanceToNextStep > 10)
-        //     stepLength = (int) distanceToNextStep / 3;
-        // else
-        //     stepLength = 1;
-
-        distanceToNode = steps.getStep(0).getDistance();
         String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
+
+        // store the last direction that was considered forward so we can allow the user to move really fast in the direction of the next step
+        if (currentDirection.equals("forward"))
+            lastForwardDirection = direction;
 
         // for mocking elevator stuff
         if (currentDirection.equals("elevator_up")) { //if we need to go up still in the elevator
