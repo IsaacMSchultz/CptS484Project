@@ -12,6 +12,7 @@ import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
 import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.MapStuff.Graph.Step;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
+import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,6 +22,9 @@ public class Navigation {
     EyeBallinMap map;
     Context mContext;
     CustomLocation userLocation;
+
+    private String lastLocation = "forward";
+    private String currentLocation = "forward";
 
     private int stepLength = 1;
     Route steps;
@@ -33,7 +37,8 @@ public class Navigation {
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-        setDirection("highest");
+        //setDirection("highest");
+
         //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
     }
 
@@ -41,98 +46,73 @@ public class Navigation {
         switch (direction) {
             //do a post here using eventbus
             case "forward":
-                move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
+                move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum(), "forward");
+                lastLocation = "forward";
                 break;
             case "back":
-                move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
+                move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum(), "back");
+                lastLocation = "back";
                 break;
             case "left":
-                move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+                move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "left");
+                lastLocation = "left";
                 break;
             case "right":
-                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
+                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(),"right");
+                lastLocation = "right";
                 break;
             case "up":
                 if (userLocation.getFloorNum() != 4)
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1);
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1, "up");
+                lastLocation = "up";
                 break;
             case "down":
                 if (userLocation.getFloorNum() != 1)
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1);
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1, "down");
+                lastLocation = "down";
                 break;
             default:
         }
         EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
-        Toast.makeText(mContext, steps.getStep(0).getDistance() + "\tSize: " + steps.numberOfSteps() + "\n" +
-                "X: " + userLocation.getPositionX() + "\tY: " + userLocation.getPositionY() + "\tZ: " + userLocation.getFloorNum(), Toast.LENGTH_SHORT).show();
     }
 
     public List<Step> getStepList() {
         return steps.getStepList();
     }
 
-    private void move(double x, double y, int floor) {
+    private void move(double x, double y, int floor, String direction) {
         userLocation.setLocation(x, y, floor);
         map.updateUser(userLocation);
-        int stepLength = steps.getStepList().size();
         steps = map.calculateRoute();
-        if(stepLength != steps.getStepList().size())
-            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED"));
-    }
-
-    //level should be high or low, so either grab the lowest direction or the highest.
-    //distance = 29 others 30, which means 29 is the closer node and whichever direction that is
-    //thats what we set.
-    /*
-    *  sets the direction of the current step by calculating future steps and getting which one
-    *  is closer.
-    * */
-    private void setDirection(String level) {
-        CustomLocation tempLoc = userLocation;
-        double[] direction = new double[4];
-        int index = 0;
-        move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum());
-        direction[0] = steps.getStep(0).getDistance();
-        move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum());
-        direction[1] = steps.getStep(0).getDistance();
-        move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
-        direction[2] = steps.getStep(0).getDistance();
-        move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum());
-        direction[3] = steps.getStep(0).getDistance();
-        if(level.equals("highest")) {
-            index = getHighest(direction);
-            String dir = directionString(index);
-            steps.getStep(0).setUserDirection(dir);
+        if((!direction.equals("up") || !direction.equals("down"))) {
+            lastLocation = steps.getGeneralWalkingDirection(direction);
         }
-        else {
-
+        //SpeakActivity say = new SpeakActivity(mContext, steps.getGeneralWalkingDirection(lastLocation) + " for " + (int)steps.getStep(0).getDistance() + " feet ");
+        //lastLocation = steps.getGeneralWalkingDirection(lastLocation);
+        if((currentLocation != lastLocation) && (!direction.equals("up") || !direction.equals("down"))) {
+            SpeakActivity say = new SpeakActivity(mContext, steps.getVoiceDirections(direction));
+            currentLocation = steps.getGeneralWalkingDirection(direction);
         }
-        move(tempLoc.getPositionX(), tempLoc.getPositionY(), tempLoc.getFloorNum());
-    }
 
-    private int getHighest(double[] dir) {
-        int index = 0;
-        for(int i = 1; i < dir.length; i++) {
-            if(dir[i] > dir[index]) {
-                index = i;
+        if(direction.equals("up") && steps.getStep(0).getDistance() == 0) {
+            if(userLocation.getFloorNum() < 4) {
+                SpeakActivity say3 = new SpeakActivity(mContext, "Go up");
             }
         }
-        return index;
-    }
-
-    private void getLowest(double[] dir) {
-
-    }
-
-    private String directionString(int dirIndex) {
-        switch(dirIndex) {
-            case 0: return "forward";
-            case 1: return "back";
-            case 2: return "right";
-            case 3: return "left";
+        if(direction.equals("down") && steps.getStep(0).getDistance() == 0)  {
+            if(userLocation.getFloorNum() > 0) {
+                SpeakActivity say3 = new SpeakActivity(mContext, "Go down");
+            }
         }
-        return "forward";
+
+        if(steps.getStep(0).getDistance()  == 10) {
+            //SpeakActivity say2 = new SpeakActivity(mContext, steps.getGeneralWalkingDirection(lastLocation) + " for " + (int)steps.getStep(0).getDistance() + " feet ");
+        }
+
     }
+
+
+
 
 
 }

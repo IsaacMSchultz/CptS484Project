@@ -264,7 +264,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         }
         if(message.getMessage().equals("CHANGED")) {
             mAdapter.notifyDataSetChanged();
-            updateUI();
+            //updateUI();
         }
     }
 
@@ -300,16 +300,16 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             * FIXME: 12/4/2019 Right now it has an empty direction.
             *   Everytime the UI gets updated the setdirection is deleted.
             * */
-            switch(stepItem.getDirection()) {
-                case "forward": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_forward));
-                break;
-                case "back": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_down));
-                break;
-                case "right": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_right));
-                break;
-                case "left": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_left));
-                break;
-            }
+//            switch(stepItem.getDirection()) {
+//                case "forward": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_forward));
+//                break;
+//                case "back": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_down));
+//                break;
+//                case "right": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_right));
+//                break;
+//                case "left": mStepItemImage.setImageDrawable(getDrawable(R.drawable.ic_left));
+//                break;
+//            }
         }
     }
 
