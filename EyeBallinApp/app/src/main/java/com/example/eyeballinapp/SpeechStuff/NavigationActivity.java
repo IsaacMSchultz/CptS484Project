@@ -276,22 +276,21 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     public void onButtonClickedEvent(OnButtonClickedMessage message) {
         if(message.getMessage().equals("UPDATE")) {
             updateUI();
+            switch(message.getDirection()) {
+                case "forward": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
+                    break;
+                case "back": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_down));
+                    break;
+                case "right": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_right));
+                    break;
+                case "left": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_left));
+                    break;
+                case "elevator": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
+            }
         }
         if(message.getMessage().equals("CHANGED")) {
             mAdapter.notifyDataSetChanged();
             updateUI();
-            Toast.makeText(this, message.getDirection(), Toast.LENGTH_SHORT).show();
-            switch(message.getDirection()) {
-                case "forward": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
-                break;
-                case "back": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_down));
-                break;
-                case "right": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_right));
-                break;
-                case "left": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_left));
-                break;
-                case "elevator": mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
-            }
         }
 
         if(message.getMessage().equals("FINISHED")) {
@@ -405,6 +404,8 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         public void setStepList(List<Step> stepList) {
             mStepList = stepList;
         }
+
+
 
     }
 }

@@ -79,7 +79,7 @@ public class Navigation {
                 break;
             default:
         }
-        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
+        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE", steps.getGeneralWalkingDirection(lastLocation)));
     }
 
     public List<Step> getStepList() {
