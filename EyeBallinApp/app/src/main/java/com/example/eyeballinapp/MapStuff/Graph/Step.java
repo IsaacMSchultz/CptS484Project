@@ -13,6 +13,7 @@ public class Step {
     private MapNode node;
     private EBVector vector;
     private String direction; // the direction the user needs to go for their next step
+    private CustomLocation prevLocation;
     private boolean hasZComponent;
 
     public Step(MapNode node, double distanceX, double distanceY) {
@@ -22,10 +23,10 @@ public class Step {
 
     public Step(MapNode node, Location loc) {
         CustomLocation nodeLocation = (CustomLocation) node.getLocation();
-        CustomLocation l = (CustomLocation) loc;
-        double y = nodeLocation.getPositionY() - l.getPositionY();
-        double x = nodeLocation.getPositionX() - l.getPositionX();
-        int z = nodeLocation.getFloorNum() - l.getFloorNum();
+        prevLocation = (CustomLocation) loc;
+        double y = nodeLocation.getPositionY() - prevLocation.getPositionY();
+        double x = nodeLocation.getPositionX() - prevLocation.getPositionX();
+        int z = nodeLocation.getFloorNum() - prevLocation.getFloorNum();
 
         if (z == 0)
             hasZComponent = false;
@@ -84,13 +85,19 @@ public class Step {
     /**
      * https://i.imgur.com/QHf5w6n.jpg drawing explanation of the breakup of directions.
      * NOTE: The graph drawn has left and right mixed up! they are opposites!
+     *
      * @param dir a string representing the direction that is either 'forward', 'left', 'right', 'back' relative to the coordinate plane where positive Y is up and positive X is right.
      */
     public String setUserDirection(String dir) {
 
         // cannot give them a direction to turn if they are in the elevator
         if (this.hasZComponent()) {
-            direction = "elevator";
+            int currFloor = prevLocation.getFloorNum();
+            int destFloor = ((CustomLocation) node.getLocation()).getFloorNum();
+            if (destFloor > currFloor)
+                direction = "elevator_up";
+            else
+                direction = "elevator_down";
             return direction;
         }
 

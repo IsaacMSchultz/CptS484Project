@@ -207,7 +207,7 @@ public class StepTest {
     }
 
     @Test
-    public void ElevatorTesting() {
+    public void ElevatorUpTesting() {
         CustomLocation userLocation = new CustomLocation(9, 55, 1); // 45 degrees towards the first step
         EyeBallinMap map = new EyeBallinMap(instrumentationContext);
         map.setDestination("Elevator 3");
@@ -218,17 +218,39 @@ public class StepTest {
         // we do not need to do elevator testing for diagonal since it will only trigger if they are EXACTLY on the point of the elevator
 
         direction = steps.getStep(0).setUserDirection("forward");
-        assertEquals("elevator", direction);
+        assertEquals("elevator_up", direction);
 
         direction = steps.getStep(0).setUserDirection("left");
-        assertEquals("elevator", direction);
+        assertEquals("elevator_up", direction);
 
         direction = steps.getStep(0).setUserDirection("right");
-        assertEquals("elevator", direction);
+        assertEquals("elevator_up", direction);
 
         direction = steps.getStep(0).setUserDirection("back");
-        assertEquals("elevator", direction);
+        assertEquals("elevator_up", direction);
     }
 
+    @Test
+    public void ElevatorDownTesting() {
+        CustomLocation userLocation = new CustomLocation(9, 55, 3); // 45 degrees towards the first step
+        EyeBallinMap map = new EyeBallinMap(instrumentationContext);
+        map.setDestination("Elevator 1");
+        map.updateUser(userLocation);
+        Route steps = map.calculateRoute();
+        String direction;
 
+        // we do not need to do elevator testing for diagonal since it will only trigger if they are EXACTLY on the point of the elevator
+
+        direction = steps.getStep(0).setUserDirection("forward");
+        assertEquals("elevator_down", direction);
+
+        direction = steps.getStep(0).setUserDirection("left");
+        assertEquals("elevator_down", direction);
+
+        direction = steps.getStep(0).setUserDirection("right");
+        assertEquals("elevator_down", direction);
+
+        direction = steps.getStep(0).setUserDirection("back");
+        assertEquals("elevator_down", direction);
+    }
 }
