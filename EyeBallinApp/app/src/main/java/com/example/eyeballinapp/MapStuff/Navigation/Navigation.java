@@ -25,6 +25,7 @@ public class Navigation {
     private Route steps;
 
     private String lastDirection = "N/A";
+    private String buttonLocation = "forward";
     private SpeakActivity say;
     private double distanceToNextStep = 1;
     private int stepLength = 1;
@@ -47,15 +48,19 @@ public class Navigation {
             //do a post here using eventbus
             case "forward":
                 move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum(), "forward");
+                buttonLocation = "forward";
                 break;
             case "back":
                 move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum(), "back");
+                buttonLocation = "back";
                 break;
             case "left":
                 move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "left");
+                buttonLocation = "left";
                 break;
             case "right":
                 move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "right");
+                buttonLocation = "right";
                 break;
             case "up":
                 if (userLocation.getFloorNum() != 4)
@@ -67,7 +72,7 @@ public class Navigation {
                 break;
             default:
         }
-        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE"));
+        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE", steps.getGeneralWalkingDirection(buttonLocation)));
     }
 
     public List<Step> getStepList() {
@@ -87,7 +92,6 @@ public class Navigation {
             stepLength = 1;
 
         String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
-        int stepLength = steps.getStepList().size(); //the number of steps left to take
 
         // for mocking elevator stuff
         if (currentDirection.equals("elevator_up")) { //if we need to go up still in the elevator
@@ -103,7 +107,7 @@ public class Navigation {
         if (lastDirection != currentDirection) { //if the direction we need to go to has changed, restate the directions.
             say.speak(steps.getVoiceDirections(direction));
             lastDirection = currentDirection; //update the last direction we need to go to.
-            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED")/*, steps.getGeneralWalkingDirection(direction)*/); //notify the UI that things have been changed
+            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED", steps.getGeneralWalkingDirection(direction))); //notify the UI that things have been changed
         }
     }
 }
