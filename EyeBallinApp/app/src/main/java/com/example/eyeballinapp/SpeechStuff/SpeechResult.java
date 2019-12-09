@@ -2,10 +2,13 @@ package com.example.eyeballinapp.SpeechStuff;
 
 import android.content.Context;
 
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
+
 public class SpeechResult {
 
     private static SpeechResult sSpeechResult;
     private Context mContext;
+    private CustomLocation userLocation;
     private String mMessage;
     private String mSpeech;
 
@@ -34,5 +37,13 @@ public class SpeechResult {
 
     public String getSpeechText() {
         return mSpeech;
+    }
+
+    public void setLastLocation(CustomLocation loc) {
+        userLocation = loc;
+    }
+
+    public CustomLocation getLastLocation() {
+        return userLocation;
     }
 }

@@ -13,73 +13,83 @@ import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.MapStuff.Graph.Step;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
+import com.example.eyeballinapp.SpeechStuff.SpeechResult;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 public class Navigation {
-    EyeBallinMap map;
-    Context mContext;
-    CustomLocation userLocation;
+    private EyeBallinMap map;
+    private Context mContext;
+    private CustomLocation userLocation;
+    private Route steps;
 
-    private String lastLocation = "forward";
-    private String currentLocation = "forward";
+    private String lastDirection = "N/A";
+    private String buttonLocation = "forward";
 
     private SpeakActivity say;
-
+    private double distanceToNextStep = 1;
     private int stepLength = 1;
-    Route steps;
 
     public Navigation(Context context, String destination) {
         mContext = context;
         map = new EyeBallinMap(mContext);
+
         //starting point
-        userLocation = new CustomLocation(0, 0, 1);
+        userLocation = new CustomLocation(0, 55, 1);
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-        //setDirection("highest");
+
         say = new SpeakActivity(mContext, "");
-        //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
     }
+
+    public Navigation(Context context, String destination, String test) {
+        mContext = context;
+        map = new EyeBallinMap(mContext);
+
+        //starting point
+        userLocation = SpeechResult.get(mContext).getLastLocation();
+        map.setDestination(destination);
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+
+        say = new SpeakActivity(mContext, "");
+    }
+
+
 
     public void navigate(String direction) {
         switch (direction) {
             //do a post here using eventbus
             case "forward":
                 move(userLocation.getPositionX(), userLocation.getPositionY() + stepLength, userLocation.getFloorNum(), "forward");
-                lastLocation = "forward";
+                buttonLocation = "forward";
                 break;
             case "back":
                 move(userLocation.getPositionX(), userLocation.getPositionY() - stepLength, userLocation.getFloorNum(), "back");
-                lastLocation = "back";
+                buttonLocation = "back";
                 break;
             case "left":
                 move(userLocation.getPositionX() - stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "left");
-                lastLocation = "left";
+                buttonLocation = "left";
                 break;
             case "right":
-                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(),"right");
-                lastLocation = "right";
+                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "right");
+                buttonLocation = "right";
                 break;
             case "up":
-                if (userLocation.getFloorNum() != 4) {
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1, "up");
-                    //say.speak("Going up, you are at floor" + userLocation.getFloorNum());
-                    //lastLocation = "up";
-                }
+                if (userLocation.getFloorNum() != 4)
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1, "elevator");
                 break;
             case "down":
-                if (userLocation.getFloorNum() != 1) {
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1, "down");
-                    say.speak( "Going down, you are at floor" + userLocation.getFloorNum());
-                    //lastLocation = "down";
-                }
+                if (userLocation.getFloorNum() != 1)
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1, "elevator");
                 break;
             default:
         }
-        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE", steps.getGeneralWalkingDirection(lastLocation)));
+        EventBus.getDefault().post(new OnButtonClickedMessage("UPDATE", steps.getGeneralWalkingDirection(buttonLocation)));
     }
 
     public List<Step> getStepList() {
@@ -87,24 +97,37 @@ public class Navigation {
     }
 
     private void move(double x, double y, int floor, String direction) {
-        userLocation.setLocation(x, y, floor);
-        map.updateUser(userLocation);
-        int stepLength = steps.getStepList().size();
-        steps = map.calculateRoute();
+        userLocation.setLocation(x, y, floor); //create new location where the user is now
+        map.updateUser(userLocation); //update the user's location in the map
+        steps = map.calculateRoute(); // re-calculate the route
 
-        //step size decreased so going on the right path.
-        if(stepLength != steps.getStepList().size() && !direction.equals("up")) {
-            say.speak( steps.getVoiceDirections(direction));
-            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED", steps.getGeneralWalkingDirection(direction)));
-        }
+        // some code to make long distances easier to travel in the app.
+        distanceToNextStep = steps.getStep(0).getDistance();
+        if (distanceToNextStep > 10)
+            stepLength = (int) distanceToNextStep / 3;
+        else
+            stepLength = 1;
 
-        if(stepLength != steps.getStepList().size() && direction.equals("up")) {
-            say.speak( steps.getVoiceDirections("left"));
-        }
+        String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
+        int stepLength = steps.getStepList().size(); //the number of steps left to take
 
-        if(steps.getStepList().size() == 1 && steps.getStep(0).getDistance() == 0) {
-            say.speak( "Yay! You have reached your destination");
+        // for mocking elevator stuff
+        if (currentDirection.equals("elevator_up")) { //if we need to go up still in the elevator
+            say.speak("demo elevator simulation. go up");
+            currentDirection = "elevator";
+        } else if (currentDirection.equals("elevator_down")) { //if we need to go down still in the elevator
+            say.speak("demo elevator simulation. go down");
+            currentDirection = "elevator";
+        } else if (currentDirection.equals("arrived")) {
+            SpeechResult.get(mContext).setLastLocation(userLocation);
+            Toast.makeText(mContext, String.valueOf(SpeechResult.get(mContext).getLastLocation().getPositionX()), Toast.LENGTH_SHORT).show();
             EventBus.getDefault().post(new OnButtonClickedMessage("FINISHED"));
+        }
+
+        if (lastDirection != currentDirection) { //if the direction we need to go to has changed, restate the directions.
+            say.speak(steps.getVoiceDirections(direction));
+            lastDirection = currentDirection; //update the last direction we need to go to.
+            EventBus.getDefault().post(new OnButtonClickedMessage("CHANGED", steps.getGeneralWalkingDirection(direction))/*, steps.getGeneralWalkingDirection(direction)*/); //notify the UI that things have been changed
         }
     }
 }

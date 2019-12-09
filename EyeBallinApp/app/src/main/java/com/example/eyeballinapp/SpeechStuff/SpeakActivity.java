@@ -21,8 +21,6 @@ public class SpeakActivity {
                     mTts.setLanguage(Locale.US);
                     mTts.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, UTTER_ID);
                     //while(mTts.isSpeaking()) {}
-//                    mTts.stop();
-//                    mTts.shutdown();
                 }
             }
         });
@@ -31,8 +29,6 @@ public class SpeakActivity {
     public void speak(String sentence) {
         mTts.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, UTTER_ID);
         //while(mTts.isSpeaking()) {}
-        //                    mTts.stop();
-//                    mTts.shutdown();
     }
 
 

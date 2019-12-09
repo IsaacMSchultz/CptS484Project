@@ -13,6 +13,7 @@ public class Step {
     private MapNode node;
     private EBVector vector;
     private String direction; // the direction the user needs to go for their next step
+    private CustomLocation prevLocation;
     private boolean hasZComponent;
 
     public Step(MapNode node, double distanceX, double distanceY) {
@@ -22,10 +23,10 @@ public class Step {
 
     public Step(MapNode node, Location loc) {
         CustomLocation nodeLocation = (CustomLocation) node.getLocation();
-        CustomLocation l = (CustomLocation) loc;
-        double y = nodeLocation.getPositionY() - l.getPositionY();
-        double x = nodeLocation.getPositionX() - l.getPositionX();
-        int z = nodeLocation.getFloorNum() - l.getFloorNum();
+        prevLocation = (CustomLocation) loc;
+        double y = nodeLocation.getPositionY() - prevLocation.getPositionY();
+        double x = nodeLocation.getPositionX() - prevLocation.getPositionX();
+        int z = nodeLocation.getFloorNum() - prevLocation.getFloorNum();
 
         if (z == 0)
             hasZComponent = false;
@@ -84,13 +85,19 @@ public class Step {
     /**
      * https://i.imgur.com/QHf5w6n.jpg drawing explanation of the breakup of directions.
      * NOTE: The graph drawn has left and right mixed up! they are opposites!
+     *
      * @param dir a string representing the direction that is either 'forward', 'left', 'right', 'back' relative to the coordinate plane where positive Y is up and positive X is right.
      */
     public String setUserDirection(String dir) {
 
         // cannot give them a direction to turn if they are in the elevator
         if (this.hasZComponent()) {
-            direction = "elevator";
+            int currFloor = prevLocation.getFloorNum();
+            int destFloor = ((CustomLocation) node.getLocation()).getFloorNum();
+            if (destFloor > currFloor)
+                direction = "elevator_up";
+            else
+                direction = "elevator_down";
             return direction;
         }
 
@@ -105,14 +112,14 @@ public class Step {
         // rotations for exact 90 degree angles are simply transformations of the signs of the components.
         if (dir.equals("forward")) { //positive Y direction
             directionVector = new EBVector(vy, -vx); // transformation: <y, -x>
-        } else if (dir.equals("left")) { // negative x direction
+        } else if (dir.equals("left") || dir.contains("elevator")) { // negative x direction. This is also the direction you face when you get out of the elevator
             directionVector = new EBVector(-vx, -vy); // transformation: <-x, -y>
         } else if (dir.equals("back")) { //negative y direction
             directionVector = new EBVector(-vy, vx); // transformation: <-y, x>
         } else if (dir.equals("right")) { // we do not need to rotate if they are facing in the positive X direction since their vectors already line up with our representation of directions.
             directionVector = vector;
         } else {
-            throw new IndexOutOfBoundsException("expected string in the form 'forward', 'left', 'right', 'back' and got" + dir);
+            throw new IndexOutOfBoundsException("expected string in the form 'forward', 'left', 'right', 'back', or contains 'elevator' and got" + dir);
         }
 
         // calculate the unit vector so we can determine which whay to tell the user to go.
@@ -124,7 +131,10 @@ public class Step {
         double y = turningDirection.getY();
 
         //if we split the unit circle based on the y component, we can make a more clear if-else chain
-        if (y >= EBVector.twentyThreePiOver12y) { // vector is pointing between F and B.
+
+        if ((x < 0.5 && y < 0.5) && (x > -0.5 && y > -0.5)) { // the vector components are not on the unit circle. This means the vector is 0. We have arrived
+            direction = "arrived";
+        } else if (y >= EBVector.twentyThreePiOver12y) { // vector is pointing between F and B.
             if (x > EBVector.piOver12x) {
                 direction = "forward";
             } else if (x > EBVector.fivePiOver12x) {
@@ -151,14 +161,5 @@ public class Step {
 
     public String getDirection() {
         return direction;
-    }
-
-    private boolean ghettoRequiredNodesList(String name) {
-        Pattern p = Pattern.compile("(Outside Hallway|Water Fountain|Outside.*61)"); // anything that contains outside hallway, water fountain, or outside the seminar rooms is required.
-        Matcher m = p.matcher(name);
-        if (m.matches())
-            return true;
-        else
-            return false;
     }
 }

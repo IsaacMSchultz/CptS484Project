@@ -67,6 +67,7 @@ public class Route {
     public String getVoiceDirections(String userIsFacing) {
         Step s = steps.get(currentStep);
         String direction = s.setUserDirection(userIsFacing); //pass the direction the user is facing to the step to see which direction we need to turn.
+        double d = s.getDistance();
         int integerDistance = (int) Math.round(s.getDistance()); //round the distance and cast to an integer
         String spokenDirections;
 
@@ -78,21 +79,22 @@ public class Route {
 
         // Should say things like "continue straight for 10 feet"
 
-        if (direction.equals("elevator")) {
+        // check to see if this is an elevator direction
+        if (direction.contains("elevator")) {
             // get some information that we need to find the floor numbers of where we are and where we need to go
-            String elevatorName = nextStep().getNode().getName(); // get the name of the elevator
+            String elevatorName = getStep(currentStep).getNode().getName(); // get the name of the elevator
             CustomLocation l = (CustomLocation) s.getNode().getLocation();
 
             // parse out the floor numbers
-            int destinationFloor = Integer.parseInt(elevatorName.substring(elevatorName.length() - 1)); // Number that
+            String e = elevatorName.substring(elevatorName.length() - 1);
+            int destinationFloor = Integer.parseInt(e); // Number that
             int currentFloor = l.getFloorNum();
 
             // create directions based on which way we need to go.
-            spokenDirections = "You are at the elevators on floor " + currentFloor ;//+ ", there are elevator doors to one elevator on your right," +
-//                    " and one to your left. The buttons to call the elevator are in front of you. Call an elevator, and go to floor " + destinationFloor;
+            spokenDirections = "You are at the elevators on floor " + currentFloor + ", there are elevator doors to one elevator on your right," +
+                    " and one to your left. The buttons to call the elevator are in front of you. Call an elevator, and go to floor " + destinationFloor;
 
-        } else {
-
+        } else { // walking directions
             // Add the direction to go at the start of the string that will be spoken
             switch (direction) {
                 case "forward":
@@ -119,6 +121,8 @@ public class Route {
                 case "120degrees_right":
                     spokenDirections = "turn 120 degrees to the right and walk ";
                     break;
+                case "arrived":
+                    return "You have arrived. The door is in front of you.";
                 default:
                     throw new IndexOutOfBoundsException("unexpected direction output");
             }
