@@ -25,6 +25,9 @@ public class Navigation {
 
     private String lastLocation = "forward";
     private String currentLocation = "forward";
+    private String lastDirection = "N/A";
+
+    SpeakActivity speech;
 
     private int stepLength = 1;
     Route steps;
@@ -33,13 +36,12 @@ public class Navigation {
         mContext = context;
         map = new EyeBallinMap(mContext);
         //starting point
-        userLocation = new CustomLocation(0, 0, 1);
+        userLocation = new CustomLocation(0, 55, 1);
         map.setDestination(destination);
         map.updateUser(userLocation);
         steps = map.calculateRoute();
-        //setDirection("highest");
 
-        //Toast.makeText(context, "Dest: " + destination, Toast.LENGTH_SHORT).show();
+        speech = new SpeakActivity(mContext, "test");
     }
 
     public void navigate(String direction) {
@@ -58,17 +60,17 @@ public class Navigation {
                 lastLocation = "left";
                 break;
             case "right":
-                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(),"right");
+                move(userLocation.getPositionX() + stepLength, userLocation.getPositionY(), userLocation.getFloorNum(), "right");
                 lastLocation = "right";
                 break;
             case "up":
                 if (userLocation.getFloorNum() != 4)
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1, "up");
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() + 1, "elevator");
                 lastLocation = "up";
                 break;
             case "down":
                 if (userLocation.getFloorNum() != 1)
-                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1, "down");
+                    move(userLocation.getPositionX(), userLocation.getPositionY(), userLocation.getFloorNum() - 1, "elevator");
                 lastLocation = "down";
                 break;
             default:
@@ -81,38 +83,23 @@ public class Navigation {
     }
 
     private void move(double x, double y, int floor, String direction) {
-        userLocation.setLocation(x, y, floor);
-        map.updateUser(userLocation);
-        steps = map.calculateRoute();
-        if((!direction.equals("up") || !direction.equals("down"))) {
-            lastLocation = steps.getGeneralWalkingDirection(direction);
-        }
-        //SpeakActivity say = new SpeakActivity(mContext, steps.getGeneralWalkingDirection(lastLocation) + " for " + (int)steps.getStep(0).getDistance() + " feet ");
-        //lastLocation = steps.getGeneralWalkingDirection(lastLocation);
-        if((currentLocation != lastLocation) && (!direction.equals("up") || !direction.equals("down"))) {
-            SpeakActivity say = new SpeakActivity(mContext, steps.getVoiceDirections(direction));
-            currentLocation = steps.getGeneralWalkingDirection(direction);
+        userLocation.setLocation(x, y, floor); //create new location where the user is now
+        map.updateUser(userLocation); //update the user's location in the map
+        steps = map.calculateRoute(); // re-calculate the route
+        String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
+
+        // for mocking elevator stuff
+        if (currentDirection.equals("elevator_up")) { //if we need to go up still in the elevator
+            speech.speak("demo elevator simulation. go up");
+            currentDirection = "elevator";
+        } else if (currentDirection.equals("elevator_down")) { //if we need to go down still in the elevator
+            speech.speak("demo elevator simulation. go down");
+            currentDirection = "elevator";
         }
 
-        if(direction.equals("up") && steps.getStep(0).getDistance() == 0) {
-            if(userLocation.getFloorNum() < 4) {
-                SpeakActivity say3 = new SpeakActivity(mContext, "Go up");
-            }
+        if (lastDirection != currentDirection) { //if the direction we need to go to has changed, restate the directions.
+            speech.speak(steps.getVoiceDirections(direction));
+            lastDirection = currentDirection; //update the last direction we need to go to.
         }
-        if(direction.equals("down") && steps.getStep(0).getDistance() == 0)  {
-            if(userLocation.getFloorNum() > 0) {
-                SpeakActivity say3 = new SpeakActivity(mContext, "Go down");
-            }
-        }
-
-        if(steps.getStep(0).getDistance()  == 10) {
-            //SpeakActivity say2 = new SpeakActivity(mContext, steps.getGeneralWalkingDirection(lastLocation) + " for " + (int)steps.getStep(0).getDistance() + " feet ");
-        }
-
     }
-
-
-
-
-
 }

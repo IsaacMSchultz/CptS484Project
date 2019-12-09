@@ -78,13 +78,14 @@ public class Route {
 
         // Should say things like "continue straight for 10 feet"
 
-        if (direction.equals("elevator")) {
+        if (direction.contains("elevator")) {
             // get some information that we need to find the floor numbers of where we are and where we need to go
-            String elevatorName = nextStep().getNode().getName(); // get the name of the elevator
+            String elevatorName = getStep(currentStep).getNode().getName(); // get the name of the elevator
             CustomLocation l = (CustomLocation) s.getNode().getLocation();
 
             // parse out the floor numbers
-            int destinationFloor = Integer.parseInt(elevatorName.substring(elevatorName.length() - 1)); // Number that
+            String e = elevatorName.substring(elevatorName.length() - 1);
+            int destinationFloor = Integer.parseInt(e); // Number that
             int currentFloor = l.getFloorNum();
 
             // create directions based on which way we need to go.

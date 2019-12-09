@@ -112,14 +112,14 @@ public class Step {
         // rotations for exact 90 degree angles are simply transformations of the signs of the components.
         if (dir.equals("forward")) { //positive Y direction
             directionVector = new EBVector(vy, -vx); // transformation: <y, -x>
-        } else if (dir.equals("left")) { // negative x direction
+        } else if (dir.equals("left") || dir.contains("elevator")) { // negative x direction. This is also the direction you face when you get out of the elevator
             directionVector = new EBVector(-vx, -vy); // transformation: <-x, -y>
         } else if (dir.equals("back")) { //negative y direction
             directionVector = new EBVector(-vy, vx); // transformation: <-y, x>
         } else if (dir.equals("right")) { // we do not need to rotate if they are facing in the positive X direction since their vectors already line up with our representation of directions.
             directionVector = vector;
         } else {
-            throw new IndexOutOfBoundsException("expected string in the form 'forward', 'left', 'right', 'back' and got" + dir);
+            throw new IndexOutOfBoundsException("expected string in the form 'forward', 'left', 'right', 'back', or contains 'elevator' and got" + dir);
         }
 
         // calculate the unit vector so we can determine which whay to tell the user to go.
@@ -158,14 +158,5 @@ public class Step {
 
     public String getDirection() {
         return direction;
-    }
-
-    private boolean ghettoRequiredNodesList(String name) {
-        Pattern p = Pattern.compile("(Outside Hallway|Water Fountain|Outside.*61)"); // anything that contains outside hallway, water fountain, or outside the seminar rooms is required.
-        Matcher m = p.matcher(name);
-        if (m.matches())
-            return true;
-        else
-            return false;
     }
 }
