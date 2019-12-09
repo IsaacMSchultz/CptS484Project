@@ -164,7 +164,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
             @Override
             public void onTick(long millisUntilFinished) {
                 interval = millisUntilFinished;
-                //if (sendText)updateCountDownText();
             }
 
             @Override
@@ -184,7 +183,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         double xyzSRoot = Math.sqrt(xSquared + ySquared + zSquared);
 
 
-        if(xyzSRoot > 20 && !notified) {
+        if(xyzSRoot > 15 && !notified) {
             notified = true;
             fallDetected();
         }
@@ -227,13 +226,6 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         }
 
     }
-
-//    private void updateCountDownText(){
-//        int seconds = (int) (interval /1000);
-//        if(seconds == 5) {
-//            //SpeakActivity say = new SpeakActivity(getApplicationContext(), "5 seconds left");
-//        }
-//    }
 
     public void stopText(){
         sendText = !sendText;
@@ -281,7 +273,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         }
 
         if(message.getMessage().equals("FINISHED")) {
-            startListener("Say navigate to go again, or say stop",REQUEST_LISTENER_END);
+            startListener("Say destination to go again, or say stop",REQUEST_LISTENER_END);
             parser = new SpeechParser();
         }
 
@@ -320,9 +312,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private void startProgramLoop(String message) {
         //parse the message
         switch(parser.getSpeechCommand(message)) {
-            // TODO: 12/4/2019 Check if destination exists before proceeding
             case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
-                //parser.clear();
                 nav = new Navigation(getApplicationContext(), parser.getDestination(), "new");
                 parser.clear();
                 break;
@@ -358,13 +348,12 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private class DirectionHolder extends RecyclerView.ViewHolder {
 
         private TextView mStepItemText;
-        private ImageView mStepItemImage;
+
 
         public DirectionHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.step_layout, parent, false));
 
             mStepItemText = itemView.findViewById(R.id.step_item);
-            mStepItemImage = itemView.findViewById(R.id.step_direction);
         }
 
         //could probably just bind a step

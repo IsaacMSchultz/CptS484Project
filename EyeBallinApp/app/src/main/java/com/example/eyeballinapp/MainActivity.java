@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
             // TODO: 12/4/2019 Check if destination exists before proceeding
             case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
                 //parser.clear();
-                Log.d("TEST", parser.getDestination());
-                Toast.makeText(this, parser.getDestination(), Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
                 myIntent.putExtra("DESTINATION", parser.getDestination());
                 startActivity(myIntent);
