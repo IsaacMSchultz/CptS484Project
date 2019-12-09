@@ -23,3 +23,4 @@ public class OnButtonClickedMessage {
         return direction;
     }
 }
+

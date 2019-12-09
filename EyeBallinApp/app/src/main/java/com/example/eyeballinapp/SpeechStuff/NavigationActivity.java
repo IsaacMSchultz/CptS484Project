@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eyeballinapp.EventBus.OnButtonClickedMessage;
 import com.example.eyeballinapp.MainActivity;
 import com.example.eyeballinapp.MapStuff.Graph.Step;
+import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.MapStuff.Navigation.EyeBallinMap;
 import com.example.eyeballinapp.MapStuff.Navigation.Navigation;
 import com.example.eyeballinapp.R;
@@ -52,6 +53,8 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private Sensor sns;
     long interval;
 
+    private SpeechParser parser;
+
     private CountDownTimer countTimer;
 
     boolean notified = false;
@@ -65,7 +68,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private RecyclerView mRecyclerView;
     private DirectionAdapter mAdapter;
     private Navigation nav;
-    private TextView mCurrentStepDistance;
+    private TextView mCurrentStepDistance, mXLocation, mYLocation;
     private DecimalFormat formatter;
 
 
@@ -140,6 +143,9 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
         mDirectionArrow.setImageDrawable(getDrawable(R.drawable.ic_forward));
 
+        mXLocation = findViewById(R.id.xLocation);
+
+        mYLocation = findViewById(R.id.yLocation);
 
         getSupportActionBar().hide();
 
@@ -189,26 +195,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
 
     }
 
-    public void startListener(String message,int code) {
-        Intent myIntent = new Intent(NavigationActivity.this, ListenActivity.class);
-        SpeechResult.get(getApplicationContext()).setSpeechText(message);
-        startActivityForResult(myIntent, REQUEST_LISTENER);
-    }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_LISTENER: {
-                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
-                handleAlert(testMessage);
-                break;
-            }
-            case REQUEST_LISTENER_END: {
-                break;
-            }
-        }
-        //finish();
-    }
 
     private void handleAlert(String message) {
         //probably parse message
@@ -294,55 +281,66 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         }
 
         if(message.getMessage().equals("FINISHED")) {
-            startListener("Do you wanna go again?",REQUEST_LISTENER_END);
+            startListener("Say navigate to go again, or say stop",REQUEST_LISTENER_END);
+            parser = new SpeechParser();
         }
 
 
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        switch (requestCode) {
-//            case REQUEST_LISTENER: {
-//                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
-//                if(testMessage == null)
-//                    testMessage = "repeat";
-//                if(testMessage == "navigate") {
-//                    EyeBallinMap map = new EyeBallinMap(this);
-//                    if(!map.setDestination(parser.getDestination()))
-//                        testMessage = "room number";
-//                }
-//                startProgramLoop(testMessage);
-//                break;
-//            }
-//        }
-//    }
+    public void startListener(String message,int code) {
+        Intent myIntent = new Intent(NavigationActivity.this, ListenActivity.class);
+        SpeechResult.get(getApplicationContext()).setSpeechText(message);
+        startActivityForResult(myIntent, code);
+    }
 
-//    private void startProgramLoop(String message) {
-//        //parse the message
-//        switch(parser.getSpeechCommand(message)) {
-//            // TODO: 12/4/2019 Check if destination exists before proceeding
-//            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
-//                //parser.clear();
-//                Log.d("TEST", parser.getDestination());
-//                Toast.makeText(this, parser.getDestination(), Toast.LENGTH_SHORT).show();
-//                Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
-//                myIntent.putExtra("DESTINATION", parser.getDestination());
-//                startActivity(myIntent);
-//                parser.clear();
-//                break;
-//            case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
-//                break;
-//            case "no": startListener(getString(R.string.init_greeting));
-//                break;
-//            case "room number": startListener(getString(R.string.room_number));
-//                //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
-//                break;
-//            case "not exist":startListener(getString(R.string.not_exist));
-//                break;
-//            default: startListener(getString(R.string.please_repeat));
-//        }
-//    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_LISTENER: {
+                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
+                handleAlert(testMessage);
+                break;
+            }
+            case REQUEST_LISTENER_END: {
+                String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
+                if(testMessage == null)
+                    testMessage = "repeat";
+                if(testMessage == "navigate") {
+                    EyeBallinMap map = new EyeBallinMap(this);
+                    if(!map.setDestination(parser.getDestination()))
+                        testMessage = "room number";
+                }
+                startProgramLoop(testMessage);
+                break;
+            }
+        }
+    }
+
+    private void startProgramLoop(String message) {
+        //parse the message
+        switch(parser.getSpeechCommand(message)) {
+            // TODO: 12/4/2019 Check if destination exists before proceeding
+            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+                //parser.clear();
+                nav = new Navigation(getApplicationContext(), parser.getDestination(), "new");
+                parser.clear();
+                break;
+            case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again), REQUEST_LISTENER_END);
+                break;
+            case "no": startListener(getString(R.string.init_greeting), REQUEST_LISTENER_END);
+                break;
+            case "room number": startListener(getString(R.string.room_number), REQUEST_LISTENER_END);
+                //Toast.makeText(getApplicationContext(), String.valueOf(parser.getDestination() == null), Toast.LENGTH_SHORT).show();
+                break;
+            case "not exist":startListener(getString(R.string.not_exist), REQUEST_LISTENER_END);
+                break;
+            case "stop": SpeakActivity say2 = new SpeakActivity(getApplicationContext(), "You chose to stop, goodbye");
+                finish();
+                break;
+            default: startListener(getString(R.string.please_repeat), REQUEST_LISTENER_END);
+        }
+    }
 
     public void updateUI() {
         List<Step> stepList = nav.getStepList();
@@ -372,6 +370,8 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         //could probably just bind a step
         public void bind(Step stepItem) {
             mStepItemText.setText(stepItem.getNode().getName());
+            mXLocation.setText(formatter.format(((CustomLocation)stepItem.getNode().getLocation()).getPositionX()));
+            mYLocation.setText(formatter.format(((CustomLocation)stepItem.getNode().getLocation()).getPositionY()));
         }
     }
 

@@ -13,6 +13,7 @@ import com.example.eyeballinapp.MapStuff.Graph.Route;
 import com.example.eyeballinapp.MapStuff.Graph.Step;
 import com.example.eyeballinapp.MapStuff.Location.CustomLocation;
 import com.example.eyeballinapp.SpeechStuff.SpeakActivity;
+import com.example.eyeballinapp.SpeechStuff.SpeechResult;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,6 +43,21 @@ public class Navigation {
 
         say = new SpeakActivity(mContext, "");
     }
+
+    public Navigation(Context context, String destination, String test) {
+        mContext = context;
+        map = new EyeBallinMap(mContext);
+
+        //starting point
+        userLocation = SpeechResult.get(mContext).getLastLocation();
+        map.setDestination(destination);
+        map.updateUser(userLocation);
+        steps = map.calculateRoute();
+
+        say = new SpeakActivity(mContext, "");
+    }
+
+
 
     public void navigate(String direction) {
 
@@ -92,6 +108,13 @@ public class Navigation {
         map.updateUser(userLocation); //update the user's location in the map
         steps = map.calculateRoute(); // re-calculate the route
 
+        // // some code to make long distances easier to travel in the app.
+        // distanceToNextStep = steps.getStep(0).getDistance();
+        // if (distanceToNextStep > 10)
+        //     stepLength = (int) distanceToNextStep / 3;
+        // else
+        //     stepLength = 1;
+
         distanceToNode = steps.getStep(0).getDistance();
         String currentDirection = steps.getGeneralWalkingDirection(direction); //get the general walking direction that is needed to reach the next step
 
@@ -103,6 +126,8 @@ public class Navigation {
             say.speak("demo elevator simulation. go down");
             currentDirection = "elevator";
         } else if (currentDirection.equals("arrived")) {
+            SpeechResult.get(mContext).setLastLocation(userLocation);
+            Toast.makeText(mContext, String.valueOf(SpeechResult.get(mContext).getLastLocation().getPositionX()), Toast.LENGTH_SHORT).show();
             EventBus.getDefault().post(new OnButtonClickedMessage("FINISHED"));
         }
 
