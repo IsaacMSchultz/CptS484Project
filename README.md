@@ -1,9 +1,18 @@
-# 484TeamBobsBullies
+# EyeBallin App
+
+## Authors
 Kenzo Banaag
 Tim Borisenko
 Dane Erosa
-Rebecca Rothchild
-Isaac Schultz
+Rebecca Rothschild
+Isaac Schultz 
 
-# Team Meetings and Records
-* [Shared Google Drive Folder](https://drive.google.com/drive/folders/1EVjfKT3Mp5qEZ30nHGDYmVxo4dSZ5dGO?usp=sharing)
+## Valid commands:  <br/>
+Go to <br/>
+Take me <br/>
+Room <br/>
+Yes <br/>
+No <br/>
+Set up <br/>
+Commands <br/>
+Stop <br/>
