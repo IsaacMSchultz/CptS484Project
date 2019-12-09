@@ -166,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         double xyzSRoot = Math.sqrt(xSquared + ySquared + zSquared);
 
 
-        if(xyzSRoot > 10 && !notified) {
+        if(xyzSRoot > 20 && !notified) {
             notified = true;
             fallDetected();
         }
@@ -264,7 +264,7 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
         }
         if(message.getMessage().equals("CHANGED")) {
             mAdapter.notifyDataSetChanged();
-            //updateUI();
+            updateUI();
         }
     }
 
