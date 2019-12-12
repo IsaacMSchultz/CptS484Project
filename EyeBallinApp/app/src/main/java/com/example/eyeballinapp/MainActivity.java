@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 String testMessage = SpeechResult.get(getApplicationContext()).getMessage();
                 if(testMessage == null)
                     testMessage = "repeat";
-                if(testMessage == "navigate") {
+                if(testMessage == "repeat") {
                     EyeBallinMap map = new EyeBallinMap(this);
                     if(!map.setDestination(parser.getDestination()))
                         testMessage = "room number";
@@ -73,12 +73,18 @@ public class MainActivity extends AppCompatActivity {
         //parse the message
         switch(parser.getSpeechCommand(message)) {
             // TODO: 12/4/2019 Check if destination exists before proceeding
-            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+            case "navigate":
                 //parser.clear();
-                Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
-                myIntent.putExtra("DESTINATION", parser.getDestination());
-                startActivity(myIntent);
-                parser.clear();
+
+                EyeBallinMap e = new EyeBallinMap(MainActivity.this);
+                if (e.setDestination(parser.getDestination())) {
+                    Intent myIntent = new Intent(MainActivity.this, NavigationActivity.class);
+                    SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+                    myIntent.putExtra("DESTINATION", parser.getDestination());
+                    startActivity(myIntent);
+                    parser.clear();
+                } else
+                    startListener(getString(R.string.not_exist));
                 break;
             case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again));
                 break;

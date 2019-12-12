@@ -312,9 +312,16 @@ public class NavigationActivity extends AppCompatActivity implements SensorEvent
     private void startProgramLoop(String message) {
         //parse the message
         switch(parser.getSpeechCommand(message)) {
-            case "navigate": SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
-                nav = new Navigation(getApplicationContext(), parser.getDestination(), "new");
-                parser.clear();
+            case "navigate":
+
+                EyeBallinMap e = new EyeBallinMap(getApplicationContext());
+                if (e.setDestination(parser.getDestination())) {
+                    nav = new Navigation(getApplicationContext(), parser.getDestination(), "new");
+                    SpeakActivity say = new SpeakActivity(getApplicationContext(), getString(R.string.navigate) + " " + parser.getDestination());
+
+                    parser.clear();
+                } else
+                    startListener(getString(R.string.not_exist), REQUEST_LISTENER_END);
                 break;
             case "repeat": startListener(getString(R.string.navigate) + " " + parser.getDestination() + " " +getString(R.string.ask_again), REQUEST_LISTENER_END);
                 break;
